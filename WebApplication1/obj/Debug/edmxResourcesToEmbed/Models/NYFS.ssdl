@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NYFSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="AccountKey" />
+    </Key>
+    <Property Name="AccountKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountName" Type="varchar" MaxLength="50" />
+    <Property Name="GLAccountCode" Type="varchar" MaxLength="50" />
+    <Property Name="AccountTypeKey" Type="int" />
+    <Property Name="AccountNote" Type="varchar" MaxLength="255" />
+    <Property Name="AccountParentKey" Type="int" />
+  </EntityType>
+  <EntityType Name="AccountType">
+    <Key>
+      <PropertyRef Name="AccountTypeKey" />
+    </Key>
+    <Property Name="AccountTypeKey" Type="int" Nullable="false" />
+    <Property Name="AccountTypeName" Type="varchar" MaxLength="50" />
+    <Property Name="AccountTypeDescription" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Budget">
+    <Key>
+      <PropertyRef Name="BudgetKey" />
+    </Key>
+    <Property Name="BudgetKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BudgetProgramKey" Type="int" />
+    <Property Name="BudgetTermKey" Type="int" />
+    <Property Name="BudgetAccountKey" Type="int" />
+    <Property Name="BudgetAmount" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="BudgetNote" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Grant">
+    <Key>
+      <PropertyRef Name="GrantKey" />
+    </Key>
+    <Property Name="GrantKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GrantName" Type="varchar" MaxLength="50" />
+    <Property Name="GrantNote" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="GrantDistribution">
+    <Key>
+      <PropertyRef Name="GrantDistributionKey" />
+    </Key>
+    <Property Name="GrantDistributionKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GrantDistributionGrantKey" Type="int" />
+    <Property Name="GrantDistributionTermKey" Type="int" />
+    <Property Name="GrantDistributionAmountTotal" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="GrantDistributionInvoiceNumber" Type="varchar" MaxLength="50" />
+    <Property Name="GrantDistributionNote" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="GrantDistributionProgram">
+    <Key>
+      <PropertyRef Name="GrantDistributionProgramKey" />
+    </Key>
+    <Property Name="GrantDistributionProgramKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GrantDistributionKey" Type="int" />
+    <Property Name="ProgramKey" Type="int" />
+    <Property Name="GrantDistributionProgramAmount" Type="decimal" Precision="18" Scale="4" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentKey" />
+    </Key>
+    <Property Name="PaymentKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentDate" Type="date" />
+    <Property Name="PaymentTo" Type="varchar" MaxLength="50" />
+    <Property Name="PaymentCheckNumber" Type="varchar" MaxLength="20" />
+    <Property Name="PaymentTypeKey" Type="int" />
+    <Property Name="PaymentAmount" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="PaymentNote" Type="varchar" MaxLength="255" />
+    <Property Name="PaymentReconciled" Type="tinyint" />
+    <Property Name="PaymentVendorInvoiceNumber" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="PaymentAccount">
+    <Key>
+      <PropertyRef Name="PaymentAccountKey" />
+    </Key>
+    <Property Name="PaymentAccountKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentKey" Type="int" />
+    <Property Name="AccountKey" Type="int" />
+    <Property Name="PaymentAccountAmount" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="PaymentAccountNote" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="PaymentProgram">
+    <Key>
+      <PropertyRef Name="PaymentProgramKey" />
+    </Key>
+    <Property Name="PaymentProgramKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentKey" Type="int" />
+    <Property Name="ProgramKey" Type="int" />
+    <Property Name="PaymentProgramAmount" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="PaymentProgramNote" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="PaymentType">
+    <Key>
+      <PropertyRef Name="PaymentTypeKey" />
+    </Key>
+    <Property Name="PaymentTypeKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentTypeCode" Type="varchar" MaxLength="20" />
+    <Property Name="PaymentTypeName" Type="varchar" MaxLength="50" />
+    <Property Name="PaymentTypeDescription" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonKey" />
+    </Key>
+    <Property Name="PersonKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonName" Type="varchar" MaxLength="50" />
+    <Property Name="PersonAddress" Type="varchar" MaxLength="50" />
+    <Property Name="PersonCity" Type="varchar" MaxLength="50" />
+    <Property Name="PersonStateKey" Type="int" />
+    <Property Name="PersonZipCode" Type="varchar" MaxLength="20" />
+    <Property Name="PersonNote" Type="varchar" MaxLength="255" />
+    <Property Name="VendorFederalEIN" Type="varchar" MaxLength="20" />
+    <Property Name="VendorDefaultTerms" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="PersonRole">
+    <Key>
+      <PropertyRef Name="PersonRoleKey" />
+    </Key>
+    <Property Name="PersonRoleKey" Type="int" Nullable="false" />
+    <Property Name="PersonRoleCode" Type="varchar" MaxLength="4" />
+    <Property Name="PersonRole" Type="varchar" MaxLength="50" />
+    <Property Name="PersonRoleDescription" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="PersonWithRole">
+    <Key>
+      <PropertyRef Name="PersonWithRoleKey" />
+    </Key>
+    <Property Name="PersonWithRoleKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonKey" Type="int" />
+    <Property Name="PersonRoleKey" Type="int" />
+    <Property Name="PersonWithRoleNote" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Program">
+    <Key>
+      <PropertyRef Name="ProgramKey" />
+    </Key>
+    <Property Name="ProgramKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProgramName" Type="varchar" MaxLength="50" />
+    <Property Name="ProgramNote" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Term">
+    <Key>
+      <PropertyRef Name="TermKey" />
+    </Key>
+    <Property Name="TermKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TermName" Type="varchar" MaxLength="50" />
+    <Property Name="TermStartDate" Type="date" />
+    <Property Name="TermEndDate" Type="date" />
+    <Property Name="TermNote" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK_Account_Budget">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountKey" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="BudgetAccountKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Account_PaymentAccount">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="PaymentAccount" Type="Self.PaymentAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountKey" />
+      </Principal>
+      <Dependent Role="PaymentAccount">
+        <PropertyRef Name="AccountKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountType_Account">
+    <End Role="AccountType" Type="Self.AccountType" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountType">
+        <PropertyRef Name="AccountTypeKey" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="AccountTypeKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grant_GrantDistribution">
+    <End Role="Grant" Type="Self.Grant" Multiplicity="0..1" />
+    <End Role="GrantDistribution" Type="Self.GrantDistribution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grant">
+        <PropertyRef Name="GrantKey" />
+      </Principal>
+      <Dependent Role="GrantDistribution">
+        <PropertyRef Name="GrantDistributionGrantKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GrantDistribution_GrantDistributionProgram">
+    <End Role="GrantDistribution" Type="Self.GrantDistribution" Multiplicity="0..1" />
+    <End Role="GrantDistributionProgram" Type="Self.GrantDistributionProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrantDistribution">
+        <PropertyRef Name="GrantDistributionKey" />
+      </Principal>
+      <Dependent Role="GrantDistributionProgram">
+        <PropertyRef Name="GrantDistributionKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_PaymentAccount">
+    <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+    <End Role="PaymentAccount" Type="Self.PaymentAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="PaymentKey" />
+      </Principal>
+      <Dependent Role="PaymentAccount">
+        <PropertyRef Name="PaymentKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_PaymentProgram">
+    <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+    <End Role="PaymentProgram" Type="Self.PaymentProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="PaymentKey" />
+      </Principal>
+      <Dependent Role="PaymentProgram">
+        <PropertyRef Name="PaymentKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaymentType_Payment">
+    <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentType">
+        <PropertyRef Name="PaymentTypeKey" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="PaymentTypeKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_PersonWithRole">
+    <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+    <End Role="PersonWithRole" Type="Self.PersonWithRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonKey" />
+      </Principal>
+      <Dependent Role="PersonWithRole">
+        <PropertyRef Name="PersonKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonRole_PersonWithRole">
+    <End Role="PersonRole" Type="Self.PersonRole" Multiplicity="0..1" />
+    <End Role="PersonWithRole" Type="Self.PersonWithRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonRole">
+        <PropertyRef Name="PersonRoleKey" />
+      </Principal>
+      <Dependent Role="PersonWithRole">
+        <PropertyRef Name="PersonRoleKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Program_Budget">
+    <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+    <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Program">
+        <PropertyRef Name="ProgramKey" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="BudgetProgramKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Program_GrantDistributionProgram">
+    <End Role="Program" Type="Self.Program" Multiplicity="1" />
+    <End Role="GrantDistributionProgram" Type="Self.GrantDistributionProgram" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Program">
+        <PropertyRef Name="ProgramKey" />
+      </Principal>
+      <Dependent Role="GrantDistributionProgram">
+        <PropertyRef Name="GrantDistributionProgramKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Program_PaymentProgram">
+    <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+    <End Role="PaymentProgram" Type="Self.PaymentProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Program">
+        <PropertyRef Name="ProgramKey" />
+      </Principal>
+      <Dependent Role="PaymentProgram">
+        <PropertyRef Name="ProgramKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Term_Budget">
+    <End Role="Term" Type="Self.Term" Multiplicity="0..1" />
+    <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Term">
+        <PropertyRef Name="TermKey" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="BudgetTermKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Term_GrantDistribution">
+    <End Role="Term" Type="Self.Term" Multiplicity="0..1" />
+    <End Role="GrantDistribution" Type="Self.GrantDistribution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Term">
+        <PropertyRef Name="TermKey" />
+      </Principal>
+      <Dependent Role="GrantDistribution">
+        <PropertyRef Name="GrantDistributionTermKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="NYFSModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AccountType" EntityType="Self.AccountType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Budget" EntityType="Self.Budget" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Grant" EntityType="Self.Grant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GrantDistribution" EntityType="Self.GrantDistribution" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GrantDistributionProgram" EntityType="Self.GrantDistributionProgram" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentAccount" EntityType="Self.PaymentAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentProgram" EntityType="Self.PaymentProgram" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PersonRole" EntityType="Self.PersonRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PersonWithRole" EntityType="Self.PersonWithRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Term" EntityType="Self.Term" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Account_Budget" Association="Self.FK_Account_Budget">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Budget" EntitySet="Budget" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Account_PaymentAccount" Association="Self.FK_Account_PaymentAccount">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="PaymentAccount" EntitySet="PaymentAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountType_Account" Association="Self.FK_AccountType_Account">
+      <End Role="AccountType" EntitySet="AccountType" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grant_GrantDistribution" Association="Self.FK_Grant_GrantDistribution">
+      <End Role="Grant" EntitySet="Grant" />
+      <End Role="GrantDistribution" EntitySet="GrantDistribution" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GrantDistribution_GrantDistributionProgram" Association="Self.FK_GrantDistribution_GrantDistributionProgram">
+      <End Role="GrantDistribution" EntitySet="GrantDistribution" />
+      <End Role="GrantDistributionProgram" EntitySet="GrantDistributionProgram" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_PaymentAccount" Association="Self.FK_Payment_PaymentAccount">
+      <End Role="Payment" EntitySet="Payment" />
+      <End Role="PaymentAccount" EntitySet="PaymentAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_PaymentProgram" Association="Self.FK_Payment_PaymentProgram">
+      <End Role="Payment" EntitySet="Payment" />
+      <End Role="PaymentProgram" EntitySet="PaymentProgram" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaymentType_Payment" Association="Self.FK_PaymentType_Payment">
+      <End Role="PaymentType" EntitySet="PaymentType" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonWithRole" Association="Self.FK_Person_PersonWithRole">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="PersonWithRole" EntitySet="PersonWithRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonRole_PersonWithRole" Association="Self.FK_PersonRole_PersonWithRole">
+      <End Role="PersonRole" EntitySet="PersonRole" />
+      <End Role="PersonWithRole" EntitySet="PersonWithRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Program_Budget" Association="Self.FK_Program_Budget">
+      <End Role="Program" EntitySet="Program" />
+      <End Role="Budget" EntitySet="Budget" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Program_GrantDistributionProgram" Association="Self.FK_Program_GrantDistributionProgram">
+      <End Role="Program" EntitySet="Program" />
+      <End Role="GrantDistributionProgram" EntitySet="GrantDistributionProgram" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Program_PaymentProgram" Association="Self.FK_Program_PaymentProgram">
+      <End Role="Program" EntitySet="Program" />
+      <End Role="PaymentProgram" EntitySet="PaymentProgram" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Term_Budget" Association="Self.FK_Term_Budget">
+      <End Role="Term" EntitySet="Term" />
+      <End Role="Budget" EntitySet="Budget" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Term_GrantDistribution" Association="Self.FK_Term_GrantDistribution">
+      <End Role="Term" EntitySet="Term" />
+      <End Role="GrantDistribution" EntitySet="GrantDistribution" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

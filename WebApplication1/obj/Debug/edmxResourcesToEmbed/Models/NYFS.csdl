@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NYFSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="AccountKey" />
+    </Key>
+    <Property Name="AccountKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GLAccountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AccountTypeKey" Type="Int32" />
+    <Property Name="AccountNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="AccountParentKey" Type="Int32" />
+    <NavigationProperty Name="Budgets" Relationship="Self.FK_Account_Budget" FromRole="Account" ToRole="Budget" />
+    <NavigationProperty Name="PaymentAccounts" Relationship="Self.FK_Account_PaymentAccount" FromRole="Account" ToRole="PaymentAccount" />
+    <NavigationProperty Name="AccountType" Relationship="Self.FK_AccountType_Account" FromRole="Account" ToRole="AccountType" />
+  </EntityType>
+  <EntityType Name="AccountType">
+    <Key>
+      <PropertyRef Name="AccountTypeKey" />
+    </Key>
+    <Property Name="AccountTypeKey" Type="Int32" Nullable="false" />
+    <Property Name="AccountTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AccountTypeDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_AccountType_Account" FromRole="AccountType" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="Budget">
+    <Key>
+      <PropertyRef Name="BudgetKey" />
+    </Key>
+    <Property Name="BudgetKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BudgetProgramKey" Type="Int32" />
+    <Property Name="BudgetTermKey" Type="Int32" />
+    <Property Name="BudgetAccountKey" Type="Int32" />
+    <Property Name="BudgetAmount" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="BudgetNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Account_Budget" FromRole="Budget" ToRole="Account" />
+    <NavigationProperty Name="Program" Relationship="Self.FK_Program_Budget" FromRole="Budget" ToRole="Program" />
+    <NavigationProperty Name="Term" Relationship="Self.FK_Term_Budget" FromRole="Budget" ToRole="Term" />
+  </EntityType>
+  <EntityType Name="Grant">
+    <Key>
+      <PropertyRef Name="GrantKey" />
+    </Key>
+    <Property Name="GrantKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GrantName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GrantNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="GrantDistributions" Relationship="Self.FK_Grant_GrantDistribution" FromRole="Grant" ToRole="GrantDistribution" />
+  </EntityType>
+  <EntityType Name="GrantDistribution">
+    <Key>
+      <PropertyRef Name="GrantDistributionKey" />
+    </Key>
+    <Property Name="GrantDistributionKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GrantDistributionGrantKey" Type="Int32" />
+    <Property Name="GrantDistributionTermKey" Type="Int32" />
+    <Property Name="GrantDistributionAmountTotal" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="GrantDistributionInvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GrantDistributionNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Grant" Relationship="Self.FK_Grant_GrantDistribution" FromRole="GrantDistribution" ToRole="Grant" />
+    <NavigationProperty Name="GrantDistributionPrograms" Relationship="Self.FK_GrantDistribution_GrantDistributionProgram" FromRole="GrantDistribution" ToRole="GrantDistributionProgram" />
+    <NavigationProperty Name="Term" Relationship="Self.FK_Term_GrantDistribution" FromRole="GrantDistribution" ToRole="Term" />
+  </EntityType>
+  <EntityType Name="GrantDistributionProgram">
+    <Key>
+      <PropertyRef Name="GrantDistributionProgramKey" />
+    </Key>
+    <Property Name="GrantDistributionProgramKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GrantDistributionKey" Type="Int32" />
+    <Property Name="ProgramKey" Type="Int32" />
+    <Property Name="GrantDistributionProgramAmount" Type="Decimal" Precision="18" Scale="4" />
+    <NavigationProperty Name="GrantDistribution" Relationship="Self.FK_GrantDistribution_GrantDistributionProgram" FromRole="GrantDistributionProgram" ToRole="GrantDistribution" />
+    <NavigationProperty Name="Program" Relationship="Self.FK_Program_GrantDistributionProgram" FromRole="GrantDistributionProgram" ToRole="Program" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentKey" />
+    </Key>
+    <Property Name="PaymentKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="0" />
+    <Property Name="PaymentTo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentCheckNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentTypeKey" Type="Int32" />
+    <Property Name="PaymentAmount" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="PaymentNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentReconciled" Type="Byte" />
+    <Property Name="PaymentVendorInvoiceNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PaymentAccounts" Relationship="Self.FK_Payment_PaymentAccount" FromRole="Payment" ToRole="PaymentAccount" />
+    <NavigationProperty Name="PaymentPrograms" Relationship="Self.FK_Payment_PaymentProgram" FromRole="Payment" ToRole="PaymentProgram" />
+    <NavigationProperty Name="PaymentType" Relationship="Self.FK_PaymentType_Payment" FromRole="Payment" ToRole="PaymentType" />
+  </EntityType>
+  <EntityType Name="PaymentAccount">
+    <Key>
+      <PropertyRef Name="PaymentAccountKey" />
+    </Key>
+    <Property Name="PaymentAccountKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentKey" Type="Int32" />
+    <Property Name="AccountKey" Type="Int32" />
+    <Property Name="PaymentAccountAmount" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="PaymentAccountNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Account_PaymentAccount" FromRole="PaymentAccount" ToRole="Account" />
+    <NavigationProperty Name="Payment" Relationship="Self.FK_Payment_PaymentAccount" FromRole="PaymentAccount" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="PaymentProgram">
+    <Key>
+      <PropertyRef Name="PaymentProgramKey" />
+    </Key>
+    <Property Name="PaymentProgramKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentKey" Type="Int32" />
+    <Property Name="ProgramKey" Type="Int32" />
+    <Property Name="PaymentProgramAmount" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="PaymentProgramNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Payment" Relationship="Self.FK_Payment_PaymentProgram" FromRole="PaymentProgram" ToRole="Payment" />
+    <NavigationProperty Name="Program" Relationship="Self.FK_Program_PaymentProgram" FromRole="PaymentProgram" ToRole="Program" />
+  </EntityType>
+  <EntityType Name="PaymentType">
+    <Key>
+      <PropertyRef Name="PaymentTypeKey" />
+    </Key>
+    <Property Name="PaymentTypeKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentTypeCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentTypeDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK_PaymentType_Payment" FromRole="PaymentType" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonKey" />
+    </Key>
+    <Property Name="PersonKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PersonAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PersonCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PersonStateKey" Type="Int32" />
+    <Property Name="PersonZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PersonNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="VendorFederalEIN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="VendorDefaultTerms" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PersonWithRoles" Relationship="Self.FK_Person_PersonWithRole" FromRole="Person" ToRole="PersonWithRole" />
+  </EntityType>
+  <EntityType Name="PersonRole">
+    <Key>
+      <PropertyRef Name="PersonRoleKey" />
+    </Key>
+    <Property Name="PersonRoleKey" Type="Int32" Nullable="false" />
+    <Property Name="PersonRoleCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="PersonRole1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PersonRoleDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PersonWithRoles" Relationship="Self.FK_PersonRole_PersonWithRole" FromRole="PersonRole" ToRole="PersonWithRole" />
+  </EntityType>
+  <EntityType Name="PersonWithRole">
+    <Key>
+      <PropertyRef Name="PersonWithRoleKey" />
+    </Key>
+    <Property Name="PersonWithRoleKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonKey" Type="Int32" />
+    <Property Name="PersonRoleKey" Type="Int32" />
+    <Property Name="PersonWithRoleNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_Person_PersonWithRole" FromRole="PersonWithRole" ToRole="Person" />
+    <NavigationProperty Name="PersonRole" Relationship="Self.FK_PersonRole_PersonWithRole" FromRole="PersonWithRole" ToRole="PersonRole" />
+  </EntityType>
+  <EntityType Name="Program">
+    <Key>
+      <PropertyRef Name="ProgramKey" />
+    </Key>
+    <Property Name="ProgramKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProgramName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProgramNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Budgets" Relationship="Self.FK_Program_Budget" FromRole="Program" ToRole="Budget" />
+    <NavigationProperty Name="GrantDistributionProgram" Relationship="Self.FK_Program_GrantDistributionProgram" FromRole="Program" ToRole="GrantDistributionProgram" />
+    <NavigationProperty Name="PaymentPrograms" Relationship="Self.FK_Program_PaymentProgram" FromRole="Program" ToRole="PaymentProgram" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Term">
+    <Key>
+      <PropertyRef Name="TermKey" />
+    </Key>
+    <Property Name="TermKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TermName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TermStartDate" Type="DateTime" Precision="0" />
+    <Property Name="TermEndDate" Type="DateTime" Precision="0" />
+    <Property Name="TermNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Budgets" Relationship="Self.FK_Term_Budget" FromRole="Term" ToRole="Budget" />
+    <NavigationProperty Name="GrantDistributions" Relationship="Self.FK_Term_GrantDistribution" FromRole="Term" ToRole="GrantDistribution" />
+  </EntityType>
+  <Association Name="FK_Account_Budget">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountKey" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="BudgetAccountKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Account_PaymentAccount">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="PaymentAccount" Type="Self.PaymentAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountKey" />
+      </Principal>
+      <Dependent Role="PaymentAccount">
+        <PropertyRef Name="AccountKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountType_Account">
+    <End Role="AccountType" Type="Self.AccountType" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountType">
+        <PropertyRef Name="AccountTypeKey" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="AccountTypeKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Program_Budget">
+    <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+    <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Program">
+        <PropertyRef Name="ProgramKey" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="BudgetProgramKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Term_Budget">
+    <End Role="Term" Type="Self.Term" Multiplicity="0..1" />
+    <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Term">
+        <PropertyRef Name="TermKey" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="BudgetTermKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grant_GrantDistribution">
+    <End Role="Grant" Type="Self.Grant" Multiplicity="0..1" />
+    <End Role="GrantDistribution" Type="Self.GrantDistribution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grant">
+        <PropertyRef Name="GrantKey" />
+      </Principal>
+      <Dependent Role="GrantDistribution">
+        <PropertyRef Name="GrantDistributionGrantKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GrantDistribution_GrantDistributionProgram">
+    <End Role="GrantDistribution" Type="Self.GrantDistribution" Multiplicity="0..1" />
+    <End Role="GrantDistributionProgram" Type="Self.GrantDistributionProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrantDistribution">
+        <PropertyRef Name="GrantDistributionKey" />
+      </Principal>
+      <Dependent Role="GrantDistributionProgram">
+        <PropertyRef Name="GrantDistributionKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Term_GrantDistribution">
+    <End Role="Term" Type="Self.Term" Multiplicity="0..1" />
+    <End Role="GrantDistribution" Type="Self.GrantDistribution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Term">
+        <PropertyRef Name="TermKey" />
+      </Principal>
+      <Dependent Role="GrantDistribution">
+        <PropertyRef Name="GrantDistributionTermKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Program_GrantDistributionProgram">
+    <End Role="Program" Type="Self.Program" Multiplicity="1" />
+    <End Role="GrantDistributionProgram" Type="Self.GrantDistributionProgram" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Program">
+        <PropertyRef Name="ProgramKey" />
+      </Principal>
+      <Dependent Role="GrantDistributionProgram">
+        <PropertyRef Name="GrantDistributionProgramKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_PaymentAccount">
+    <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+    <End Role="PaymentAccount" Type="Self.PaymentAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="PaymentKey" />
+      </Principal>
+      <Dependent Role="PaymentAccount">
+        <PropertyRef Name="PaymentKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_PaymentProgram">
+    <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+    <End Role="PaymentProgram" Type="Self.PaymentProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="PaymentKey" />
+      </Principal>
+      <Dependent Role="PaymentProgram">
+        <PropertyRef Name="PaymentKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaymentType_Payment">
+    <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentType">
+        <PropertyRef Name="PaymentTypeKey" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="PaymentTypeKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Program_PaymentProgram">
+    <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+    <End Role="PaymentProgram" Type="Self.PaymentProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Program">
+        <PropertyRef Name="ProgramKey" />
+      </Principal>
+      <Dependent Role="PaymentProgram">
+        <PropertyRef Name="ProgramKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_PersonWithRole">
+    <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+    <End Role="PersonWithRole" Type="Self.PersonWithRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonKey" />
+      </Principal>
+      <Dependent Role="PersonWithRole">
+        <PropertyRef Name="PersonKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonRole_PersonWithRole">
+    <End Role="PersonRole" Type="Self.PersonRole" Multiplicity="0..1" />
+    <End Role="PersonWithRole" Type="Self.PersonWithRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonRole">
+        <PropertyRef Name="PersonRoleKey" />
+      </Principal>
+      <Dependent Role="PersonWithRole">
+        <PropertyRef Name="PersonRoleKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NYFSEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
+    <EntitySet Name="Budgets" EntityType="Self.Budget" />
+    <EntitySet Name="Grants" EntityType="Self.Grant" />
+    <EntitySet Name="GrantDistributions" EntityType="Self.GrantDistribution" />
+    <EntitySet Name="GrantDistributionPrograms" EntityType="Self.GrantDistributionProgram" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="PaymentAccounts" EntityType="Self.PaymentAccount" />
+    <EntitySet Name="PaymentPrograms" EntityType="Self.PaymentProgram" />
+    <EntitySet Name="PaymentTypes" EntityType="Self.PaymentType" />
+    <EntitySet Name="People" EntityType="Self.Person" />
+    <EntitySet Name="PersonRoles" EntityType="Self.PersonRole" />
+    <EntitySet Name="PersonWithRoles" EntityType="Self.PersonWithRole" />
+    <EntitySet Name="Programs" EntityType="Self.Program" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Terms" EntityType="Self.Term" />
+    <AssociationSet Name="FK_Account_Budget" Association="Self.FK_Account_Budget">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Budget" EntitySet="Budgets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Account_PaymentAccount" Association="Self.FK_Account_PaymentAccount">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="PaymentAccount" EntitySet="PaymentAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountType_Account" Association="Self.FK_AccountType_Account">
+      <End Role="AccountType" EntitySet="AccountTypes" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Program_Budget" Association="Self.FK_Program_Budget">
+      <End Role="Program" EntitySet="Programs" />
+      <End Role="Budget" EntitySet="Budgets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Term_Budget" Association="Self.FK_Term_Budget">
+      <End Role="Term" EntitySet="Terms" />
+      <End Role="Budget" EntitySet="Budgets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grant_GrantDistribution" Association="Self.FK_Grant_GrantDistribution">
+      <End Role="Grant" EntitySet="Grants" />
+      <End Role="GrantDistribution" EntitySet="GrantDistributions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GrantDistribution_GrantDistributionProgram" Association="Self.FK_GrantDistribution_GrantDistributionProgram">
+      <End Role="GrantDistribution" EntitySet="GrantDistributions" />
+      <End Role="GrantDistributionProgram" EntitySet="GrantDistributionPrograms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Term_GrantDistribution" Association="Self.FK_Term_GrantDistribution">
+      <End Role="Term" EntitySet="Terms" />
+      <End Role="GrantDistribution" EntitySet="GrantDistributions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Program_GrantDistributionProgram" Association="Self.FK_Program_GrantDistributionProgram">
+      <End Role="Program" EntitySet="Programs" />
+      <End Role="GrantDistributionProgram" EntitySet="GrantDistributionPrograms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_PaymentAccount" Association="Self.FK_Payment_PaymentAccount">
+      <End Role="Payment" EntitySet="Payments" />
+      <End Role="PaymentAccount" EntitySet="PaymentAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_PaymentProgram" Association="Self.FK_Payment_PaymentProgram">
+      <End Role="Payment" EntitySet="Payments" />
+      <End Role="PaymentProgram" EntitySet="PaymentPrograms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaymentType_Payment" Association="Self.FK_PaymentType_Payment">
+      <End Role="PaymentType" EntitySet="PaymentTypes" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Program_PaymentProgram" Association="Self.FK_Program_PaymentProgram">
+      <End Role="Program" EntitySet="Programs" />
+      <End Role="PaymentProgram" EntitySet="PaymentPrograms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonWithRole" Association="Self.FK_Person_PersonWithRole">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonWithRole" EntitySet="PersonWithRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonRole_PersonWithRole" Association="Self.FK_PersonRole_PersonWithRole">
+      <End Role="PersonRole" EntitySet="PersonRoles" />
+      <End Role="PersonWithRole" EntitySet="PersonWithRoles" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(NYFSModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(NYFSModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

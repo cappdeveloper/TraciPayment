@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NYFSModelStoreContainer" CdmEntityContainer="NYFSEntities1">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="NYFSModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="AccountKey" ColumnName="AccountKey" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="GLAccountCode" ColumnName="GLAccountCode" />
+          <ScalarProperty Name="AccountTypeKey" ColumnName="AccountTypeKey" />
+          <ScalarProperty Name="AccountNote" ColumnName="AccountNote" />
+          <ScalarProperty Name="AccountParentKey" ColumnName="AccountParentKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccountTypes">
+      <EntityTypeMapping TypeName="NYFSModel.AccountType">
+        <MappingFragment StoreEntitySet="AccountType">
+          <ScalarProperty Name="AccountTypeKey" ColumnName="AccountTypeKey" />
+          <ScalarProperty Name="AccountTypeName" ColumnName="AccountTypeName" />
+          <ScalarProperty Name="AccountTypeDescription" ColumnName="AccountTypeDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Budgets">
+      <EntityTypeMapping TypeName="NYFSModel.Budget">
+        <MappingFragment StoreEntitySet="Budget">
+          <ScalarProperty Name="BudgetKey" ColumnName="BudgetKey" />
+          <ScalarProperty Name="BudgetProgramKey" ColumnName="BudgetProgramKey" />
+          <ScalarProperty Name="BudgetTermKey" ColumnName="BudgetTermKey" />
+          <ScalarProperty Name="BudgetAccountKey" ColumnName="BudgetAccountKey" />
+          <ScalarProperty Name="BudgetAmount" ColumnName="BudgetAmount" />
+          <ScalarProperty Name="BudgetNote" ColumnName="BudgetNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Grants">
+      <EntityTypeMapping TypeName="NYFSModel.Grant">
+        <MappingFragment StoreEntitySet="Grant">
+          <ScalarProperty Name="GrantKey" ColumnName="GrantKey" />
+          <ScalarProperty Name="GrantName" ColumnName="GrantName" />
+          <ScalarProperty Name="GrantNote" ColumnName="GrantNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrantDistributions">
+      <EntityTypeMapping TypeName="NYFSModel.GrantDistribution">
+        <MappingFragment StoreEntitySet="GrantDistribution">
+          <ScalarProperty Name="GrantDistributionKey" ColumnName="GrantDistributionKey" />
+          <ScalarProperty Name="GrantDistributionGrantKey" ColumnName="GrantDistributionGrantKey" />
+          <ScalarProperty Name="GrantDistributionTermKey" ColumnName="GrantDistributionTermKey" />
+          <ScalarProperty Name="GrantDistributionAmountTotal" ColumnName="GrantDistributionAmountTotal" />
+          <ScalarProperty Name="GrantDistributionInvoiceNumber" ColumnName="GrantDistributionInvoiceNumber" />
+          <ScalarProperty Name="GrantDistributionNote" ColumnName="GrantDistributionNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrantDistributionPrograms">
+      <EntityTypeMapping TypeName="NYFSModel.GrantDistributionProgram">
+        <MappingFragment StoreEntitySet="GrantDistributionProgram">
+          <ScalarProperty Name="GrantDistributionProgramKey" ColumnName="GrantDistributionProgramKey" />
+          <ScalarProperty Name="GrantDistributionKey" ColumnName="GrantDistributionKey" />
+          <ScalarProperty Name="ProgramKey" ColumnName="ProgramKey" />
+          <ScalarProperty Name="GrantDistributionProgramAmount" ColumnName="GrantDistributionProgramAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="NYFSModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="PaymentKey" ColumnName="PaymentKey" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="PaymentTo" ColumnName="PaymentTo" />
+          <ScalarProperty Name="PaymentCheckNumber" ColumnName="PaymentCheckNumber" />
+          <ScalarProperty Name="PaymentTypeKey" ColumnName="PaymentTypeKey" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="PaymentNote" ColumnName="PaymentNote" />
+          <ScalarProperty Name="PaymentReconciled" ColumnName="PaymentReconciled" />
+          <ScalarProperty Name="PaymentVendorInvoiceNumber" ColumnName="PaymentVendorInvoiceNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentAccounts">
+      <EntityTypeMapping TypeName="NYFSModel.PaymentAccount">
+        <MappingFragment StoreEntitySet="PaymentAccount">
+          <ScalarProperty Name="PaymentAccountKey" ColumnName="PaymentAccountKey" />
+          <ScalarProperty Name="PaymentKey" ColumnName="PaymentKey" />
+          <ScalarProperty Name="AccountKey" ColumnName="AccountKey" />
+          <ScalarProperty Name="PaymentAccountAmount" ColumnName="PaymentAccountAmount" />
+          <ScalarProperty Name="PaymentAccountNote" ColumnName="PaymentAccountNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentPrograms">
+      <EntityTypeMapping TypeName="NYFSModel.PaymentProgram">
+        <MappingFragment StoreEntitySet="PaymentProgram">
+          <ScalarProperty Name="PaymentProgramKey" ColumnName="PaymentProgramKey" />
+          <ScalarProperty Name="PaymentKey" ColumnName="PaymentKey" />
+          <ScalarProperty Name="ProgramKey" ColumnName="ProgramKey" />
+          <ScalarProperty Name="PaymentProgramAmount" ColumnName="PaymentProgramAmount" />
+          <ScalarProperty Name="PaymentProgramNote" ColumnName="PaymentProgramNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentTypes">
+      <EntityTypeMapping TypeName="NYFSModel.PaymentType">
+        <MappingFragment StoreEntitySet="PaymentType">
+          <ScalarProperty Name="PaymentTypeKey" ColumnName="PaymentTypeKey" />
+          <ScalarProperty Name="PaymentTypeCode" ColumnName="PaymentTypeCode" />
+          <ScalarProperty Name="PaymentTypeName" ColumnName="PaymentTypeName" />
+          <ScalarProperty Name="PaymentTypeDescription" ColumnName="PaymentTypeDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="NYFSModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="PersonKey" ColumnName="PersonKey" />
+          <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+          <ScalarProperty Name="PersonAddress" ColumnName="PersonAddress" />
+          <ScalarProperty Name="PersonCity" ColumnName="PersonCity" />
+          <ScalarProperty Name="PersonStateKey" ColumnName="PersonStateKey" />
+          <ScalarProperty Name="PersonZipCode" ColumnName="PersonZipCode" />
+          <ScalarProperty Name="PersonNote" ColumnName="PersonNote" />
+          <ScalarProperty Name="VendorFederalEIN" ColumnName="VendorFederalEIN" />
+          <ScalarProperty Name="VendorDefaultTerms" ColumnName="VendorDefaultTerms" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonRoles">
+      <EntityTypeMapping TypeName="NYFSModel.PersonRole">
+        <MappingFragment StoreEntitySet="PersonRole">
+          <ScalarProperty Name="PersonRoleKey" ColumnName="PersonRoleKey" />
+          <ScalarProperty Name="PersonRoleCode" ColumnName="PersonRoleCode" />
+          <ScalarProperty Name="PersonRole1" ColumnName="PersonRole" />
+          <ScalarProperty Name="PersonRoleDescription" ColumnName="PersonRoleDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonWithRoles">
+      <EntityTypeMapping TypeName="NYFSModel.PersonWithRole">
+        <MappingFragment StoreEntitySet="PersonWithRole">
+          <ScalarProperty Name="PersonWithRoleKey" ColumnName="PersonWithRoleKey" />
+          <ScalarProperty Name="PersonKey" ColumnName="PersonKey" />
+          <ScalarProperty Name="PersonRoleKey" ColumnName="PersonRoleKey" />
+          <ScalarProperty Name="PersonWithRoleNote" ColumnName="PersonWithRoleNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Programs">
+      <EntityTypeMapping TypeName="NYFSModel.Program">
+        <MappingFragment StoreEntitySet="Program">
+          <ScalarProperty Name="ProgramKey" ColumnName="ProgramKey" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="ProgramNote" ColumnName="ProgramNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="NYFSModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Terms">
+      <EntityTypeMapping TypeName="NYFSModel.Term">
+        <MappingFragment StoreEntitySet="Term">
+          <ScalarProperty Name="TermKey" ColumnName="TermKey" />
+          <ScalarProperty Name="TermName" ColumnName="TermName" />
+          <ScalarProperty Name="TermStartDate" ColumnName="TermStartDate" />
+          <ScalarProperty Name="TermEndDate" ColumnName="TermEndDate" />
+          <ScalarProperty Name="TermNote" ColumnName="TermNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="NYFSModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="NYFSModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="NYFSModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="NYFSModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NYFSModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="NYFSModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NYFSModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="NYFSModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="NYFSModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>
