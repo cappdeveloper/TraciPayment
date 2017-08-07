@@ -2,423 +2,478 @@
     ViewBag.Title = "Payment";
 }
 
-<div id="mainForm">
-    <div class="page-content">
+                    <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+                    <nav class="editorSectionzindex navbar navbar-default row" role="navigation" id="horizontal-navbar" style="margin: auto 0">
+                        <div id="horizontal-navbar">
 
-
-        <nav class="editorSectionzindex navbar navbar-default row" role="navigation" id="horizontal-navbar" style="margin: auto 0">
-            <div id="horizontal-navbar">
-
-                <div id="InteractionDetails" class="validateform" ng-controller="paymentController">
-                    @using (Html.BeginForm(null, null, FormMethod.Post, new
-                        {
-                            id = "PaymentForm",
-                            @class = "editorForm",
-                            onsubmit = "return false;",
-                            name = "PaymentForm"
-                        }))
-                    {
-                        <div id="editorForm" class="editorForm">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <div class="col-md-12"><h4 style="margin-left:10px"><b>Payment Detail</b></h4></div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-gray">
-                                        @*<div class="panel-heading">"Interaction Deatils"</div>*@
-                                        <div class="panel-body">
-                                            <div class="form-horizontal">
-                                                <div class="row">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3  col-md-3 col-xs-5 control-label">Date:</label>
-                                                        <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
-                                                            <input id="Date" name="Date" ng-model="Payment.PaymentDate" class="form-control" data-val="true" data-val-required="" />
-                                                            <span class="msg-validation">
-                                                                <span data-valmsg-for="Date">Date is required.</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3  col-md-3 col-xs-5 control-label">Check Number:</label>
-                                                        <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
-                                                            <input  id="CheckNumber" name="CheckNumber" ng-model="Payment.PaymentCheckNumber" class="form-control" data-val="true" data-val-required="" />
-                                                            <span class="msg-validation">
-                                                                <span data-valmsg-for="CheckNumber">Payment check number is required.</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3  col-md-3 col-xs-5 control-label">Payment Type:</label>
-                                                        <div class="col-md-4 col-sm-6 col-xs-7">
-                                                            <select class="form-control" data-val="true" data-val-required="" data-ng-model="Payment.PaymentTypeKey" data-ng-options="types.PaymentTypeKey as types.PaymentTypeName for types in PeymentTypes" id="Project" name="Project">
-                                                                <option value="">Select</option>
-                                                            </select>
-                                                            <span class="msg-validation">
-                                                                <span data-valmsg-for="Project">Payment Type is required.</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3  col-md-3 col-xs-5 control-label">Payment To:</label>
-                                                        <div class="col-md-4 col-sm-6 col-xs-7">
-                                                            <select class="form-control" data-val="true" data-val-required="" data-ng-model="Payment.PaymentTo" data-ng-options="person.PersonKey as person.PersonName for person in Persons" id="person" name="person">
-                                                                <option value="">Select</option>
-                                                            </select>
-                                                            <span class="msg-validation">
-                                                                <span data-valmsg-for="person">Payment To is required.</span>
-                                                            </span>
-                                                        </div>
-                                                        <a class="pull-left" data-toggle="modal" style="cursor:pointer;" ng-click="AddNewPerson()">Add a new person</a>
-                                                        @*<button type="button" class="btn btn-neutral" ng-click="AddNewPerson()" >
-                                                                <i class="fa fa-download"></i>&nbsp; Add new person
-                                                            </button>*@
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3  col-md-3 col-xs-5 control-label">Invoice Number:</label>
-                                                        <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
-                                                            <input id="CheckNumber" name="CheckNumber" ng-model="Payment.PaymentVendorInvoiceNumber" class="form-control" data-val="true" data-val-required="" />
-                                                            <span class="msg-validation">
-                                                                <span data-valmsg-for="CheckNumber">Invoice Number is required.</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3  col-md-3 col-xs-5 control-label">Note:</label>
-                                                        <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
-                                                            <textarea id="PaymentNote" name="PaymentNote" ng-model="Payment.PaymentNote" class="form-control" rows="4"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <button ng-click="SavePayment()" class="btn btn-neutral pull-right" style="margin-right:10px">Save Detail </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <div class="col-md-12"><h4 style="margin-left:10px"><b>Account &nbsp; 
-                                                <img src="~/Images/add.jpg" height="20px" title="Add new payment account" ng-click="AddNewPaymentAccount()"/></b></h4></div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-gray">
-                                        <div class="panel-body">
-                                            <div class="form-horizontal">
-                                                <div class="row">
-
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <table class="table  table-hover table-bordered table-striped spacer-top-20" ng-show="PaymentAccounts.length > 0">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Account Name</th>
-                                                                    <th>Amount</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr ng-repeat="account in PaymentAccounts">
-                                                                    <td>{{account.AccountKey}}</td>
-                                                                    <td>{{account.PaymentAccountAmount}}</td>
-                                                                    <td><img ng-click="DeletePaymentAccount(account.PaymentAccountKey,$index)" src="~/Images/recycle.jpg" height="17px" /></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
+                            <div id="InteractionDetails" class="validateform" ng-controller="paymentController">
+                                @using (Html.BeginForm(null, null, FormMethod.Post, new
+                            {
+                                id = "PaymentForm",
+                                @class = "editorForm",
+                                onsubmit = "return false;",
+                                name = "PaymentForm"
+                            }))
+                            {
+                                    <div id="editorForm" class="editorForm">
+                                        <div class="row">
                                             <div class="col-md-12">
-                                                <h4 style="margin-left:10px">
-                                                    <b>
-                                                        Program &nbsp;
-                                                        <img src="~/Images/add.jpg" height="20px" title="Add new payment account" ng-click="AddNewPaymentProgram()" />
-                                                    </b>
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12"><h4 style="margin-left:10px"><b>Payment Detail</b></h4></div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-gray">
+                                                    @*<div class="panel-heading">"Interaction Deatils"</div>*@
+                                                    <div class="panel-body">
+                                                        <div class="form-horizontal">
+                                                            <div class="row">
+                                                                <div class="form-group">
+
+
+                                                                    <label class="col-sm-3  col-md-3 col-xs-5 control-label">Date:</label>
+                                                                    <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                        <input id="Date" name="Date" ng-model="Payment.PaymentDate" class="form-control form-control years hasDatepicker" data-val="true" data-val-required="" />
+                                                                        <span class="msg-validation">
+                                                                            <span data-valmsg-for="Date">Date is required.</span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3  col-md-3 col-xs-5 control-label">Check Number:</label>
+                                                                    <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                        <input id="CheckNumber" name="CheckNumber" ng-model="Payment.PaymentCheckNumber" class="form-control" data-val="true" data-val-required="" />
+                                                                        <span class="msg-validation">
+                                                                            <span data-valmsg-for="CheckNumber">Payment check number is required.</span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3  col-md-3 col-xs-5 control-label">Payment Type:</label>
+                                                                    <div class="col-md-4 col-sm-6 col-xs-7">
+                                                                        <select class="form-control" data-val="true" data-val-required="" data-ng-model="Payment.PaymentTypeKey" data-ng-options="types.PaymentTypeKey as types.PaymentTypeName for types in PeymentTypes" id="Project" name="Project">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                        <span class="msg-validation">
+                                                                            <span data-valmsg-for="Project">Payment Type is required.</span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3  col-md-3 col-xs-5 control-label">Payment To:</label>
+                                                                    <div class="col-md-4 col-sm-6 col-xs-7">
+                                                                        <select class="form-control" data-val="true" data-val-required="" data-ng-model="Payment.PaymentTo" data-ng-options="person.PersonKey as person.PersonName for person in Persons" id="person" name="person">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                        <span class="msg-validation">
+                                                                            <span data-valmsg-for="person">Payment To is required.</span>
+                                                                        </span>
+                                                                    </div>
+                                                                    <a class="pull-left btn btn-danger btn-sm" data-toggle="modal" style="cursor:pointer;" ng-click="AddNewPerson()">Add a new person</a>
+                                                                    @*<button type="button" class="btn btn-neutral" ng-click="AddNewPerson()" >
+                                                                            <i class="fa fa-download"></i>&nbsp; Add new person
+                                                                        </button>*@
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3  col-md-3 col-xs-5 control-label">Invoice Number:</label>
+                                                                    <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                        <input id="CheckNumber" name="CheckNumber" ng-model="Payment.PaymentVendorInvoiceNumber" class="form-control" data-val="true" data-val-required="" />
+                                                                        <span class="msg-validation">
+                                                                            <span data-valmsg-for="CheckNumber">Invoice Number is required.</span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3  col-md-3 col-xs-5 control-label">Note:</label>
+                                                                    <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                        <textarea id="PaymentNote" name="PaymentNote" ng-model="Payment.PaymentNote" class="form-control" rows="4"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row text-center">
+                                                                <button ng-click="SavePayment()" class="btn btn-add btn-sm" style="margin-right:10px">Save Detail </button>
+                                                                <button  class="btn btn-danger btn-sm" style="margin-right:10px">Cancel</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <h4 style="margin-left:10px">
+                                                                <b>
+                                                                    Account &nbsp;
+                                                                    <img src="~/Images/add.jpg" height="20px" title="Add new payment account" ng-click="AddNewPaymentAccount()" />
+                                                                </b>
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-gray">
+                                                    <div class="panel-body">
+                                                        <div class="form-horizontal">
+                                                            <div class="row">
+
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                    <table class="table  table-hover table-bordered table-striped spacer-top-20" ng-show="PaymentAccounts.length > 0">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Account Name</th>
+                                                                                <th>Amount</th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr ng-repeat="account in PaymentAccounts">
+                                                                                <td>{{account.AccountKey}}</td>
+                                                                                <td>{{account.PaymentAccountAmount}}</td>
+                                                                                <td><img ng-click="DeletePaymentAccount(account.PaymentAccountKey,$index)" src="~/Images/recycle.jpg" height="17px" /></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <h4 style="margin-left:10px">
+                                                                <b>
+                                                                    Program &nbsp;
+                                                                    <img src="~/Images/add.jpg" height="20px" title="Add new payment account" ng-click="AddNewPaymentProgram()" />
+                                                                </b>
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-gray">
+                                                    <div class="panel-body">
+                                                        <div class="form-horizontal">
+                                                            <div class="row">
+
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                    <table class="table  table-hover table-bordered table-striped spacer-top-20" ng-show="PaymentPrograms.length > 0">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Program Name</th>
+                                                                                <th>Amount</th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr ng-repeat="prog in PaymentPrograms">
+                                                                                <td>{{prog.ProgramKey}}</td>
+                                                                                <td>{{prog.PaymentProgramAmount}}</td>
+                                                                                <td><img src="~/Images/recycle.jpg" height="15px" ng-click="DeletePaymentProgram(prog.PaymentProgramKey,$index)" /></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                            }
+
+
+
+                                <!-- create new person modal-->
+                                <div class="modal fade" id="PersonModal" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title" style=" text-align center; ">
+                                                    <span>Create a new person</span>
                                                 </h4>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-gray">
-                                        <div class="panel-body">
-                                            <div class="form-horizontal">
-                                                <div class="row">
+                                            <div class="modal-body">
+                                                <form name="PersonForm" id="PersonForm" class="form-horizontal">
+                                                    <div class="row">
+                                                        <div class="form-horizontal">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3"> Name</label>
+                                                                <div class="col-sm-9">
+                                                                    <input id="personname" name="personname" class="form-control" ng-model="Person.PersonName"
+                                                                           data-val="true" data-val-required="" validator="required" />
+                                                                    <span class="msg-validation">
+                                                                        <span data-valmsg-for="personname" class="spn-err"> Name is required.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">Person Address</label>
+                                                                <div class="col-sm-9">
+                                                                    <input id="personaddress" name="personaddress" class="form-control" ng-model="Person.PersonAddress"
+                                                                           data-val="true" data-val-required="" validator="required" />
+                                                                    <span class="msg-validation">
+                                                                        <span data-valmsg-for="personaddress" class="spn-err">Person Address is required.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
 
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <table class="table  table-hover table-bordered table-striped spacer-top-20" ng-show="PaymentPrograms.length > 0">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Program Name</th>
-                                                                    <th>Amount</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr ng-repeat="prog in PaymentPrograms">
-                                                                    <td>{{prog.ProgramKey}}</td>
-                                                                    <td>{{prog.PaymentProgramAmount}}</td>
-                                                                    <td><img src="~/Images/recycle.jpg" height="15px" ng-click="DeletePaymentProgram(prog.PaymentProgramKey,$index)" /></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">City</label>
+                                                                <div class="col-sm-9">
+                                                                    <input id="city" name="city" class="form-control" ng-model="Person.PersonCity"
+                                                                           data-val="true" data-val-required="" validator="required" />
+                                                                    <span class="msg-validation">
+                                                                        <span data-valmsg-for="city" class="spn-err">City is required.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">State Key</label>
+                                                                <div class="col-sm-9">
+                                                                    <input id="statekey" name="statekey" class="form-control" ng-model="Person.PersonStateKey"
+                                                                           data-val="true" data-val-required="" validator="required" />
+                                                                    <span class="msg-validation">
+                                                                        <span data-valmsg-for="statekey" class="spn-err"> State Key is required.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3"> Note</label>
+                                                                <div class="col-sm-9">
+                                                                    <textarea rows="4" id="note" name="note" class="form-control" ng-model="Person.PersonNote"> </textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">Vendor Federal EIN</label>
+                                                                <div class="col-sm-9">
+                                                                    <input id="vendorfederalEIN" name="vendorfederalEIN" class="form-control" ng-model="Person.VendorFederalEIN"
+                                                                           data-val="true" data-val-required="" validator="required" />
+                                                                    <span class="msg-validation">
+                                                                        <span data-valmsg-for="vendorfederalEIN" class="spn-err"> Vendor Federal EIN is required.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">Vendor Default Terms</label>
+                                                                <div class="col-sm-9">
+                                                                    <textarea rows="4" id="vendordefaultterms" name="vendordefaultterms" class="form-control" ng-model="Person.VendorDefaultTerms"></textarea>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
-
-                                                </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-add btn-md" ng-click="SavePerson();"> Save</button>
+                                                <button type="button" class="btn btn-danger btn-md" data-dismiss="modal"> Cancel</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <!--end  person modal-->
+                                <!-- create new payment account modal-->
+                                <div class="modal fade" id="PaymentAmountModal" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title" style=" text-align center; ">
+                                                    <span>Create a new account</span>
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form name="PaymentAmountForm" id="PaymentAmountForm" class="form-horizontal">
+                                                    <div class="row">
+                                                        <div class="form-horizontal">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3"> Account</label>
+                                                                <div class="col-sm-9">
+                                                                    <select class="form-control" data-val="true" data-val-required="" data-ng-model="PaymentAccount.AccountKey" data-ng-options="account.AccountKey as account.AccountName for account in Accounts" id="accountKey" name="accountKey">
+                                                                        <option value="">Select</option>
+                                                                    </select>
+                                                                    <span class="msg-validation">
+                                                                        <span data-valmsg-for="accountKey">Account is required.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">Account Amount</label>
+                                                                <div class="col-sm-9">
+                                                                    <input id="accountamnt" name="accountamnt" class="form-control" ng-model="PaymentAccount.PaymentAccountAmount" data-val="true" data-val-required="" validator="required" />
+                                                                    <span class="msg-validation">
+                                                                        <span data-valmsg-for="accountamnt" class="spn-err">Account amount is required.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
 
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">Account Note</label>
+                                                                <div class="col-sm-9">
+                                                                    <textarea rows="4" id="note" name="note" class="form-control" ng-model="PaymentAccount.PaymentAccountNote"> </textarea>
+                                                                </div>
+                                                            </div>
 
-                        </div>
-                    }
-
-
-
-                    <!-- create new person modal-->
-                    <div class="modal fade" id="PersonModal" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title" style=" text-align: center; ">
-                                        <span>Create a new person</span>
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form name="PersonForm" id="PersonForm" class="form-horizontal">
-                                        <div class="row">
-                                            <div class="form-horizontal">
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3"> Name</label>
-                                                    <div class="col-sm-9">
-                                                        <input id="personname" name="personname" class="form-control" ng-model="Person.PersonName"
-                                                               data-val="true" data-val-required="" validator="required" />
-                                                        <span class="msg-validation">
-                                                            <span data-valmsg-for="personname" class="spn-err"> Name is required.</span>
-                                                        </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3">Person Address</label>
-                                                    <div class="col-sm-9">
-                                                        <input id="personaddress" name="personaddress" class="form-control" ng-model="Person.PersonAddress"
-                                                               data-val="true" data-val-required="" validator="required" />
-                                                        <span class="msg-validation">
-                                                            <span data-valmsg-for="personaddress" class="spn-err">Person Address is required.</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3">City</label>
-                                                    <div class="col-sm-9">
-                                                        <input id="city" name="city" class="form-control" ng-model="Person.PersonCity"
-                                                               data-val="true" data-val-required="" validator="required" />
-                                                        <span class="msg-validation">
-                                                            <span data-valmsg-for="city" class="spn-err">City is required.</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3">State Key</label>
-                                                    <div class="col-sm-9">
-                                                        <input id="statekey" name="statekey" class="form-control" ng-model="Person.PersonStateKey"
-                                                               data-val="true" data-val-required="" validator="required" />
-                                                        <span class="msg-validation">
-                                                            <span data-valmsg-for="statekey" class="spn-err"> State Key is required.</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3"> Note</label>
-                                                    <div class="col-sm-9">
-                                                        <textarea rows="4" id="note" name="note" class="form-control" ng-model="Person.PersonNote"> </textarea>                                                       
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3">Vendor Federal EIN</label>
-                                                    <div class="col-sm-9">
-                                                        <input id="vendorfederalEIN" name="vendorfederalEIN" class="form-control" ng-model="Person.VendorFederalEIN"
-                                                               data-val="true" data-val-required="" validator="required" />
-                                                        <span class="msg-validation">
-                                                            <span data-valmsg-for="vendorfederalEIN" class="spn-err"> Vendor Federal EIN is required.</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3">Vendor Default Terms</label>
-                                                    <div class="col-sm-9">
-                                                        <textarea rows="4" id="vendordefaultterms" name="vendordefaultterms" class="form-control" ng-model="Person.VendorDefaultTerms" ></textarea>
-                                                    </div>
-                                                </div>
-
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success btn-md" ng-click="SavePaymentAccount();"> Save</button>
+                                                <button type="button" class="btn btn-neutral btn-md" data-dismiss="modal"> Cancel</button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success btn-md" ng-click="SavePerson();"> Save</button>
-                                    <button type="button" class="btn btn-neutral btn-md" data-dismiss="modal"> Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end  person modal-->
+                                <!--end payment account modal-->
+                                <!-- create new program account modal-->
+                                <div class="modal fade" id="PaymentProgramModal" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title" style=" text-align center; ">
+                                                    <span>Create a new account</span>
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form name="PaymentAmountForm" id="PaymentAmountForm" class="form-horizontal">
+                                                    <div class="row">
+                                                        <div class="form-horizontal">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3"> Program</label>
+                                                                <div class="col-sm-9">
+                                                                    <select class="form-control" data-val="true" data-val-required="" data-ng-model="PaymentProgram.ProgramKey" data-ng-options="program.ProgramKey as program.ProgramName for program in Programs" id="programkey" name="programkey">
+                                                                        <option value="">Select</option>
+                                                                    </select>
+                                                                    <span class="msg-validation">
+                                                                        <span data-valmsg-for="programkey">Program is required.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">Program Amount</label>
+                                                                <div class="col-sm-9">
+                                                                    <input id="programamnt" name="programamnt" class="form-control" ng-model="PaymentProgram.PaymentProgramAmount" data-val="true" data-val-required="" validator="required" />
+                                                                    <span class="msg-validation">
+                                                                        <span data-valmsg-for="programamnt" class="spn-err">Program amount is required.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
 
-                    <!-- create new payment account modal-->
-                    <div class="modal fade" id="PaymentAmountModal" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title" style=" text-align: center; ">
-                                        <span>Create a new account</span>
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form name="PaymentAmountForm" id="PaymentAmountForm" class="form-horizontal">
-                                        <div class="row">
-                                            <div class="form-horizontal">
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3"> Account</label>
-                                                    <div class="col-sm-9">
-                                                        <select class="form-control" data-val="true" data-val-required="" data-ng-model="PaymentAccount.AccountKey" data-ng-options="account.AccountKey as account.AccountName for account in Accounts" id="accountKey" name="accountKey">
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                        <span class="msg-validation">
-                                                            <span data-valmsg-for="accountKey">Account is required.</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3">Account Amount</label>
-                                                    <div class="col-sm-9">
-                                                        <input id="accountamnt" name="accountamnt" class="form-control" ng-model="PaymentAccount.PaymentAccountAmount" data-val="true" data-val-required="" validator="required" />
-                                                        <span class="msg-validation">
-                                                            <span data-valmsg-for="accountamnt" class="spn-err">Account amount is required.</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">Program Note</label>
+                                                                <div class="col-sm-9">
+                                                                    <textarea rows="4" id="note" name="note" class="form-control" ng-model="PaymentProgram.PaymentProgramNote"> </textarea>
+                                                                </div>
+                                                            </div>
 
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3">Account Note</label>
-                                                    <div class="col-sm-9">
-                                                        <textarea rows="4" id="note" name="note" class="form-control" ng-model="PaymentAccount.PaymentAccountNote"> </textarea>
+                                                        </div>
                                                     </div>
-                                                </div>
-
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success btn-md" ng-click="SavePaymentProgram();"> Save</button>
+                                                <button type="button" class="btn btn-neutral btn-md" data-dismiss="modal"> Cancel</button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success btn-md" ng-click="SavePaymentAccount();"> Save</button>
-                                    <button type="button" class="btn btn-neutral btn-md" data-dismiss="modal"> Cancel</button>
-                                </div>
+                                <!--end payment program modal-->
+
+
                             </div>
+                            <div class="clear"></div>
                         </div>
-                    </div>
-                    <!--end payment account modal-->
+                    </nav>
+                    <!-- ./Plugin content:powerpoint,txt,pdf,png,word,xl -->
 
-                    <!-- create new program account modal-->
-                    <div class="modal fade" id="PaymentProgramModal" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title" style=" text-align: center; ">
-                                        <span>Create a new account</span>
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form name="PaymentAmountForm" id="PaymentAmountForm" class="form-horizontal">
-                                        <div class="row">
-                                            <div class="form-horizontal">
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3"> Program</label>
-                                                    <div class="col-sm-9">
-                                                        <select class="form-control" data-val="true" data-val-required="" data-ng-model="PaymentProgram.ProgramKey" data-ng-options="program.ProgramKey as program.ProgramName for program in Programs" id="programkey" name="programkey">
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                        <span class="msg-validation">
-                                                            <span data-valmsg-for="programkey">Program is required.</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3">Program Amount</label>
-                                                    <div class="col-sm-9">
-                                                        <input id="programamnt" name="programamnt" class="form-control" ng-model="PaymentProgram.PaymentProgramAmount" data-val="true" data-val-required="" validator="required" />
-                                                        <span class="msg-validation">
-                                                            <span data-valmsg-for="programamnt" class="spn-err">Program amount is required.</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="control-label col-sm-3">Program Note</label>
-                                                    <div class="col-sm-9">
-                                                        <textarea rows="4" id="note" name="note" class="form-control" ng-model="PaymentProgram.PaymentProgramNote"> </textarea>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success btn-md" ng-click="SavePaymentProgram();"> Save</button>
-                                    <button type="button" class="btn btn-neutral btn-md" data-dismiss="modal"> Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end payment program modal-->
-
-
-                </div>
-                <div class="clear"></div>
-            </div>
-        </nav>
-
-
-    </div>
-
-</div>
 
 
 @section Scripts {
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/App/app.js"></script>
+<script src="~/Scripts/App/Services/paymentService.js"></script>
+<script src="~/Scripts/App/Controllers/paymentController.js"></script>
 
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/App/app.js"></script>
-    <script src="~/Scripts/App/Services/paymentService.js"></script>
-    <script src="~/Scripts/App/Controllers/paymentController.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    }
+<!-- /.content -->
 
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
