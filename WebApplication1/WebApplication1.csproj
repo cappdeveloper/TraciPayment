@@ -210,9 +210,12 @@
     <Compile Include="Models\PaymentAccount.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PaymentAccountModel.cs" />
+    <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\PaymentProgram.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PaymentProgramModel.cs" />
     <Compile Include="Models\PaymentType.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
@@ -360,6 +363,8 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_MenuBar.cshtml" />
+    <Content Include="Views\PaymentScreen\_AddEditPayment.cshtml" />
+    <Content Include="Views\PaymentScreen\_ListPayment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

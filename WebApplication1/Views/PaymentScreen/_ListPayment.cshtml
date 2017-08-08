@@ -1,0 +1,47 @@
+﻿
+<div class="form-group">
+    <div class="col-md-3 col-sm-4 col-condensed">
+        <h3>Payments</h3>
+    </div>
+    <div class="col-md-9 col-sm-8">
+        <div class=" pull-right">
+            <div class="btn_aline">
+                <button type="button" class="btn btn-success" ng-click="AddEditPayment()">
+                    <i class="fa"></i>&nbsp; Add New Payment
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div id="listSection" class="table-responsive">
+
+    <table class="table table-hover" id="payment-table" ng-show="Payments.length > 0">
+        <thead>
+            <tr>
+                @*<th>Payment To</th>*@
+                <th>Payment Type</th>
+                <th>Payment Chcek Number</th>
+                <th>Payment Note</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="payment in Payments">
+                @*<td>{{payment.PaymentTo}}</td>*@
+                <td>{{payment.PaymentTypeName}}</td>
+                <td>{{payment.PaymentCheckNumber}}</td>
+                <td>{{payment.PaymentNote}}</td>
+                <td>
+                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="DeletePayment(payment.PaymentKey,$index)"></i> &nbsp;
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" ng-click="AddEditPayment(payment.PaymentKey)"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="NoRecord" ng-show="Payments.length == 0" style="border:2px solid #e6e7e8;padding:10px;" class="form-group">
+        No records found
+    </div>
+
+</div>

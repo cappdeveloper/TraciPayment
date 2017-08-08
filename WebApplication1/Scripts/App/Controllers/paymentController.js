@@ -3,15 +3,19 @@ var container = $(".displaynone");
 
 app.controller('paymentController', ['$scope', '$filter', 'paymentService', function ($scope, $filter, paymentService) {
 
+    $scope.Mode = { ListMode: 1, AddEditMode: 2 };
+
     /// <summary>
-    /// Method will get data of all dlls 
+    /// Method will get all payments and data of all dlls 
     /// <summary>
-    $scope.GetPaymentDllData = function () {
+    $scope.GetPayments = function () {        
+        $scope.Payments = [];
         $scope.PeymentTypes = [];
         $scope.Accounts = [];
         $scope.Programs = [];
         $scope.Persons = [];
-        paymentService.getPaymentDllData().success(function (data) {
+        paymentService.getPayments().success(function (data) {
+            $scope.Payments = data.Payments;
             $scope.PeymentTypes = data.PaymentTypes;
             $scope.Persons = data.Persons;
             $scope.Programs = data.Programs;
@@ -19,6 +23,33 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         }).error(function () {
             alert("Some error occured while getting dropdown's data.")
         });
+    }
+
+    // method will display the payment in add/edit mode
+    $scope.AddEditPayment = function (paymentKey) {
+        $scope.Payment = {};
+        $scope.PaymentAccounts = [];
+        $scope.PaymentPrograms = [];
+        clearValidations();
+        $scope.PageMode = $scope.Mode.AddEditMode;
+        if (paymentKey != undefined) {
+            $scope.GetPayment(paymentKey);
+        }
+    }
+
+    $scope.GetPayment = function (paymentKey) {
+        paymentService.getPayment(paymentKey).success(function (data) {
+            $scope.Payment = data;
+            $scope.PaymentAccounts = data.PaymentAccountsModel;
+            $scope.PaymentPrograms = data.PaymentProgramsModel;
+        }).error(function () {
+            alert("Some error occured while getting Payment.")
+        });
+    }
+
+    ///method will take you back to payment listing
+    $scope.CancelPayment = function () {
+        $scope.PageMode = $scope.Mode.ListMode;
     }
 
     /// <summary>
@@ -33,12 +64,42 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
 
         paymentService.savePayment($scope.Payment).success(function (data) {
             if (data.PaymentKey != undefined) {
-                alert("Payment added successfully.")
-                $scope.Payment.PaymentKey = data.PaymentKey;
+                if($scope.Payment.PaymentKey == undefined){
+                    alert("Payment added successfully.");
+                    $scope.Payment.PaymentKey = data.PaymentKey;
+                }
+                else{
+                    alert("Payment updated successfully.")
+                    debugger
+                    var paymentObj = $filter('filter')($scope.Payments, { PaymentKey: $scope.Payment.PaymentKey } );
+                    debugger
+                    if (paymentObj != null) {
+                        paymentObj[0].PaymentDate = data.PaymentDate;
+                        paymentObj[0].PaymentCheckNumber = data.PaymentCheckNumber;
+                        paymentObj[0].PaymentTypeKey = data.PaymentTypeKey;
+                        paymentObj[0].PaymentTo = data.PaymentTo;
+                        paymentObj[0].PaymentVendorInvoiceNumber = data.PaymentVendorInvoiceNumber;
+                        paymentObj[0].PaymentNote = data.PaymentNote;
+                    }
+                }
             }
         }).error(function () {
             alert("Some error occured while saving the payment.")
         });
+    }
+    
+    ///method will delete specific payment
+    $scope.DeletePayment = function (paymentId, index) {     
+        paymentService.deletePayment(paymentId).then(function (response) {
+            if (response.data) {
+                $scope.Payments.splice(index, 1);
+                alert('Payment deleted successfully');
+            }
+        },
+        function (response) {
+            alert('Some error occured while deleting the payment.');
+        });
+
     }
 
     // method will display the person popup allowing you to add a new person
@@ -67,7 +128,6 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
             alert("Some error occured while adding the person.")
         });
     }
-
 
     /// method will display payment account popup, allowing you to add new account for payment
     $scope.AddNewPaymentAccount = function () {
@@ -146,7 +206,7 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
 
     ///method will delete he specific payment program
     $scope.DeletePaymentProgram = function (paymentProgramId, index) {
-        paymentService.deletePaymentProgram(paymentProgramId).then(function (response) {
+        paymentService.deletePaymentProgram(paymentProgramId).then(function (response) {           
             if (response.data)
                 $scope.PaymentPrograms.splice(index, 1);
         },
@@ -166,7 +226,10 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         $scope.PaymentAccount = {};
         $scope.PaymentPrograms = [];
         $scope.PaymentAccounts = [];
-        $scope.GetPaymentDllData();
+        $scope.PageMode = $scope.Mode.ListMode;
+        $scope.Payments = [];
+
+        $scope.GetPayments();
     }
     initial();
 

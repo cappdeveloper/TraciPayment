@@ -1,10 +1,16 @@
 ﻿app.factory('paymentService', ['$http', function ($http) {
     return {
-        getPaymentDllData: function () {
-            return $http.post("/PaymentScreen/GetPaymentDllData");
+        getPayments: function () {
+            return $http.post("/PaymentScreen/GetPayments");
         },
         savePayment: function (payment) {
             return $http.post("/PaymentScreen/SavePayment", payment);
+        },
+        deletePayment: function (paymentKey) {
+            return $http.post("/PaymentScreen/Deletepayment?paymentKey=" + paymentKey);
+        },
+        getPayment: function (paymentKey) {
+            return $http.post("/PaymentScreen/GetPayment?paymentKay=" + paymentKey);
         },
         savePerson: function (person) {
             return $http.post("/PaymentScreen/SavePerson", person);
@@ -16,10 +22,10 @@
             return $http.post("/PaymentScreen/SavePaymentProgram", program);
         },
         deletePaymentAccount: function (paymentAccountKey) {
-            return $http.post("/PaymentScreen/DeletePaymentAccount" + '?paymentAccountKey=' + paymentAccountKey);
+            return $http.post("/PaymentScreen/DeletePaymentAccount?paymentAccountKey=" + paymentAccountKey);
         },
         deletePaymentProgram: function (paymentProgramKey) {
-            return $http.post("/PaymentScreen/DeletePaymentProgram" + '?paymentProgramKey=' + paymentProgramKey);
+            return $http.post("/PaymentScreen/DeletePaymentProgram?paymentProgramKey=" + paymentProgramKey);
     }
     };
 }]);
