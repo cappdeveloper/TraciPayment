@@ -273,6 +273,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\App\Controllers\paymentController.js" />
+    <Content Include="Scripts\App\Filters\appFilters.js" />
     <Content Include="Scripts\App\Services\paymentService.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

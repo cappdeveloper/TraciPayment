@@ -16,10 +16,31 @@
 </div>
 <div id="listSection" class="table-responsive">
 
+    <div class="table-header-options" ng-show="Payments.length>0">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div ng-hide="PaymentCount==0" class="display-inline-block pull-left" style="margin:8px 0">
+                <strong class="ng-binding">
+                    {{PaymentCount}}
+                    <span ng-bind="PaymentCount == 1?'Payment found':'Payments found'"></span>
+                </strong>
+            </div>
+            <div class="display-inline-block pull-right">
+                <label class="control-label display-inline-block">Page Size:</label>
+                <div class=" display-inline-block">
+                    <select class="form-control ng-pristine ng-valid" ng-change="GetPayments(1,PageSize)" ng-model="PageSize">
+                        <option value="10" ng-selected="true" selected="selected">10</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <table class="table table-hover" id="payment-table" ng-show="Payments.length > 0">
         <thead>
             <tr>
-                @*<th>Payment To</th>*@
                 <th>Payment Type</th>
                 <th>Payment Chcek Number</th>
                 <th>Payment Note</th>
@@ -28,7 +49,6 @@
         </thead>
         <tbody>
             <tr ng-repeat="payment in Payments">
-                @*<td>{{payment.PaymentTo}}</td>*@
                 <td>{{payment.PaymentTypeName}}</td>
                 <td>{{payment.PaymentCheckNumber}}</td>
                 <td>{{payment.PaymentNote}}</td>
@@ -39,6 +59,29 @@
             </tr>
         </tbody>
     </table>
+
+    <div class="form-group" ng-show="Payments.length>0">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+            <label>Showing {{FirstRecord}} to {{LastRecord}} of {{PaymentCount}} records</label>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 text-right" ng-show="PaymentCount > PageSize">
+            <span class="lh30 pull-left">Page:</span>
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2 padding-right-2">
+                <input type="text" class="form-control" numeric-only="{{PageCount}}" ng-model="GoToPage" />
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2">
+                <button class="btn btn-neutral btn-sm" ng-click="SetPage(GoToPage)"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-5 col-sm-5 col-xs-12">
+            <ul class="pagination pull-right" ng-show="Payments.length > 0 && PaymentCount > PageSize">
+                <li ng-class="{disabled: CurrentPage == 0}"><a href="#" ng-click="PrevPage()"><i class="fa fa-angle-double-left"></i></a></li>
+                <li ng-class="{disabled: n == CurrentPage}" ng-repeat="n in [] | range: PageCount:CurrentPage"><a href="#" ng-click="SetPage(n)">{{n}}</a></li>
+                <li ng-class="{disabled: CurrentPage== Payments.length}"><a href="#" ng-click="NextPage()"><i class="fa fa-angle-double-right"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
 
     <div id="NoRecord" ng-show="Payments.length == 0" style="border:2px solid #e6e7e8;padding:10px;" class="form-group">
         No records found

@@ -4,22 +4,60 @@ var container = $(".displaynone");
 app.controller('paymentController', ['$scope', '$filter', 'paymentService', function ($scope, $filter, paymentService) {
 
     $scope.Mode = { ListMode: 1, AddEditMode: 2 };
+    
+    /// Begin Pagin
+    $scope.FirstRecord = 0; $scope.LastRecord = 10; $scope.GoToPage = '';
+    $scope.NextPage = function () {
+        if ($scope.CurrentPage < $scope.PageCount) {
+            $scope.SetPage($scope.CurrentPage + 1);
+        }
+    };
+
+    $scope.PrevPage = function () {
+        if ($scope.CurrentPage > 1) {
+            $scope.SetPage($scope.CurrentPage - 1);
+        }
+    };
+
+    $scope.SetPage = function (n) {
+        n = parseInt(n);
+        if ($scope.CurrentPage != n && n > 0) {
+            $scope.CurrentPage = n;
+            $scope.GetPayments($scope.CurrentPage, $scope.PageSize);
+        }
+    };
+    /// End paging
+
 
     /// <summary>
     /// Method will get all payments and data of all dlls 
     /// <summary>
-    $scope.GetPayments = function () {        
+    $scope.GetPayments = function (page, pageSize) {
+        //paging
+        $scope.PageSize = parseInt(pageSize);
+        $scope.CurrentPage = page; //paging
+
         $scope.Payments = [];
         $scope.PeymentTypes = [];
         $scope.Accounts = [];
         $scope.Programs = [];
         $scope.Persons = [];
-        paymentService.getPayments().success(function (data) {
+        paymentService.getPayments(page, pageSize).success(function (data) {
             $scope.Payments = data.Payments;
             $scope.PeymentTypes = data.PaymentTypes;
             $scope.Persons = data.Persons;
             $scope.Programs = data.Programs;
             $scope.Accounts = data.Accounts;
+
+            //begin paging
+            $scope.PaymentCount = data.PaymentCount;
+            $scope.PageCount = Math.ceil(data.PaymentCount / $scope.PageSize);
+            if (data.PaymentCount > 0) {
+                $scope.FirstRecord = (($scope.CurrentPage - 1) * $scope.PageSize) + 1;
+                $scope.LastRecord = ($scope.Payments.length == $scope.PageSize ? $scope.PageSize * $scope.CurrentPage : $scope.PaymentCount);
+            }
+            //end paging
+
         }).error(function () {
             alert("Some error occured while getting dropdown's data.")
         });
@@ -229,7 +267,14 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         $scope.PageMode = $scope.Mode.ListMode;
         $scope.Payments = [];
 
-        $scope.GetPayments();
+        //Paging
+        $scope.PaymentCount = 0;
+        $scope.PageSize = 10;
+        $scope.CurrentPage = 1;
+        $scope.PageCount = 0;
+        //paging
+
+        $scope.GetPayments($scope.CurrentPage, $scope.PageSize);
     }
     initial();
 

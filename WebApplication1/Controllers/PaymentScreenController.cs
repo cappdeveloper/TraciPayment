@@ -20,9 +20,11 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public JsonResult GetPayments()
+        public JsonResult GetPayments(int page, int pagesize)
         {
-            var payments = obj.Payments.ToList(); // for listing
+            var paymentCount = obj.Payments.Count();
+            var skip = (page - 1) * pagesize;
+            var payments = obj.Payments.OrderBy(x => x.PaymentKey).Skip(skip).Take(pagesize).ToList(); // for listing
             var paymentsModel = payments.Select(x => new PaymentModel()
             {
                 PaymentKey = x.PaymentKey,
@@ -70,7 +72,7 @@ namespace WebApplication1.Controllers
                 ProgramName = x.ProgramName,
             }).ToList();
 
-            return Json(new { Payments = paymentsModel, PaymentTypes = paymentTypesModel, Persons = personsModel, Accounts = accountsModel, Programs = programsModel }, JsonRequestBehavior.AllowGet);
+            return Json(new { Payments = paymentsModel, PaymentTypes = paymentTypesModel, Persons = personsModel, Accounts = accountsModel, Programs = programsModel, PaymentCount = paymentCount }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult SavePayment(Payment payment)

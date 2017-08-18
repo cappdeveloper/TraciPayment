@@ -1,7 +1,7 @@
 ﻿app.factory('paymentService', ['$http', function ($http) {
     return {
-        getPayments: function () {
-            return $http.post("/PaymentScreen/GetPayments");
+        getPayments: function (currentPage, pageSize) {
+            return $http.post("/PaymentScreen/GetPayments?page=" + currentPage + "&pagesize=" + pageSize);
         },
         savePayment: function (payment) {
             return $http.post("/PaymentScreen/SavePayment", payment);
