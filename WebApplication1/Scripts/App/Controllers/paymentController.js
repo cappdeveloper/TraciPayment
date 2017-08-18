@@ -27,8 +27,7 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         }
     };
     /// End paging
-
-
+    
     /// <summary>
     /// Method will get all payments and data of all dlls 
     /// <summary>
@@ -58,6 +57,7 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
             }
             //end paging
 
+            $scope.PageMode = $scope.Mode.ListMode;
         }).error(function () {
             alert("Some error occured while getting dropdown's data.")
         });
@@ -87,7 +87,8 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
 
     ///method will take you back to payment listing
     $scope.CancelPayment = function () {
-        $scope.PageMode = $scope.Mode.ListMode;
+        //$scope.PageMode = $scope.Mode.ListMode;
+        $scope.GetPayments($scope.CurrentPage, $scope.PageSize);
     }
 
     /// <summary>
@@ -107,10 +108,8 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
                     $scope.Payment.PaymentKey = data.PaymentKey;
                 }
                 else{
-                    alert("Payment updated successfully.")
-                    debugger
+                    alert("Payment updated successfully.");
                     var paymentObj = $filter('filter')($scope.Payments, { PaymentKey: $scope.Payment.PaymentKey } );
-                    debugger
                     if (paymentObj != null) {
                         paymentObj[0].PaymentDate = data.PaymentDate;
                         paymentObj[0].PaymentCheckNumber = data.PaymentCheckNumber;
@@ -130,7 +129,8 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
     $scope.DeletePayment = function (paymentId, index) {     
         paymentService.deletePayment(paymentId).then(function (response) {
             if (response.data) {
-                $scope.Payments.splice(index, 1);
+                //$scope.Payments.splice(index, 1);
+                $scope.GetPayments($scope.CurrentPage, $scope.PageSize);
                 alert('Payment deleted successfully');
             }
         },
