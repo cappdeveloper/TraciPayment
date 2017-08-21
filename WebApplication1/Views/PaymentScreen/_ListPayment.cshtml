@@ -37,164 +37,82 @@
                 </tr>
             </tbody>
         </table>*@
-  
-   
 
 
-  
-        <div class="col-sm-12 lobipanel-parent-sortable ui-sortable" data-lobipanel-child-inner-id="UXEHduuW9D">
-            <div class="panel panel-bd lobidrag lobipanel lobipanel-sortable" data-inner-id="UXEHduuW9D" data-index="0">
-                <div class="panel-heading ui-sortable-handle">
-                    <div class="btn-group" id="buttonexport">
-                        <a href="#">
-                            <h4>Transaction list</h4>
-                        </a>
-                    </div>
-                    <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="editTitle" data-tooltip="Edit title" data-toggle="tooltip" data-title="Edit title" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-pencil"></i><span class="control-title">Edit title</span></a></li><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="reload" data-tooltip="Reload" data-toggle="tooltip" data-title="Reload" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-reload"></i><span class="control-title">Reload</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li><li><a data-func="close" data-tooltip="Close" data-toggle="tooltip" data-title="Close" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-close"></i><span class="control-title">Close</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div>
-                </div>
-                <div class="panel-body">
-                    <div class="btn-group">
-                        <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
-                        <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Table Data</button>
-                        <ul class="dropdown-menu exp-drop" role="menu">
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'json',escape:'false'});">
-                                    <img src="assets/dist/img/json.png" width="24" alt="logo"> JSON
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'json',escape:'false',ignoreColumn:'[2,3]'});">
-                                    <img src="assets/dist/img/json.png" width="24" alt="logo"> JSON (ignoreColumn)
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'json',escape:'true'});">
-                                    <img src="assets/dist/img/json.png" width="24" alt="logo"> JSON (with Escape)
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'xml',escape:'false'});">
-                                    <img src="assets/dist/img/xml.png" width="24" alt="logo"> XML
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'sql'});">
-                                    <img src="assets/dist/img/sql.png" width="24" alt="logo"> SQL
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'csv',escape:'false'});">
-                                    <img src="assets/dist/img/csv.png" width="24" alt="logo"> CSV
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'txt',escape:'false'});">
-                                    <img src="assets/dist/img/txt.png" width="24" alt="logo"> TXT
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'excel',escape:'false'});">
-                                    <img src="assets/dist/img/xls.png" width="24" alt="logo"> XLS
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'doc',escape:'false'});">
-                                    <img src="assets/dist/img/word.png" width="24" alt="logo"> Word
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'powerpoint',escape:'false'});">
-                                    <img src="assets/dist/img/ppt.png" width="24" alt="logo"> PowerPoint
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'png',escape:'false'});">
-                                    <img src="assets/dist/img/png.png" width="24" alt="logo"> PNG
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});">
-                                    <img src="assets/dist/img/pdf.png" width="24" alt="logo"> PDF
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
 
-                    <div class="table-header-options" ng-show="Payments.length>0">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div ng-hide="PaymentCount==0" class="display-inline-block pull-left" style="margin:8px 0">
-                                <strong class="ng-binding">
-                                    {{PaymentCount}}
-                                    <span ng-bind="PaymentCount == 1?'Payment found':'Payments found'"></span>
-                                </strong>
-                            </div>
-                            <div class="display-inline-block pull-right">
-                                <label class="control-label display-inline-block">Page Size:</label>
-                                <div class=" display-inline-block">
-                                    <select class="form-control ng-pristine ng-valid" ng-change="GetPayments(1,PageSize)" ng-model="PageSize">
-                                        <option value="10" ng-selected="true" selected="selected">10</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ./Plugin content:powerpoint,txt,pdf,png,word,xl -->
-                    <div class="table-responsive">
-                        <table id="payment-table" ng-show="Payments.length > 0" class="table table-bordered table-striped table-hover">
-                            <thead>
-                                <tr class="info">
-                                    <th>Payment Type</th>
-                                    <th>Payment Chcek Number</th>
-                                    <th>Payment Note</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="payment in Payments">
-                                    <td>{{payment.PaymentTypeName}}</td>
-                                    <td>{{payment.PaymentCheckNumber}}</td>
-                                    <td>{{payment.PaymentNote}}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-add btn-sm" ng-click="AddEditPayment(payment.PaymentKey)" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                        <button type="button" class="btn btn-danger btn-sm" ng-click="DeletePayment(payment.PaymentKey,$index)" data-toggle="modal"><i class="fa fa-trash-o"></i> </button>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
 
-                    <div class="form-group" ng-show="Payments.length>0">
-                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
-                            <label>Showing {{FirstRecord}} to {{LastRecord}} of {{PaymentCount}} records</label>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 text-right" ng-show="PaymentCount > PageSize">
-                            <span class="lh30 pull-left">Page:</span>
-                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2 padding-right-2">
-                                <input type="text" class="form-control" numeric-only="{{PageCount}}" ng-model="GoToPage" />
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2">
-                                <button class="btn btn-neutral btn-sm" ng-click="SetPage(GoToPage)"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-5 col-sm-5 col-xs-12">
-                            <ul class="pagination pull-right" ng-show="Payments.length > 0 && PaymentCount > PageSize">
-                                <li ng-class="{disabled: CurrentPage == 0}"><a href="#" ng-click="PrevPage()"><i class="fa fa-angle-double-left"></i></a></li>
-                                <li ng-class="{disabled: n == CurrentPage}" ng-repeat="n in [] | range: PageCount:CurrentPage"><a href="#" ng-click="SetPage(n)">{{n}}</a></li>
-                                <li ng-class="{disabled: CurrentPage== Payments.length}"><a href="#" ng-click="NextPage()"><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>  <div id="NoRecord" ng-show="Payments.length == 0" style="border:2px solid #e6e7e8;padding:10px;" class="form-group">
-                        No records found
-                    </div>
+
+  <section class="panel-default">
+    <div class="table-header-options" ng-show="Payments.length>0">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div ng-hide="PaymentCount==0" class="display-inline-block pull-left" style="margin:8px 0">
+                <strong class="ng-binding">
+                    {{PaymentCount}}
+                    <span ng-bind="PaymentCount == 1?'Payment found':'Payments found'"></span>
+                </strong>
+            </div>
+            <div class="display-inline-block pull-right">
+                <label class="control-label display-inline-block">Page Size:</label>
+                <div class=" display-inline-block">
+                    <select class="form-control ng-pristine ng-valid" ng-change="GetPayments(1,PageSize)" ng-model="PageSize">
+                        <option value="10" ng-selected="true" selected="selected">10</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
                 </div>
             </div>
         </div>
-   
+    </div>
+    <div>
+        <table id="payment-table" ng-show="Payments.length > 0" class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr class="info">
+                    <th>Payment Type</th>
+                    <th>Payment Chcek Number</th>
+                    <th>Payment Note</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="payment in Payments">
+                    <td>{{payment.PaymentTypeName}}</td>
+                    <td>{{payment.PaymentCheckNumber}}</td>
+                    <td>{{payment.PaymentNote}}</td>
+                    <td>
+                        <button type="button" class="btn btn-add btn-sm" ng-click="AddEditPayment(payment.PaymentKey)" data-target="#customer1"><i class="fa fa-pencil"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm" ng-click="DeletePayment(payment.PaymentKey,$index)" data-toggle="modal"><i class="fa fa-trash-o"></i> </button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="form-group" ng-show="Payments.length>0">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+            <label>Showing {{FirstRecord}} to {{LastRecord}} of {{PaymentCount}} records</label>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 text-right" ng-show="PaymentCount > PageSize">
+            <span class="lh30 pull-left">Page:</span>
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2 padding-right-2">
+                <input type="text" class="form-control" numeric-only="{{PageCount}}" ng-model="GoToPage" />
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2">
+                <button class="btn btn-neutral btn-sm" ng-click="SetPage(GoToPage)"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-5 col-sm-5 col-xs-12">
+            <ul class="pagination pull-right" ng-show="Payments.length > 0 && PaymentCount > PageSize">
+                <li ng-class="{disabled: CurrentPage == 0}"><a href="#" ng-click="PrevPage()"><i class="fa fa-angle-double-left"></i></a></li>
+                <li ng-class="{disabled: n == CurrentPage}" ng-repeat="n in [] | range: PageCount:CurrentPage"><a href="#" ng-click="SetPage(n)">{{n}}</a></li>
+                <li ng-class="{disabled: CurrentPage== Payments.length}"><a href="#" ng-click="NextPage()"><i class="fa fa-angle-double-right"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>  <div id="NoRecord" ng-show="Payments.length == 0" style="border:2px solid #e6e7e8;padding:10px;" class="form-group">
+        No records found
+    </div>
+</section>
