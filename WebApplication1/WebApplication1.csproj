@@ -327,6 +327,7 @@
     <Content Include="fonts\linecons\linecons.eot" />
     <Content Include="fonts\linecons\linecons.ttf" />
     <Content Include="fonts\linecons\linecons.woff" />
+    <Content Include="Database_Script\NYFS.bak" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
@@ -374,7 +375,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\" />
-    <Folder Include="Database_Script\" />
     <Folder Include="Design\" />
   </ItemGroup>
   <ItemGroup>
