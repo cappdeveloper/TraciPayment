@@ -134,6 +134,7 @@ namespace WebApplication1.Controllers
                 paymentModel.PaymentTo = payment.PaymentTo;
                 paymentModel.PaymentVendorInvoiceNumber = payment.PaymentVendorInvoiceNumber;
                 paymentModel.PaymentNote = payment.PaymentNote;
+                paymentModel.PaymentTypeName = payment.PaymentType.PaymentTypeName;
                 paymentModel.PaymentAccountsModel = payment.PaymentAccounts.Select(y => new PaymentAccountModel()
                 {
                     PaymentAccountKey = y.PaymentAccountKey,

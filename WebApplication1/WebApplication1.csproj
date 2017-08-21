@@ -252,6 +252,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DatePicker\bootstrap-datepicker.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\codropsicons\codropsicons.svg" />
     <Content Include="fonts\codropsicons\license.txt" />
@@ -273,10 +274,13 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\App\Controllers\paymentController.js" />
+    <Content Include="Scripts\App\Directives\datePicker.js" />
     <Content Include="Scripts\App\Filters\appFilters.js" />
     <Content Include="Scripts\App\Services\paymentService.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\DatePicker\bootstrap-datepicker.js" />
+    <Content Include="Scripts\DatePicker\moment.js" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
     <EntityDeploy Include="Models\NYFS.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

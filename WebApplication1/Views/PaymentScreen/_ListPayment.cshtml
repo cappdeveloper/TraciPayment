@@ -11,39 +11,43 @@
     </div>
 </section>
 
-    
-    
-    <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
-   
-        @*<table id="payment-table1" ng-show="Payments.length > 0" class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr class="info">
-                    <th>Payment Type</th>
-                    <th>Payment Chcek Number</th>
-                    <th>Payment Note</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="payment in Payments">
-                    <td>{{payment.PaymentTypeName}}</td>
-                    <td>{{payment.PaymentCheckNumber}}</td>
-                    <td>{{payment.PaymentNote}}</td>
-                    <td>
-                        <button type="button" class="btn btn-add btn-sm" ng-click="AddEditPayment(payment.PaymentKey)" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                        <button type="button" class="btn btn-danger btn-sm" ng-click="DeletePayment(payment.PaymentKey,$index)" data-toggle="modal"><i class="fa fa-trash-o"></i> </button>
 
-                    </td>
-                </tr>
-            </tbody>
-        </table>*@
 
+<!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+@*<table id="payment-table1" ng-show="Payments.length > 0" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr class="info">
+                <th>Payment Type</th>
+                <th>Payment Chcek Number</th>
+                <th>Payment Note</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="payment in Payments">
+                <td>{{payment.PaymentTypeName}}</td>
+                <td>{{payment.PaymentCheckNumber}}</td>
+                <td>{{payment.PaymentNote}}</td>
+                <td>
+                    <button type="button" class="btn btn-add btn-sm" ng-click="AddEditPayment(payment.PaymentKey)" data-target="#customer1"><i class="fa fa-pencil"></i></button>
+                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeletePayment(payment.PaymentKey,$index)" data-toggle="modal"><i class="fa fa-trash-o"></i> </button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>*@
 
 
 
 
 
-  <section class="panel-default">
+
+<section class="panel-default">
+
+    <div class="row" style="margin-bottom: 20px; margin-top: 10px;">
+        <button type="button" class="btn btn-add btn-sm pull-right" ng-click="AddEditPayment()" style="margin-right: 35px;"> <i class="fa fa-plus"></i> &nbsp; Add New Payment</button>
+    </div>
+
     <div class="table-header-options" ng-show="Payments.length>0">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div ng-hide="PaymentCount==0" class="display-inline-block pull-left" style="margin:8px 0">
@@ -64,31 +68,29 @@
             </div>
         </div>
     </div>
-    <div>
-        <table id="payment-table" ng-show="Payments.length > 0" class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr class="info">
-                    <th>Payment Type</th>
-                    <th>Payment Chcek Number</th>
-                    <th>Payment Note</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="payment in Payments">
-                    <td>{{payment.PaymentTypeName}}</td>
-                    <td>{{payment.PaymentCheckNumber}}</td>
-                    <td>{{payment.PaymentNote}}</td>
-                    <td>
-                        <button type="button" class="btn btn-add btn-sm" ng-click="AddEditPayment(payment.PaymentKey)" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                        <button type="button" class="btn btn-danger btn-sm" ng-click="DeletePayment(payment.PaymentKey,$index)" data-toggle="modal"><i class="fa fa-trash-o"></i> </button>
 
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
+    <table id="payment-table" ng-show="Payments.length > 0" class="table table-responsive table-bordered table-striped table-hover">
+        <thead>
+            <tr class="info">
+                <th>Payment Type</th>
+                <th>Payment Chcek Number</th>
+                <th>Payment Note</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="payment in Payments">
+                <td>{{payment.PaymentTypeName}}</td>
+                <td>{{payment.PaymentCheckNumber}}</td>
+                <td>{{payment.PaymentNote}}</td>
+                <td>
+                    <button type="button" class="btn btn-add btn-sm" ng-click="AddEditPayment(payment.PaymentKey)" data-target="#customer1"><i class="fa fa-pencil"></i></button>
+                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeletePayment(payment.PaymentKey,$index)" data-toggle="modal"><i class="fa fa-trash-o"></i> </button>
+                    <button type="button" class="btn btn-add btn-sm" ng-click="GetPayment(payment.PaymentKey,true)"> View</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 
     <div class="form-group" ng-show="Payments.length>0">
@@ -112,7 +114,80 @@
             </ul>
             <div class="clearfix"></div>
         </div>
-    </div>  <div id="NoRecord" ng-show="Payments.length == 0" style="border:2px solid #e6e7e8;padding:10px;" class="form-group">
+    </div> 
+    
+    
+     <div id="NoRecord" ng-show="Payments.length == 0" style="border:2px solid #e6e7e8;padding:10px;" class="form-group">
         No records found
     </div>
 </section>
+
+
+   <!-- create new program account modal-->
+<div class="modal fade" id="PaymentDetailModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style=" text-align:center; ">
+                    <span>Payment Detail</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+               
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-sm-4"> Payment Key :</label>
+                                <div class="col-sm-8">
+                                    <label class="control-label"> {{Payment.PaymentKey}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Payment Date :</label>
+                                <div class="col-sm-8">
+                                    <label class="control-label"> {{Payment.PaymentDate}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Payment Check Number :</label>
+                                <div class="col-sm-8">
+                                    <label class="control-label"> {{Payment.PaymentCheckNumber}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Payment Type : </label>
+                                <div class="col-sm-8">
+                                    <label class="control-label"> {{Payment.PaymentTypeName}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Payment Amount : </label>
+                                <div class="col-sm-8">
+                                    <label class="control-label"> {{Payment.PaymentAmount}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Payment Note : </label>
+                                <div class="col-sm-8">
+                                    <label class="control-label" style="text-align: left;"> {{Payment.PaymentNote}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Payment Vendor Invoice Number : </label>
+                                <div class="col-sm-8">
+                                    <label class="control-label"> {{Payment.PaymentVendorInvoiceNumber}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+              
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-md" data-dismiss="modal"> Close </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end payment program modal-->

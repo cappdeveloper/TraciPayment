@@ -26,7 +26,7 @@
 
                                                 <label class="col-sm-3  col-md-3 col-xs-5 control-label">Date:</label>
                                                 <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
-                                                    <input id="Date" name="Date" ng-model="Payment.PaymentDate" class="form-control form-control years hasDatepicker" data-val="true" data-val-required="" />
+                                                    <input id="Date" name="Date" ng-model="Payment.PaymentDate" set-datepicker="" class="form-control form-control years hasDatepicker" data-val="true" data-val-required="" />
                                                     <span class="msg-validation">
                                                         <span data-valmsg-for="Date">Date is required.</span>
                                                     </span>
@@ -63,9 +63,6 @@
                                                     </span>
                                                 </div>
                                                 <a class="pull-left btn btn-danger btn-sm" data-toggle="modal" style="cursor:pointer;" ng-click="AddNewPerson()">Add a new person</a>
-                                                @*<button type="button" class="btn btn-neutral" ng-click="AddNewPerson()" >
-                                                        <i class="fa fa-download"></i>&nbsp; Add new person
-                                                    </button>*@
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-3  col-md-3 col-xs-5 control-label">Invoice Number:</label>
@@ -122,15 +119,25 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr ng-repeat="account in PaymentAccounts">
-                                                            <td>{{account.PaymentAccountKey}}</td>
+                                                            <td>{{account.AccountName}}</td>
                                                             <td>{{account.PaymentAccountAmount}}</td>
                                                             <td>
                                                                 <i class="fa fa-trash-o" aria-hidden="true" ng-click="DeletePaymentAccount(account.PaymentAccountKey,$index)"></i> &nbsp;
-</td>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
+
+                                            <div class="row" ng-hide="AccountTotalAmount == 0" style="margin-left: 20px;">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <label>Total Amount:</label>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <label>{{AccountTotalAmount}} </label>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -167,14 +174,24 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr ng-repeat="prog in PaymentPrograms">
-                                                            <td>{{prog.PaymentProgramKey}}</td>
+                                                            <td>{{prog.ProgramName}}</td>
                                                             <td>{{prog.PaymentProgramAmount}}</td>
                                                             <td>
                                                                 <i class="fa fa-trash-o" aria-hidden="true" ng-click="DeletePaymentProgram(prog.PaymentProgramKey,$index)"></i> &nbsp;
                                                             </td>
                                                         </tr>
                                                     </tbody>
+
                                                 </table>
+
+                                            </div>
+                                            <div class="row" ng-hide="ProgramTotalAmount == 0" style="margin-left: 20px;">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <label>Total Amount:</label>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <label>{{ProgramTotalAmount}} </label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -381,6 +398,9 @@
                 </div>
             </div>
             <!--end payment program modal-->
+
+
+
 
         </div>
         <div class="clear"></div>

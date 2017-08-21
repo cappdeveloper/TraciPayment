@@ -4,7 +4,7 @@ var container = $(".displaynone");
 app.controller('paymentController', ['$scope', '$filter', 'paymentService', function ($scope, $filter, paymentService) {
 
     $scope.Mode = { ListMode: 1, AddEditMode: 2 };
-    
+
     /// Begin Pagin
     $scope.FirstRecord = 0; $scope.LastRecord = 10; $scope.GoToPage = '';
     $scope.NextPage = function () {
@@ -27,7 +27,7 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         }
     };
     /// End paging
-    
+
     /// <summary>
     /// Method will get all payments and data of all dlls 
     /// <summary>
@@ -68,6 +68,8 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         $scope.Payment = {};
         $scope.PaymentAccounts = [];
         $scope.PaymentPrograms = [];
+        $scope.AccountTotalAmount = 0;
+        $scope.ProgramTotalAmount = 0;
         clearValidations();
         $scope.PageMode = $scope.Mode.AddEditMode;
         if (paymentKey != undefined) {
@@ -75,14 +77,28 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         }
     }
 
-    $scope.GetPayment = function (paymentKey) {
+    $scope.GetPayment = function (paymentKey,viewDetail) {
         paymentService.getPayment(paymentKey).success(function (data) {
             $scope.Payment = data;
+            $scope.Payment.PaymentDate = ToJavaScriptDate($scope.Payment.PaymentDate);
             $scope.PaymentAccounts = data.PaymentAccountsModel;
             $scope.PaymentPrograms = data.PaymentProgramsModel;
+            GetProgramTotalAmount();
+            GetAccountTotalAmount();
+            if (viewDetail != undefined) {
+                $("#PaymentDetailModal").modal("toggle");
+            }
         }).error(function () {
             alert("Some error occured while getting Payment.")
         });
+    }
+
+    //Convert date to javascript date
+    var ToJavaScriptDate = function (value) {
+        if (value == null || value == undefined) {
+            return "";
+        }
+        return moment(value).format("DD/MM/YYYY");
     }
 
     ///method will take you back to payment listing
@@ -100,16 +116,16 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
             return;
 
         clearValidations();
-
+        debugger;
         paymentService.savePayment($scope.Payment).success(function (data) {
             if (data.PaymentKey != undefined) {
-                if($scope.Payment.PaymentKey == undefined){
+                if ($scope.Payment.PaymentKey == undefined) {
                     alert("Payment added successfully.");
                     $scope.Payment.PaymentKey = data.PaymentKey;
                 }
-                else{
+                else {
                     alert("Payment updated successfully.");
-                    var paymentObj = $filter('filter')($scope.Payments, { PaymentKey: $scope.Payment.PaymentKey } );
+                    var paymentObj = $filter('filter')($scope.Payments, { PaymentKey: $scope.Payment.PaymentKey });
                     if (paymentObj != null) {
                         paymentObj[0].PaymentDate = data.PaymentDate;
                         paymentObj[0].PaymentCheckNumber = data.PaymentCheckNumber;
@@ -124,9 +140,9 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
             alert("Some error occured while saving the payment.")
         });
     }
-    
+
     ///method will delete specific payment
-    $scope.DeletePayment = function (paymentId, index) {     
+    $scope.DeletePayment = function (paymentId, index) {
         paymentService.deletePayment(paymentId).then(function (response) {
             if (response.data) {
                 //$scope.Payments.splice(index, 1);
@@ -191,7 +207,12 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         $scope.PaymentAccount.PaymentKey = $scope.Payment.PaymentKey;
         paymentService.savePaymentAccount($scope.PaymentAccount).success(function (data) {
             if (data.PaymentAccountKey != undefined) {
+                var accountObj = $filter('filter')($scope.Accounts, { AccountKey: $scope.PaymentAccount.AccountKey });
+                if (accountObj != null) {
+                    data.AccountName = accountObj[0].AccountName;
+                }
                 $scope.PaymentAccounts.push(data);
+                GetAccountTotalAmount();
                 $("#PaymentAmountModal").modal("toggle");
             }
         }).error(function () {
@@ -200,10 +221,11 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
     }
 
     ///method will delete he specific payment account
-    $scope.DeletePaymentAccount = function (paymentAccountId, index) {        
-        paymentService.deletePaymentAccount(paymentAccountId).then(function (response) {           
+    $scope.DeletePaymentAccount = function (paymentAccountId, index) {
+        paymentService.deletePaymentAccount(paymentAccountId).then(function (response) {
             if (response.data)
-            $scope.PaymentAccounts.splice(index, 1);
+                $scope.PaymentAccounts.splice(index, 1);
+            GetAccountTotalAmount();
         },
         function (response) {
             alert('Some error occured while deleting the account.')
@@ -231,10 +253,15 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
             return;
 
         clearValidations();
-        $scope.PaymentProgram.PaymentKey =  $scope.Payment.PaymentKey;
+        $scope.PaymentProgram.PaymentKey = $scope.Payment.PaymentKey;
         paymentService.savePaymentProgram($scope.PaymentProgram).success(function (data) {
             if (data.PaymentProgramKey != undefined) {
+                var progObj = $filter('filter')($scope.Programs, { ProgramName: $scope.PaymentProgram.AccountKey });
+                if (progObj != null) {
+                    data.ProgramName = progObj[0].ProgramName;
+                }
                 $scope.PaymentPrograms.push(data);
+                GetProgramTotalAmount();
                 $("#PaymentProgramModal").modal("toggle");
             }
         }).error(function () {
@@ -244,14 +271,31 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
 
     ///method will delete he specific payment program
     $scope.DeletePaymentProgram = function (paymentProgramId, index) {
-        paymentService.deletePaymentProgram(paymentProgramId).then(function (response) {           
+        paymentService.deletePaymentProgram(paymentProgramId).then(function (response) {
             if (response.data)
                 $scope.PaymentPrograms.splice(index, 1);
+            GetProgramTotalAmount();
         },
         function (response) {
             alert('Some error occured while deleting the program.')
         });
 
+    }
+
+    var GetProgramTotalAmount = function () {
+
+        $scope.ProgramTotalAmount = 0;
+        angular.forEach($scope.PaymentPrograms, function (value, key) {
+            $scope.ProgramTotalAmount = $scope.ProgramTotalAmount + value.PaymentProgramAmount;
+        });
+    }
+
+    var GetAccountTotalAmount = function () {
+
+        $scope.AccountTotalAmount = 0;
+        angular.forEach($scope.PaymentAccounts, function (value, key) {
+            $scope.AccountTotalAmount = $scope.AccountTotalAmount + value.PaymentAccountAmount;
+        });
     }
 
     var initial = function () {
@@ -266,7 +310,8 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         $scope.PaymentAccounts = [];
         $scope.PageMode = $scope.Mode.ListMode;
         $scope.Payments = [];
-
+        $scope.AccountTotalAmount = 0;
+        $scope.ProgramTotalAmount = 0;
         //Paging
         $scope.PaymentCount = 0;
         $scope.PageSize = 10;
