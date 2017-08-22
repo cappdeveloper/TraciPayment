@@ -250,7 +250,7 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-</section>
+
 
 
    <!-- create new program account modal-->
@@ -265,65 +265,135 @@
                 </h4>
             </div>
             <div class="modal-body">
-               
-                    <div class="row">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label class="control-label col-sm-4"> Payment Key :</label>
-                                <div class="col-sm-8">
-                                    <label class="control-label"> {{Payment.PaymentKey}}</label>
-                                </div>
+
+                <div class="row">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4"> Payment Key :</label>
+                            <div class="col-sm-8">
+                                <label class="control-label"> {{Payment.PaymentKey}}</label>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">Client Name:</label>
-                                <div class="col-sm-8">
-                                    <label class="control-label"> {{Payment.PaymentToClient}}</label>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Client Name:</label>
+                            <div class="col-sm-8">
+                                <label class="control-label"> {{Payment.PaymentToClient}}</label>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">Payment Date :</label>
-                                <div class="col-sm-8">
-                                    <label class="control-label"> {{Payment.PaymentDate}}</label>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Payment Date :</label>
+                            <div class="col-sm-8">
+                                <label class="control-label"> {{Payment.PaymentDate}}</label>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">Payment Check Number :</label>
-                                <div class="col-sm-8">
-                                    <label class="control-label"> {{Payment.PaymentCheckNumber}}</label>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Payment Check Number :</label>
+                            <div class="col-sm-8">
+                                <label class="control-label"> {{Payment.PaymentCheckNumber}}</label>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">Payment Type : </label>
-                                <div class="col-sm-8">
-                                    <label class="control-label"> {{Payment.PaymentTypeName}}</label>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Payment Type : </label>
+                            <div class="col-sm-8">
+                                <label class="control-label"> {{Payment.PaymentTypeName}}</label>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">Payment Amount : </label>
-                                <div class="col-sm-8">
-                                    <label class="control-label"> {{Payment.PaymentAmount}}</label>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Payment Amount : </label>
+                            <div class="col-sm-8">
+                                <label class="control-label"> {{Payment.PaymentAmount}}</label>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">Payment Note : </label>
-                                <div class="col-sm-8">
-                                    <label class="control-label" style="text-align: left;"> {{Payment.PaymentNote}}</label>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Payment Note : </label>
+                            <div class="col-sm-8">
+                                <label class="control-label" style="text-align: left;"> {{Payment.PaymentNote}}</label>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">Payment Vendor Invoice Number : </label>
-                                <div class="col-sm-8">
-                                    <label class="control-label"> {{Payment.PaymentVendorInvoiceNumber}}</label>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Payment Vendor Invoice Number : </label>
+                            <div class="col-sm-8">
+                                <label class="control-label"> {{Payment.PaymentVendorInvoiceNumber}}</label>
                             </div>
                         </div>
                     </div>
-              
+                </div>
+                <hr color="green" />
+             @*Account section bind*@
+                   
+                        <table id="payment-table1" ng-show="Payments.length > 0" class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr class="info">
+                                    <th>Account Name</th>
+                                    <th>Account Amount</th>
+
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="paymentaccount in PaymentAccounts">
+                                    <td>{{paymentaccount.AccountName}}</td>
+                                    <td>{{paymentaccount.PaymentAccountAmount}}</td>
+                                  
+
+                                </tr>
+                                <tr>
+                                  
+                                </tr>
+                            </tbody>
+                            <tbody>
+                              
+                            </tbody>
+                        </table>
+                   
+            <div class="row" ng-hide="AccountTotalAmount == 0" style="margin-left: 20px;">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <label>Total Amount:</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <label>{{AccountTotalAmount}} </label>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success btn-md" data-dismiss="modal"> Close </button>
+
+            <hr color="red"/>
+         @*Program model Bind*@
+                <table id="payment-table1" class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr class="info">
+                            <th>Program Name</th>
+                            <th>Program Amount</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="paymentprogram in PaymentPrograms">
+                            <td>{{paymentprogram.ProgramName}}</td>
+                            <td>{{paymentprogram.PaymentProgramAmount }}</td>
+
+
+                        </tr>
+                        <tr></tr>
+                    </tbody>
+                    <tbody></tbody>
+                </table>
+
+                <div class="row" ng-hide="ProgramTotalAmount == 0" style="margin-left: 20px;">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <label>Total Amount:</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <label>{{ProgramTotalAmount}} </label>
+                    </div>
+                </div>
+
+
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success btn-md" data-dismiss="modal"> Close </button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 </div>
 <!--end payment program modal-->
