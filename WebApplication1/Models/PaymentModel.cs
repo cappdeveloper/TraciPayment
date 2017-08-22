@@ -9,7 +9,8 @@ namespace WebApplication1.Models
     {
         public int PaymentKey { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
-        public string PaymentTo { get; set; }
+        public  int PaymentTo { get; set; }
+        public string PaymentToClient { get; set; }
         public string PaymentCheckNumber { get; set; }
         public Nullable<int> PaymentTypeKey { get; set; }
         public Nullable<decimal> PaymentAmount { get; set; }

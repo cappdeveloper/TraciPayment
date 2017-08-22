@@ -14,6 +14,7 @@ namespace WebApplication1.Models
     
     public partial class Account
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Account()
         {
             this.Budgets = new HashSet<Budget>();
@@ -27,7 +28,9 @@ namespace WebApplication1.Models
         public string AccountNote { get; set; }
         public Nullable<int> AccountParentKey { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Budget> Budgets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentAccount> PaymentAccounts { get; set; }
         public virtual AccountType AccountType { get; set; }
     }

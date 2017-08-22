@@ -1,6 +1,7 @@
 ﻿using OneClickHSE.Web.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,7 +12,7 @@ namespace WebApplication1.Controllers
 
     public class PaymentScreenController : Controller
     {
-        NYFSEntities1 obj = new NYFSEntities1();
+        NYFSEntities2 obj = new NYFSEntities2();
 
         //
         // GET: /PaymentScreen/
@@ -25,13 +26,17 @@ namespace WebApplication1.Controllers
             var paymentCount = obj.Payments.Count();
             var skip = (page - 1) * pagesize;
             var payments = obj.Payments.OrderBy(x => x.PaymentKey).Skip(skip).Take(pagesize).ToList(); // for listing
+
             var paymentsModel = payments.Select(x => new PaymentModel()
             {
                 PaymentKey = x.PaymentKey,
-                //PaymentTo = obj.People.Where(y=>y.PersonKey == Convert.ToInt32(x.PaymentTo)).FirstOrDefault().PersonName,
+                 PaymentTo=(Int32)x.PaymentTo,
+                 PaymentToClient=obj.People.Where(m=>m.PersonKey==x.PaymentTo).SingleOrDefault().PersonName,
+              // PaymentTo=obj.People.Where(x=>x)
                 PaymentCheckNumber = x.PaymentCheckNumber,
                 PaymentTypeName = x.PaymentType.PaymentTypeName,
                 PaymentNote = x.PaymentNote,
+             
                 PaymentAccountsModel = x.PaymentAccounts.Count() > 0 ? x.PaymentAccounts.Select(y => new PaymentAccountModel()
                 {
                     PaymentAccountAmount = y.PaymentAccountAmount,
@@ -91,6 +96,7 @@ namespace WebApplication1.Controllers
                     paymentObj.PaymentCheckNumber = payment.PaymentCheckNumber;
                     paymentObj.PaymentTypeKey = payment.PaymentTypeKey;
                     paymentObj.PaymentTo = payment.PaymentTo;
+                  
                     paymentObj.PaymentVendorInvoiceNumber = payment.PaymentVendorInvoiceNumber;
                     paymentObj.PaymentNote = payment.PaymentNote;
                     obj.SaveChanges();
@@ -124,14 +130,17 @@ namespace WebApplication1.Controllers
         public JsonResult GetPayment(int paymentKay)
         {
             var payment = obj.Payments.SingleOrDefault(x => x.PaymentKey == paymentKay);
-
+            //Accessing client name
+            int client_id =Convert.ToInt32(payment.PaymentTo);
             PaymentModel paymentModel = new PaymentModel ();
             
                 paymentModel.PaymentKey = payment.PaymentKey;
                 paymentModel.PaymentDate = payment.PaymentDate;               
                 paymentModel.PaymentCheckNumber = payment.PaymentCheckNumber;
                 paymentModel.PaymentTypeKey =payment.PaymentTypeKey;
-                paymentModel.PaymentTo = payment.PaymentTo;
+                paymentModel.PaymentTo =(Int32)payment.PaymentTo;
+                //Accessing client name
+                paymentModel.PaymentToClient = obj.People.Where(m => m.PersonKey==client_id).SingleOrDefault().PersonName;
                 paymentModel.PaymentVendorInvoiceNumber = payment.PaymentVendorInvoiceNumber;
                 paymentModel.PaymentNote = payment.PaymentNote;
                 paymentModel.PaymentTypeName = payment.PaymentType.PaymentTypeName;

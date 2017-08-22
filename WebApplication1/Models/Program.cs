@@ -14,6 +14,7 @@ namespace WebApplication1.Models
     
     public partial class Program
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Program()
         {
             this.Budgets = new HashSet<Budget>();
@@ -24,8 +25,10 @@ namespace WebApplication1.Models
         public string ProgramName { get; set; }
         public string ProgramNote { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Budget> Budgets { get; set; }
         public virtual GrantDistributionProgram GrantDistributionProgram { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentProgram> PaymentPrograms { get; set; }
     }
 }

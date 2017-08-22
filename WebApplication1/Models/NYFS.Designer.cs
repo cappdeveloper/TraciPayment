@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Aug_2\updated\WebApplication1\WebApplication1\Models\NYFS.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\vikas\Source\Repos\TraciNew\TraciPayment\WebApplication1\Models\NYFS.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

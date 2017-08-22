@@ -15,10 +15,10 @@ namespace WebApplication1.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class NYFSEntities1 : DbContext
+    public partial class NYFSEntities2 : DbContext
     {
-        public NYFSEntities1()
-            : base("name=NYFSEntities1")
+        public NYFSEntities2()
+            : base("name=NYFSEntities2")
         {
         }
     
@@ -27,8 +27,13 @@ namespace WebApplication1.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountType> AccountTypes { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Budget> Budgets { get; set; }
         public virtual DbSet<Grant> Grants { get; set; }
         public virtual DbSet<GrantDistribution> GrantDistributions { get; set; }

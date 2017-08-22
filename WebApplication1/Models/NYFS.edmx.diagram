@@ -4,26 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5c5fc5e10b7047d4aec61f7b9525547a" Name="Diagram1">
+      <Diagram DiagramId="fd0f7151788d4ea8a8f858ca7167b3f0" Name="Diagram1">
+        <EntityTypeShape EntityType="NYFSModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="NYFSModel.Account" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="NYFSModel.AccountType" Width="1.5" PointX="1.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="NYFSModel.AspNetRole" Width="1.5" PointX="5.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="NYFSModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NYFSModel.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NYFSModel.AspNetUser" Width="1.5" PointX="8" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NYFSModel.Budget" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="NYFSModel.Grant" Width="1.5" PointX="1.5" PointY="21.5" IsExpanded="true" />
         <EntityTypeShape EntityType="NYFSModel.GrantDistribution" Width="1.5" PointX="3.75" PointY="21" IsExpanded="true" />
         <EntityTypeShape EntityType="NYFSModel.GrantDistributionProgram" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="NYFSModel.Payment" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NYFSModel.PaymentAccount" Width="1.5" PointX="9" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NYFSModel.PaymentAccount" Width="1.5" PointX="11" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="NYFSModel.PaymentProgram" Width="1.5" PointX="6" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="NYFSModel.PaymentType" Width="1.5" PointX="1.5" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="NYFSModel.Person" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NYFSModel.PersonRole" Width="1.5" PointX="5.75" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="NYFSModel.PersonWithRole" Width="1.5" PointX="8" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NYFSModel.Person" Width="1.5" PointX="8.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NYFSModel.PersonRole" Width="1.5" PointX="8.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NYFSModel.PersonWithRole" Width="1.5" PointX="11" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="NYFSModel.Program" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="NYFSModel.sysdiagram" Width="1.5" PointX="8.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NYFSModel.sysdiagram" Width="1.5" PointX="3.75" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="NYFSModel.Term" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
         <AssociationConnector Association="NYFSModel.FK_Account_Budget" ManuallyRouted="false" />
         <AssociationConnector Association="NYFSModel.FK_Account_PaymentAccount" ManuallyRouted="false" />
         <AssociationConnector Association="NYFSModel.FK_AccountType_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="NYFSModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="NYFSModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="NYFSModel.FK_Program_Budget" ManuallyRouted="false" />
         <AssociationConnector Association="NYFSModel.FK_Term_Budget" ManuallyRouted="false" />
         <AssociationConnector Association="NYFSModel.FK_Grant_GrantDistribution" ManuallyRouted="false" />
@@ -36,6 +43,7 @@
         <AssociationConnector Association="NYFSModel.FK_Program_PaymentProgram" ManuallyRouted="false" />
         <AssociationConnector Association="NYFSModel.FK_Person_PersonWithRole" ManuallyRouted="false" />
         <AssociationConnector Association="NYFSModel.FK_PersonRole_PersonWithRole" ManuallyRouted="false" />
+        <AssociationConnector Association="NYFSModel.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

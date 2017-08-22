@@ -176,7 +176,22 @@
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>NYFS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>NYFS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>NYFS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>NYFS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Budget.cs">
+      <DependentUpon>NYFS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Grant.cs">
@@ -271,6 +286,16 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\add.jpg" />
+    <Content Include="Models\NYFS.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NYFS.edmx</DependentUpon>
+      <LastGenOutput>NYFS.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\NYFS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NYFS.edmx</DependentUpon>
+      <LastGenOutput>NYFS.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\App\Controllers\paymentController.js" />
@@ -282,23 +307,6 @@
     <Content Include="Scripts\DatePicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\DatePicker\moment.js" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
-    <EntityDeploy Include="Models\NYFS.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NYFS.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\NYFS.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NYFS.edmx</DependentUpon>
-      <LastGenOutput>NYFS.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\NYFS.edmx.diagram">
-      <DependentUpon>NYFS.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\NYFS.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NYFS.edmx</DependentUpon>
-      <LastGenOutput>NYFS.cs</LastGenOutput>
-    </Content>
     <Content Include="fonts\codropsicons\.DS_Store" />
     <Content Include="fonts\codropsicons\codropsicons.eot" />
     <Content Include="fonts\codropsicons\codropsicons.ttf" />
@@ -328,6 +336,13 @@
     <Content Include="fonts\linecons\linecons.ttf" />
     <Content Include="fonts\linecons\linecons.woff" />
     <Content Include="Database_Script\NYFS.bak" />
+    <EntityDeploy Include="Models\NYFS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NYFS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\NYFS.edmx.diagram">
+      <DependentUpon>NYFS.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />

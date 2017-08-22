@@ -14,6 +14,7 @@ namespace WebApplication1.Models
     
     public partial class Grant
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Grant()
         {
             this.GrantDistributions = new HashSet<GrantDistribution>();
@@ -23,6 +24,7 @@ namespace WebApplication1.Models
         public string GrantName { get; set; }
         public string GrantNote { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GrantDistribution> GrantDistributions { get; set; }
     }
 }

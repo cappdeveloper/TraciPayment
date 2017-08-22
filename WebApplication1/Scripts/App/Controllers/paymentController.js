@@ -43,6 +43,7 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         $scope.Persons = [];
         paymentService.getPayments(page, pageSize).success(function (data) {
             $scope.Payments = data.Payments;
+            $scope.Payments.PaymentToClient=data.Payments.PaymentToClient;
             $scope.PeymentTypes = data.PaymentTypes;
             $scope.Persons = data.Persons;
             $scope.Programs = data.Programs;

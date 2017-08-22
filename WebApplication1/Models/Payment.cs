@@ -14,6 +14,7 @@ namespace WebApplication1.Models
     
     public partial class Payment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Payment()
         {
             this.PaymentAccounts = new HashSet<PaymentAccount>();
@@ -22,7 +23,7 @@ namespace WebApplication1.Models
     
         public int PaymentKey { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
-        public string PaymentTo { get; set; }
+        public Nullable<int> PaymentTo { get; set; }
         public string PaymentCheckNumber { get; set; }
         public Nullable<int> PaymentTypeKey { get; set; }
         public Nullable<decimal> PaymentAmount { get; set; }
@@ -30,7 +31,9 @@ namespace WebApplication1.Models
         public Nullable<byte> PaymentReconciled { get; set; }
         public string PaymentVendorInvoiceNumber { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentAccount> PaymentAccounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentProgram> PaymentPrograms { get; set; }
         public virtual PaymentType PaymentType { get; set; }
     }

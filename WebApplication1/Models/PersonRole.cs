@@ -14,6 +14,7 @@ namespace WebApplication1.Models
     
     public partial class PersonRole
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PersonRole()
         {
             this.PersonWithRoles = new HashSet<PersonWithRole>();
@@ -24,6 +25,7 @@ namespace WebApplication1.Models
         public string PersonRole1 { get; set; }
         public string PersonRoleDescription { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PersonWithRole> PersonWithRoles { get; set; }
     }
 }

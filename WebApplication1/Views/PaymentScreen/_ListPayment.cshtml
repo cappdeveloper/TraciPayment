@@ -8,7 +8,10 @@
     <div class="header-title">
         <h1>Payments</h1>
         <small>Payment List</small>
+      
+        
     </div>
+    
 </section>
 
 
@@ -42,84 +45,211 @@
 
 
 
-<section class="panel-default">
 
-    <div class="row" style="margin-bottom: 20px; margin-top: 10px;">
-        <button type="button" class="btn btn-add btn-sm pull-right" ng-click="AddEditPayment()" style="margin-right: 35px;"> <i class="fa fa-plus"></i> &nbsp; Add New Payment</button>
-    </div>
 
-    <div class="table-header-options" ng-show="Payments.length>0">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div ng-hide="PaymentCount==0" class="display-inline-block pull-left" style="margin:8px 0">
-                <strong class="ng-binding">
-                    {{PaymentCount}}
-                    <span ng-bind="PaymentCount == 1?'Payment found':'Payments found'"></span>
-                </strong>
-            </div>
-            <div class="display-inline-block pull-right">
-                <label class="control-label display-inline-block">Page Size:</label>
-                <div class=" display-inline-block">
-                    <select class="form-control ng-pristine ng-valid" ng-change="GetPayments(1,PageSize)" ng-model="PageSize">
-                        <option value="10" ng-selected="true" selected="selected">10</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
+
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-bd ">
+                <div class="panel-heading ui-sortable-handle">
+                    <div class="btn-group" id="buttonexport">
+                        <a href="#">
+                            <h4>Payment List Record</h4>
+                        </a>
+                    </div>
+                 </div>
+                <div class="panel-body">
+                    <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+                    <div class="btn-group">
+                        <div class="buttonexport" id="buttonlist">
+                            <a ng-click="AddEditPayment()"  class="btn btn-danger btn-sm">
+                                <i class="fa fa-plus"></i> Add New Payment
+                            </a>
+                        </div>
+                        
+                    </div>
+                    <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+                  
+                     
+
+
+
+                            <div class="table-header-options" ng-show="Payments.length>0">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div ng-hide="PaymentCount==0" class="display-inline-block pull-left" style="margin:8px 0">
+                                        <strong class="ng-binding">
+                                            {{PaymentCount}}
+                                            <span ng-bind="PaymentCount == 1?'Payment found':'Payments found'"></span>
+                                        </strong>
+                                    </div>
+                                    <div class="display-inline-block pull-right">
+                                        <label class="control-label display-inline-block">Page Size:</label>
+                                        <div class=" display-inline-block">
+                                            <select class="form-control ng-pristine ng-valid" ng-change="GetPayments(1,PageSize)" ng-model="PageSize">
+                                                <option value="10" ng-selected="true" selected="selected">10</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                  
+                        <table id="payment-table" ng-show="Payments.length > 0" class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr class="info">
+                                    <th>Client Name</th>
+                                    <th>Payment Type</th>
+                                    
+                                    <th>Payment Check Number</th>
+                                    <th>Payment Note</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="payment in Payments">
+                                    <td><a class="btn btn-danger btn-sm">{{payment.PaymentToClient}}</a></td>
+                                    <td><a class="btn btn-add btn-sm"   ng-click="GetPayment(payment.PaymentKey,true)">{{payment.PaymentTypeName}}</a></td>
+                                    <td>{{payment.PaymentCheckNumber}}</td>
+                                    <td>{{payment.PaymentNote}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-add btn-sm" ng-click="AddEditPayment(payment.PaymentKey)" data-target="#customer1"><i class="fa fa-pencil"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm" ng-click="DeletePayment(payment.PaymentKey,$index)" data-toggle="modal"><i class="fa fa-trash-o"></i> </button>
+                                        <button type="button" class="btn btn-add btn-sm" ng-click="GetPayment(payment.PaymentKey,true)">Detail</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    
+
+                            <div class="form-group" ng-show="Payments.length>0">
+                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+                                    <label>Showing {{FirstRecord}} to {{LastRecord}} of {{PaymentCount}} records</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 text-right" ng-show="PaymentCount > PageSize">
+                                    <span class="lh30 pull-left">Page:</span>
+                                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2 padding-right-2">
+                                        <input type="text" class="form-control" numeric-only="{{PageCount}}" ng-model="GoToPage" />
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2">
+                                        <button class="btn btn-neutral btn-sm" ng-click="SetPage(GoToPage)"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-5 col-sm-5 col-xs-12">
+                                    <ul class="pagination pull-right" ng-show="Payments.length > 0 && PaymentCount > PageSize">
+                                        <li ng-class="{disabled: CurrentPage == 0}"><a href="#" ng-click="PrevPage()"><i class="fa fa-angle-double-left"></i></a></li>
+                                        <li ng-class="{disabled: n == CurrentPage}" ng-repeat="n in [] | range: PageCount:CurrentPage"><a href="#" ng-click="SetPage(n)">{{n}}</a></li>
+                                        <li ng-class="{disabled: CurrentPage== Payments.length}"><a href="#" ng-click="NextPage()"><i class="fa fa-angle-double-right"></i></a></li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+
+                            <div id="NoRecord" ng-show="Payments.length == 0" style="border:2px solid #e6e7e8;padding:10px;" class="form-group">
+                                No records found
+                            </div>
+                      
+                  
                 </div>
             </div>
         </div>
     </div>
-
-    <table id="payment-table" ng-show="Payments.length > 0" class="table table-responsive table-bordered table-striped table-hover">
-        <thead>
-            <tr class="info">
-                <th>Payment Type</th>
-                <th>Payment Chcek Number</th>
-                <th>Payment Note</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="payment in Payments">
-                <td>{{payment.PaymentTypeName}}</td>
-                <td>{{payment.PaymentCheckNumber}}</td>
-                <td>{{payment.PaymentNote}}</td>
-                <td>
-                    <button type="button" class="btn btn-add btn-sm" ng-click="AddEditPayment(payment.PaymentKey)" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeletePayment(payment.PaymentKey,$index)" data-toggle="modal"><i class="fa fa-trash-o"></i> </button>
-                    <button type="button" class="btn btn-add btn-sm" ng-click="GetPayment(payment.PaymentKey,true)"> View</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    <div class="form-group" ng-show="Payments.length>0">
-        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
-            <label>Showing {{FirstRecord}} to {{LastRecord}} of {{PaymentCount}} records</label>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 text-right" ng-show="PaymentCount > PageSize">
-            <span class="lh30 pull-left">Page:</span>
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2 padding-right-2">
-                <input type="text" class="form-control" numeric-only="{{PageCount}}" ng-model="GoToPage" />
+    </section>
+    <!-- customer Modal1 -->
+    <div class="modal fade" id="customer1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3><i class="fa fa-user m-r-5"></i> Update Customer</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="form-horizontal">
+                                <fieldset>
+                                    <!-- Text input-->
+                                    <div class="col-md-4 form-group">
+                                        <label class="control-label">Customer Name:</label>
+                                        <input type="text" placeholder="Customer Name" class="form-control">
+                                    </div>
+                                    <!-- Text input-->
+                                    <div class="col-md-4 form-group">
+                                        <label class="control-label">Email:</label>
+                                        <input type="email" placeholder="Email" class="form-control">
+                                    </div>
+                                    <!-- Text input-->
+                                    <div class="col-md-4 form-group">
+                                        <label class="control-label">Mobile</label>
+                                        <input type="number" placeholder="Mobile" class="form-control">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label class="control-label">Address</label><br>
+                                        <textarea name="address" rows="3"></textarea>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label class="control-label">type</label>
+                                        <input type="text" placeholder="type" class="form-control">
+                                    </div>
+                                    <div class="col-md-12 form-group user-form-group">
+                                        <div class="pull-right">
+                                            <button type="button" class="btn btn-danger btn-sm">Cancel</button>
+                                            <button type="submit" class="btn btn-add btn-sm">Save</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2">
-                <button class="btn btn-neutral btn-sm" ng-click="SetPage(GoToPage)"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
-            </div>
+            <!-- /.modal-content -->
         </div>
-        <div class="col-lg-6 col-md-5 col-sm-5 col-xs-12">
-            <ul class="pagination pull-right" ng-show="Payments.length > 0 && PaymentCount > PageSize">
-                <li ng-class="{disabled: CurrentPage == 0}"><a href="#" ng-click="PrevPage()"><i class="fa fa-angle-double-left"></i></a></li>
-                <li ng-class="{disabled: n == CurrentPage}" ng-repeat="n in [] | range: PageCount:CurrentPage"><a href="#" ng-click="SetPage(n)">{{n}}</a></li>
-                <li ng-class="{disabled: CurrentPage== Payments.length}"><a href="#" ng-click="NextPage()"><i class="fa fa-angle-double-right"></i></a></li>
-            </ul>
-            <div class="clearfix"></div>
-        </div>
-    </div> 
-    
-    
-     <div id="NoRecord" ng-show="Payments.length == 0" style="border:2px solid #e6e7e8;padding:10px;" class="form-group">
-        No records found
+        <!-- /.modal-dialog -->
     </div>
+    <!-- /.modal -->
+    <!-- Modal -->
+    <!-- Customer Modal2 -->
+    <div class="modal fade" id="customer2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3><i class="fa fa-user m-r-5"></i> Delete Customer</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="form-horizontal">
+                                <fieldset>
+                                    <div class="col-md-12 form-group user-form-group">
+                                        <label class="control-label">Delete Customer</label>
+                                        <div class="pull-right">
+                                            <button type="button" class="btn btn-danger btn-sm">NO</button>
+                                            <button type="submit" class="btn btn-add btn-sm">YES</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 </section>
 
 
@@ -142,6 +272,12 @@
                                 <label class="control-label col-sm-4"> Payment Key :</label>
                                 <div class="col-sm-8">
                                     <label class="control-label"> {{Payment.PaymentKey}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Client Name:</label>
+                                <div class="col-sm-8">
+                                    <label class="control-label"> {{Payment.PaymentToClient}}</label>
                                 </div>
                             </div>
                             <div class="form-group">

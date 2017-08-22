@@ -14,6 +14,7 @@ namespace WebApplication1.Models
     
     public partial class PaymentType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PaymentType()
         {
             this.Payments = new HashSet<Payment>();
@@ -24,6 +25,7 @@ namespace WebApplication1.Models
         public string PaymentTypeName { get; set; }
         public string PaymentTypeDescription { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
     }
 }

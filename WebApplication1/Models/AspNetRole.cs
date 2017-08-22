@@ -12,24 +12,18 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GrantDistribution
+    public partial class AspNetRole
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GrantDistribution()
+        public AspNetRole()
         {
-            this.GrantDistributionPrograms = new HashSet<GrantDistributionProgram>();
+            this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
-        public int GrantDistributionKey { get; set; }
-        public Nullable<int> GrantDistributionGrantKey { get; set; }
-        public Nullable<int> GrantDistributionTermKey { get; set; }
-        public Nullable<decimal> GrantDistributionAmountTotal { get; set; }
-        public string GrantDistributionInvoiceNumber { get; set; }
-        public string GrantDistributionNote { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
-        public virtual Grant Grant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GrantDistributionProgram> GrantDistributionPrograms { get; set; }
-        public virtual Term Term { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

@@ -11,84 +11,102 @@
                             }))
             {
                 <div id="editorForm" class="editorForm">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-horizontal">
-                                <div class="form-group">
-                                    <div class="col-md-12"><h4 style="margin-left:10px"><b>Payment Detail</b></h4></div>
+
+
+                    <div class="col-sm-12 col-md-12">
+                        <div class="panel panel-bd">
+                            <div class="panel-heading ui-sortable-handle">
+                                <div class="panel-title">
+                                    <h4>Payment Detail</h4>
                                 </div>
                             </div>
-                            <div class="panel panel-gray">
-                                <div class="panel-body">
-                                    <div class="form-horizontal">
-                                        <div class="row">
-                                            <div class="form-group">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                      
+                                        <div class="panel panel-gray">
+                                            <div class="panel-body">
+                                                <div class="form-horizontal">
+                                                    <div class="row">
+                                                        <div class="form-group">
 
-                                                <label class="col-sm-3  col-md-3 col-xs-5 control-label">Date:</label>
-                                                <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
-                                                    <input id="Date" name="Date" ng-model="Payment.PaymentDate" set-datepicker="" class="form-control form-control years hasDatepicker" data-val="true" data-val-required="" />
-                                                    <span class="msg-validation">
-                                                        <span data-valmsg-for="Date">Date is required.</span>
-                                                    </span>
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Date:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="Date" name="Date" ng-model="Payment.PaymentDate" set-datepicker="" class="form-control form-control years hasDatepicker" data-val="true" data-val-required="" />
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="Date">Date is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Check Number:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="CheckNumber" name="CheckNumber" ng-model="Payment.PaymentCheckNumber" class="form-control" data-val="true" data-val-required="" />
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="CheckNumber">Payment check number is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Payment Type:</label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-7">
+                                                                <select class="form-control" data-val="true" data-val-required="" data-ng-model="Payment.PaymentTypeKey" data-ng-options="types.PaymentTypeKey as types.PaymentTypeName for types in PeymentTypes" id="Project" name="Project">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="Project">Payment Type is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Payment To:</label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-7">
+                                                                <select class="form-control" data-val="true" data-val-required="" data-ng-model="Payment.PaymentTo" data-ng-options="person.PersonKey as person.PersonName for person in Persons" id="person" name="person">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="person">Payment To is required.</span>
+                                                                </span>
+                                                            </div>
+                                                            <a class="pull-left btn btn-danger btn-sm" data-toggle="modal" style="cursor:pointer;" ng-click="AddNewPerson()">Add a new person</a>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Invoice Number:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="CheckNumber" name="CheckNumber" ng-model="Payment.PaymentVendorInvoiceNumber" class="form-control" data-val="true" data-val-required="" />
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="CheckNumber">Invoice Number is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Note:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <textarea id="PaymentNote" name="PaymentNote" ng-model="Payment.PaymentNote" class="form-control" rows="4"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row text-center">
+                                                        <button ng-click="SavePayment()" class="btn btn-add btn-sm" style="margin-right:10px"> <span ng-bind="Payment.PaymentKey == undefined ? 'Save Detail' : 'Update Detail'"></span> </button>
+                                                        <button ng-click="CancelPayment()" class="btn btn-danger btn-sm" style="margin-right:10px"><span ng-bind="Payment.PaymentKey == undefined ? 'Cancel' : 'Back To List'"></span> </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3  col-md-3 col-xs-5 control-label">Check Number:</label>
-                                                <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
-                                                    <input id="CheckNumber" name="CheckNumber" ng-model="Payment.PaymentCheckNumber" class="form-control" data-val="true" data-val-required="" />
-                                                    <span class="msg-validation">
-                                                        <span data-valmsg-for="CheckNumber">Payment check number is required.</span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3  col-md-3 col-xs-5 control-label">Payment Type:</label>
-                                                <div class="col-md-4 col-sm-6 col-xs-7">
-                                                    <select class="form-control" data-val="true" data-val-required="" data-ng-model="Payment.PaymentTypeKey" data-ng-options="types.PaymentTypeKey as types.PaymentTypeName for types in PeymentTypes" id="Project" name="Project">
-                                                        <option value="">Select</option>
-                                                    </select>
-                                                    <span class="msg-validation">
-                                                        <span data-valmsg-for="Project">Payment Type is required.</span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3  col-md-3 col-xs-5 control-label">Payment To:</label>
-                                                <div class="col-md-4 col-sm-6 col-xs-7">
-                                                    <select class="form-control" data-val="true" data-val-required="" data-ng-model="Payment.PaymentTo" data-ng-options="person.PersonKey as person.PersonName for person in Persons" id="person" name="person">
-                                                        <option value="">Select</option>
-                                                    </select>
-                                                    <span class="msg-validation">
-                                                        <span data-valmsg-for="person">Payment To is required.</span>
-                                                    </span>
-                                                </div>
-                                                <a class="pull-left btn btn-danger btn-sm" data-toggle="modal" style="cursor:pointer;" ng-click="AddNewPerson()">Add a new person</a>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3  col-md-3 col-xs-5 control-label">Invoice Number:</label>
-                                                <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
-                                                    <input id="CheckNumber" name="CheckNumber" ng-model="Payment.PaymentVendorInvoiceNumber" class="form-control" data-val="true" data-val-required="" />
-                                                    <span class="msg-validation">
-                                                        <span data-valmsg-for="CheckNumber">Invoice Number is required.</span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3  col-md-3 col-xs-5 control-label">Note:</label>
-                                                <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
-                                                    <textarea id="PaymentNote" name="PaymentNote" ng-model="Payment.PaymentNote" class="form-control" rows="4"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row text-center">
-                                            <button ng-click="SavePayment()" class="btn btn-add btn-sm" style="margin-right:10px"> <span ng-bind="Payment.PaymentKey == undefined ? 'Save Detail' : 'Update Detail'"></span> </button>
-                                            <button ng-click="CancelPayment()" class="btn btn-danger btn-sm" style="margin-right:10px"><span ng-bind="Payment.PaymentKey == undefined ? 'Cancel' : 'Back To List'"></span> </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
+
+                    
 
                     <div class="row">
                         <div class="col-md-12">

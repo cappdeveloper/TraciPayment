@@ -14,6 +14,7 @@ namespace WebApplication1.Models
     
     public partial class Term
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Term()
         {
             this.Budgets = new HashSet<Budget>();
@@ -26,7 +27,9 @@ namespace WebApplication1.Models
         public Nullable<System.DateTime> TermEndDate { get; set; }
         public string TermNote { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Budget> Budgets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GrantDistribution> GrantDistributions { get; set; }
     }
 }

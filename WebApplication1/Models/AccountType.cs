@@ -14,6 +14,7 @@ namespace WebApplication1.Models
     
     public partial class AccountType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AccountType()
         {
             this.Accounts = new HashSet<Account>();
@@ -23,6 +24,7 @@ namespace WebApplication1.Models
         public string AccountTypeName { get; set; }
         public string AccountTypeDescription { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
     }
 }
