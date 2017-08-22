@@ -254,8 +254,8 @@
 
 
    <!-- create new program account modal-->
-<div class="modal fade" id="PaymentDetailModal" role="dialog">
-    <div class="modal-dialog">
+<div class="modal fade " id="PaymentDetailModal" role="dialog">
+    <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -346,18 +346,18 @@
                             </tbody>
                         </table>
                    
-            <div class="row" ng-hide="AccountTotalAmount == 0" style="margin-left: 20px;">
+            <div class="row" ng-hide="AccountTotalAmount == 0">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <label>Total Amount:</label>
+                    <label class="btn-sm btn-add">Total Account Amount:</label><label class="btn-sm btn-danger">{{AccountTotalAmount}} </label>
+
+                   
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <label>{{AccountTotalAmount}} </label>
-                </div>
+               
             </div>
 
             <hr color="red"/>
          @*Program model Bind*@
-                <table id="payment-table1" class="table table-bordered table-striped table-hover">
+                <table id="payment-table2" class="table table-bordered table-striped table-hover">
                     <thead>
                         <tr class="info">
                             <th>Program Name</th>
@@ -378,13 +378,12 @@
                     <tbody></tbody>
                 </table>
 
-                <div class="row" ng-hide="ProgramTotalAmount == 0" style="margin-left: 20px;">
+                <div class="row" ng-hide="ProgramTotalAmount == 0">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <label>Total Amount:</label>
+                        <label class="btn-sm btn-add">Total Program Amount:</label><label class="btn-sm btn-danger">{{ProgramTotalAmount}}</label>
+
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <label>{{ProgramTotalAmount}} </label>
-                    </div>
+                   
                 </div>
 
 
@@ -396,4 +395,5 @@
                 </div>
             </div>
 </div>
+    </div>
 <!--end payment program modal-->

@@ -125,6 +125,7 @@ body {
 body {
     overflow-x: hidden;
     overflow-y: auto;
+     zoom:85%;
     color: #374767;
     background-color: #f1f3f6;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
