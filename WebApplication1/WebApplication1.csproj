@@ -164,6 +164,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentScreenController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -299,9 +300,11 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\App\Controllers\paymentController.js" />
+    <Content Include="Scripts\App\Controllers\personController.js" />
     <Content Include="Scripts\App\Directives\datePicker.js" />
     <Content Include="Scripts\App\Filters\appFilters.js" />
     <Content Include="Scripts\App\Services\paymentService.js" />
+    <Content Include="Scripts\App\Services\personService.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\DatePicker\bootstrap-datepicker.js" />
@@ -386,6 +389,9 @@
     <Content Include="Views\Shared\_MenuBar.cshtml" />
     <Content Include="Views\PaymentScreen\_AddEditPayment.cshtml" />
     <Content Include="Views\PaymentScreen\_ListPayment.cshtml" />
+    <Content Include="Views\Person\Index.cshtml" />
+    <Content Include="Views\Person\_AddEditPerson.cshtml" />
+    <Content Include="Views\Person\_ListPerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

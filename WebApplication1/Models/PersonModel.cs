@@ -10,7 +10,6 @@ namespace WebApplication1.Models
         public int PersonKey { get; set; }
         public string PersonName { get; set; }
         public string PersonAddress { get; set; }
-
         public string PersonCity { get; set; }
         public int? PersonStateKey { get; set; }
         public string PersonZipCode { get; set; }

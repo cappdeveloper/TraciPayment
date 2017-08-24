@@ -1,0 +1,103 @@
+﻿
+<section class="content-header">
+    <div class="header-icon">
+        <i class="fa fa-users"></i>
+    </div>
+    <div class="header-title">
+        <h1>Persons</h1>
+        <small>Person List</small>
+    </div>
+</section>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-bd ">
+                <div class="panel-heading ui-sortable-handle">
+                    <div class="btn-group" id="buttonexport">
+                        <a href="#">
+                            <h4>Person List Record</h4>
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <div class="table-header-options" ng-show="Persons.length>0">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div ng-hide="PersonCount==0" class="display-inline-block pull-left" style="margin:8px 0">
+                                <strong class="ng-binding">
+                                    {{PersonCount}}
+                                    <span ng-bind="PersonCount == 1?'Person found':'Persons found'"></span>
+                                </strong>
+                            </div>
+                            <div class="display-inline-block pull-right">
+                                <label class="control-label display-inline-block">Page Size:</label>
+                                <div class=" display-inline-block">
+                                    <select class="form-control ng-pristine ng-valid" ng-change="GetPersons(1,PageSize)" ng-model="PageSize">
+                                        <option value="10" ng-selected="true" selected="selected">10</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table id="person-table" ng-show="Persons.length > 0" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr class="info">
+                                <th>Person Name</th>
+                                <th>Person City</th>
+                                <th>Person Address</th>
+                                <th>Person ZipCode</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="person in Persons">
+                                <td>{{person.PersonName}}</td>
+                                <td>{{person.PersonCity}}</td>
+                                <td>{{person.PersonAddress}}</td>
+                                <td>{{person.PersonZipCode}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-add btn-sm" ng-click="EditPerson(person)"><i class="fa fa-pencil"></i></button>
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeletePerson(person.PersonKey,$index)"><i class="fa fa-trash-o"></i> </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="form-group" ng-show="Persons.length>0">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+                            <label>Showing {{FirstRecord}} to {{LastRecord}} of {{PersonCount}} records</label>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 text-right" ng-show="PersonCount > PageSize">
+                            <span class="lh30 pull-left">Page:</span>
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2 padding-right-2">
+                                <input type="text" class="form-control" numeric-only="{{PageCount}}" ng-model="GoToPage" />
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 padding-left-2">
+                                <button class="btn btn-neutral btn-sm" ng-click="SetPage(GoToPage)"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-5 col-sm-5 col-xs-12">
+                            <ul class="pagination pull-right" ng-show="Persons.length > 0 && PersonCount > PageSize">
+                                <li ng-class="{disabled: CurrentPage == 0}"><a href="#" ng-click="PrevPage()"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li ng-class="{disabled: n == CurrentPage}" ng-repeat="n in [] | range: PageCount:CurrentPage"><a href="#" ng-click="SetPage(n)">{{n}}</a></li>
+                                <li ng-class="{disabled: CurrentPage== Persons.length}"><a href="#" ng-click="NextPage()"><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                    <div id="NoRecord" ng-show="Persons.length == 0" style="border:2px solid #e6e7e8;padding:10px;" class="form-group">
+                        No records found
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

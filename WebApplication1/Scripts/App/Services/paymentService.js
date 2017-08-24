@@ -1,4 +1,6 @@
-﻿app.factory('paymentService', ['$http', function ($http) {
+﻿'use strict';
+
+app.factory('paymentService', ['$http', function ($http) {
     return {
         getPayments: function (currentPage, pageSize) {
             return $http.post("/PaymentScreen/GetPayments?page=" + currentPage + "&pagesize=" + pageSize);
