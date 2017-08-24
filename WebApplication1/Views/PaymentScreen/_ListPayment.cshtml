@@ -101,7 +101,6 @@
                         <table id="payment-table" ng-show="Payments.length > 0" class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr class="info">
-                                    <th>Date Added</th>
                                     <th>Client Name</th>
                                     <th>Payment Type</th>
                                     
@@ -112,8 +111,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="payment in Payments">
-                                    <td>{{payment.PaymentDate}}</td>
-                                    <td><a class="btn btn-danger btn-sm"  ng-click="PersonDetail(payment.PaymentTo,true)">{{payment.PaymentToClient}}</a></td>
+                                    <td><a class="btn btn-danger btn-sm">{{payment.PaymentToClient}}</a></td>
                                     <td><a class="btn btn-add btn-sm"   ng-click="GetPayment(payment.PaymentKey,true)">{{payment.PaymentTypeName}}</a></td>
                                     <td>{{payment.PaymentCheckNumber}}</td>
                                     <td>{{payment.PaymentNote}}</td>
@@ -253,78 +251,7 @@
     </div>
     <!-- /.modal -->
 
-<div class="modal fade " id="PersonDetailModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" style=" text-align:center; ">
-                    <span>Client Detail</span>
-                </h4>
-            </div>
-            <div class="modal-body">
 
-                <div class="row">
-                    <div class="form-horizontal">
-                        <div class="form-group">
-                            <label class="control-label col-sm-4">Name :</label>
-                            <div class="col-sm-8">
-                                <label class="control-label"> {{Person.PersonName}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4"> Address :</label>
-                            <div class="col-sm-8">
-                                <label class="control-label"> {{Person.PersonAddress}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4"> City :</label>
-                            <div class="col-sm-8">
-                                <label class="control-label"> {{Person.PersonCity}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4">Zip Code :</label>
-                            <div class="col-sm-8">
-                                <label class="control-label"> {{Person.PersonZipCode}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4">Notes :</label>
-                            <div class="col-sm-8">
-                                <label class="control-label"> {{Person.PersonNote }}</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4"> VendorFederalEIN :</label>
-                            <div class="col-sm-8">
-                                <label class="control-label"> {{Person.VendorFederalEIN }}</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4">  VendorDefaultTerms :</label>
-                            <div class="col-sm-8">
-                                <label class="control-label"> {{Person.VendorDefaultTerms }}</label>
-                            </div>
-                        </div>
-                       
-                       
-                       
-                    </div>
-                </div>
-             
-
-
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success btn-md" data-dismiss="modal"> Close </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
    <!-- create new program account modal-->
 <div class="modal fade " id="PaymentDetailModal" role="dialog">

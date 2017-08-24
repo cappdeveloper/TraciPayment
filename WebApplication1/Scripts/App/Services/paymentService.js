@@ -3,7 +3,6 @@
         getPayments: function (currentPage, pageSize) {
             return $http.post("/PaymentScreen/GetPayments?page=" + currentPage + "&pagesize=" + pageSize);
         },
-
         savePayment: function (payment) {
             return $http.post("/PaymentScreen/SavePayment", payment);
         },
@@ -12,9 +11,6 @@
         },
         getPayment: function (paymentKey) {
             return $http.post("/PaymentScreen/GetPayment?paymentKay=" + paymentKey);
-        },
-        getPerson: function (paymentto) {
-            return $http.post("/PaymentScreen/GetPeople?paymentto=" + paymentto);
         },
         savePerson: function (person) {
             return $http.post("/PaymentScreen/SavePerson", person);
