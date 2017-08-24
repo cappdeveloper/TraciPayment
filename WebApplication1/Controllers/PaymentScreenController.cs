@@ -30,6 +30,7 @@ namespace WebApplication1.Controllers
             var paymentsModel = payments.Select(x => new PaymentModel()
             {
                 PaymentKey = x.PaymentKey,
+                PaymentDate=x.PaymentDate,
                  PaymentTo=(Int32)x.PaymentTo,
                  PaymentToClient=obj.People.Where(m=>m.PersonKey==x.PaymentTo).SingleOrDefault().PersonName,
               // PaymentTo=obj.People.Where(x=>x)
@@ -125,6 +126,20 @@ namespace WebApplication1.Controllers
             obj.PaymentPrograms.Add(paymentProgram);
             obj.SaveChanges();
             return Json(paymentProgram, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetPeople(int paymentto)
+        {
+            var _people = obj.People.SingleOrDefault(x => x.PersonKey == paymentto);
+            PersonModel _personModel = new PersonModel();
+            _personModel.PersonName = _people.PersonName;
+            _personModel.PersonAddress = _people.PersonAddress;
+            _personModel.PersonCity = _people.PersonCity;
+            _personModel.VendorFederalEIN = _people.VendorFederalEIN;
+            _personModel.VendorDefaultTerms = _people.VendorDefaultTerms;
+            _personModel.PersonZipCode = _people.PersonZipCode;
+            _personModel.PersonNote = _people.PersonNote;
+            return Json(_personModel, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetPayment(int paymentKay)

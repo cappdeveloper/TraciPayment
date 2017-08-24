@@ -43,6 +43,8 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         $scope.Persons = [];
         paymentService.getPayments(page, pageSize).success(function (data) {
             $scope.Payments = data.Payments;
+           $scope.Payments.PaymentDate = ToJavaScriptDate($scope.Payments.PaymentDate);
+         
             $scope.Payments.PaymentToClient=data.Payments.PaymentToClient;
             $scope.PeymentTypes = data.PaymentTypes;
             $scope.Persons = data.Persons;
@@ -88,6 +90,18 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
             GetAccountTotalAmount();
             if (viewDetail != undefined) {
                 $("#PaymentDetailModal").modal("toggle");
+            }
+        }).error(function () {
+            alert("Some error occured while getting Payment.")
+        });
+    }
+
+    $scope.PersonDetail = function (paymento, viewDetail) {
+        paymentService.getPerson(paymento).success(function (data) {
+            $scope.Person = data;
+         
+            if (viewDetail != undefined) {
+                $("#PersonDetailModal").modal("toggle");
             }
         }).error(function () {
             alert("Some error occured while getting Payment.")
