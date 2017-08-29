@@ -28,6 +28,20 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
     };
     /// End paging
 
+    // method will get data of drop downs
+    $scope.GetBudgetViewData = function () {
+        $scope.Accounts = [];
+        $scope.Terms = [];
+        $scope.Programs = [];
+        budgetService.getBudgetViewData().success(function (data) {
+            $scope.Accounts = data.Accounts;
+            $scope.Terms = data.Terms;
+            $scope.Programs = data.Programs;
+        }).error(function () {
+            alert("Some error occured while getting data.")
+        });
+    }
+
     // method will get all Budgets
     $scope.GetBudgets = function (page, pageSize) {
         //paging
@@ -150,6 +164,8 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
         $scope.CurrentPage = 1;
         $scope.PageCount = 0;
         //paging
+
+        $scope.GetBudgetViewData();
 
         $scope.GetBudgets($scope.CurrentPage, $scope.PageSize);
     }

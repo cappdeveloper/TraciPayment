@@ -17,6 +17,35 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public JsonResult GetBudgetViewData()
+        {
+            var programs = obj.Programs.ToList();
+            var programsModel = programs.Select(x => new ProgramModel()
+            {
+                ProgramKey = x.ProgramKey,
+                ProgramName = x.ProgramName
+            }).ToList();
+
+            var accounts = obj.Accounts.ToList();
+            var accountsModel = accounts.Select(x => new AccountModel()
+            {
+                AccountKey = x.AccountKey,
+                AccountName = x.AccountName
+            }).ToList();
+
+            var terms = obj.Terms.ToList();
+            var termsModel = terms.Select(x => new TermModel()
+            {
+                TermKey = x.TermKey,
+                TermName = x.TermName,
+                TermStartDate = x.TermStartDate,
+                TermEndDate = x.TermEndDate
+
+            }).ToList();
+
+            return Json(new { Programs = programsModel, Accounts = accountsModel, Terms = termsModel }, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetBudgets(int page, int pagesize)
         {
             var budgetCount = obj.Budgets.Count();
@@ -44,48 +73,41 @@ namespace WebApplication1.Controllers
             return Json(new { Budgets = budgetsModel, BudgetCount = budgetCount }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SaveUpdatePerson(Person person)
+        public JsonResult SaveUpdateBudget(Budget budget)
         {
-            var personObj = obj.People.SingleOrDefault(x => x.PersonKey == person.PersonKey);
-            if (personObj != null)
+            if (budget.BudgetKey == 0)
             {
-                personObj.PersonName = person.PersonName;
-                personObj.PersonAddress = person.PersonAddress;
-                personObj.PersonCity = person.PersonCity;
-                personObj.PersonStateKey = person.PersonStateKey;
-                personObj.PersonZipCode = person.PersonZipCode;
-                personObj.PersonNote = person.PersonNote;
-                personObj.VendorFederalEIN = person.VendorFederalEIN;
-                personObj.VendorDefaultTerms = person.VendorDefaultTerms;
+                obj.Budgets.Add(budget);
                 obj.SaveChanges();
-            }
-
-            return Json(person, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult DeletePerson(int personKey)
-        {
-            var person = obj.People.SingleOrDefault(x => x.PersonKey == personKey);
-            if (person != null)
-            {
-                var payments = obj.Payments.Where(x => x.PaymentTo == personKey);
-                if (payments.Count() == 0)
-                {
-                    var personWithRoles = obj.PersonWithRoles.Where(y => y.PersonKey == personKey).ToList();
-                    if (personWithRoles.Count > 0)
-                        obj.PersonWithRoles.RemoveRange(personWithRoles);
-
-                    obj.People.Remove(person);
-                    obj.SaveChanges();
-                    return Json(new { Success = true, Message = "Person deleted successfully." }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                    return Json(new { Success = false, Message = "You cannot delete this person, As this person is being used in some payments." }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return Json(new { Success = false, Message = "Some error occured while deleting the person." }, JsonRequestBehavior.AllowGet);
+                var budegtObj = obj.Budgets.SingleOrDefault(x => x.BudgetKey == budget.BudgetKey);
+                if (budegtObj != null)
+                {
+                    budegtObj.BudgetProgramKey = budget.BudgetProgramKey;
+                    budegtObj.BudgetTermKey = budget.BudgetTermKey;
+                    budegtObj.BudgetAccountKey = budget.BudgetAccountKey;
+                    budegtObj.BudgetAmount = budget.BudgetAmount;
+                    budegtObj.BudgetNote = budget.BudgetNote;
+                    obj.SaveChanges();
+                }
             }
+
+            return Json(budget, JsonRequestBehavior.AllowGet);
         }
-	}
+
+
+        public JsonResult DeleteBudget(int budgetKey)
+        {
+            var budget = obj.Budgets.SingleOrDefault(x => x.BudgetKey == budgetKey);
+            if (budget != null)
+            {
+                obj.Budgets.Remove(budget);
+                obj.SaveChanges();
+            }
+            return Json(new { Success = true, Message = "Budget deleted successfully." }, JsonRequestBehavior.AllowGet);
+
+        }
+    }
 }

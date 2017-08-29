@@ -2,6 +2,9 @@
 
 app.factory('budgetService', ['$http', function ($http) {
     return {
+        getBudgetViewData: function () {
+            return $http.post("/Budget/GetBudgetViewData");
+        },
         getBudgets: function (currentPage, pageSize) {
             return $http.post("/Budget/GetBudgets?page=" + currentPage + "&pagesize=" + pageSize);
         },
