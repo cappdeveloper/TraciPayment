@@ -162,6 +162,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BudgetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentScreenController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Models\Budget.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BudgetModel.cs" />
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
@@ -262,6 +264,7 @@
     <Compile Include="Models\Term.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TermModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -397,6 +400,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="assets\" />
     <Folder Include="Design\" />
+    <Folder Include="Views\Budget\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
