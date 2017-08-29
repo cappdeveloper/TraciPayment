@@ -1,0 +1,99 @@
+﻿
+<!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+<nav class="navbar navbar-default row" role="navigation" id="horizontal-navbar" style="margin: auto 0">
+    <div id="horizontal-navbar">
+        <div id="budgetId" class="validateform">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new
+                            {
+                                id = "BudgetForm",
+                                @class = "editorForm",
+                                onsubmit = "return false;",
+                                name = "BudgetForm"
+                            }))
+            {
+                <div id="editorForm" class="editorForm">
+
+                    <div class="col-sm-12 col-md-12">
+                        <div class="panel panel-bd">
+                            <div class="panel-heading ui-sortable-handle">
+                                <div class="panel-title">
+                                    <h4>Budget Detail</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="panel panel-gray">
+                                            <div class="panel-body">
+                                                <div class="form-horizontal">
+                                                    <div class="row">
+                                                       
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Budget Program:</label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-7">
+                                                                <select class="form-control" data-val="true" data-val-required="" data-ng-model="Budget.BudgetProgramKey" data-ng-options="program.ProgramKey as program.ProgramName for program in Programs" id="ProgramKey" name="ProgramKey">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="ProgramKey">Budget Program is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Budget Term:</label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-7">
+                                                                <select class="form-control" data-val="true" data-val-required="" data-ng-model="Budget.BudgetTermKey" data-ng-options="term.TermKey as term.TermName for term in Terms" id="TermKey" name="TermKey">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="TermKey">Budget Term is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Budget Account:</label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-7">
+                                                                <select class="form-control" data-val="true" data-val-required="" data-ng-model="Budget.BudgetAccountKey" data-ng-options="account.AccountKey as account.AccountName for account in Accounts" id="AccountKey" name="AccountKey">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="AccountKey">Budget Account is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Budget Amount:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="BudgetAmount" name="BudgetAmount" ng-model="Budget.BudgetAmount" class="form-control" data-val="true" data-val-required="" />
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="BudgetAmount">Budget Amount is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Budget Note:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <textarea id="BudgetNote" name="BudgetNote" ng-model="Budget.BudgetNote" class="form-control" rows="4"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row text-center">
+                                                        <button ng-click="SaveUpdateBudget()" class="btn btn-add btn-sm" style="margin-right:10px"> <span ng-bind="Budget.BudgetKey == undefined ? 'Save' : 'Update'"></span> </button>
+                                                        <button ng-click="CancelBudget()" class="btn btn-danger btn-sm" style="margin-right:10px"><span ng-bind="Budget.BudgetKey == undefined ? 'Cancel' : 'Back To List'"></span> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+        <div class="clear"></div>
+    </div>
+</nav>

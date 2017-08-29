@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Budget";
+}
+
+<div ng-controller="budgetController" class="displaynone">
+    <div ng-show="PageMode != Mode.ListMode">
+        @Html.Partial("_AddEditBudget")
+    </div>
+    <div ng-show="PageMode == Mode.ListMode">
+        @Html.Partial("_ListBudget")
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/App/app.js"></script>
+    <script src="~/Scripts/App/Services/budgetService.js"></script>
+    <script src="~/Scripts/App/Controllers/budgetController.js"></script>
+    <script src="~/Scripts/App/Filters/appFilters.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

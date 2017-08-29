@@ -117,7 +117,6 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
             return;
 
         clearValidations();
-        debugger;
         paymentService.savePayment($scope.Payment).success(function (data) {
             if (data.PaymentKey != undefined) {
                 if ($scope.Payment.PaymentKey == undefined) {

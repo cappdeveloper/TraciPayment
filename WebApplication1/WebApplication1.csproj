@@ -302,10 +302,12 @@
     </Content>
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\App\app.js" />
+    <Content Include="Scripts\App\Controllers\budgetController.js" />
     <Content Include="Scripts\App\Controllers\paymentController.js" />
     <Content Include="Scripts\App\Controllers\personController.js" />
     <Content Include="Scripts\App\Directives\datePicker.js" />
     <Content Include="Scripts\App\Filters\appFilters.js" />
+    <Content Include="Scripts\App\Services\budgetService.js" />
     <Content Include="Scripts\App\Services\paymentService.js" />
     <Content Include="Scripts\App\Services\personService.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -395,12 +397,14 @@
     <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Views\Person\_AddEditPerson.cshtml" />
     <Content Include="Views\Person\_ListPerson.cshtml" />
+    <Content Include="Views\Budget\Index.cshtml" />
+    <Content Include="Views\Budget\_ListBudget.cshtml" />
+    <Content Include="Views\Budget\_AddEditBudget.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\" />
     <Folder Include="Design\" />
-    <Folder Include="Views\Budget\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

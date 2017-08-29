@@ -13,6 +13,9 @@ namespace WebApplication1.Models
         public Nullable<int> BudgetAccountKey { get; set; }
         public Nullable<decimal> BudgetAmount { get; set; }
         public string BudgetNote { get; set; }
+        public string BudgetProgramName { get; set; }
+        public string BudgetTermName { get; set; }
+        public string BudgetAccountName { get; set; }
         public virtual AccountModel Account { get; set; }
         public virtual ProgramModel Program { get; set; }
         public virtual TermModel Term { get; set; }
