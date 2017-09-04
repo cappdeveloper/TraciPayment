@@ -40,7 +40,8 @@ namespace WebApplication1.Controllers
                 PaymentAccountsModel = x.PaymentAccounts.Count() > 0 ? x.PaymentAccounts.Select(y => new PaymentAccountModel()
                 {
                     PaymentAccountAmount = y.PaymentAccountAmount,
-                    AccountName = y.Account.AccountName
+                    AccountName = y.Account.AccountName,
+                  
                 }).ToList() : null,
                 PaymentProgramsModel = x.PaymentPrograms.Count() > 0 ? x.PaymentPrograms.Select(y => new PaymentProgramModel()
                 {

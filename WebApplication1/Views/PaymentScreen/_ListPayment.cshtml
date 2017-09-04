@@ -103,7 +103,8 @@
                                 <tr class="info">
                                     <th>Client Name</th>
                                     <th>Payment Type</th>
-                                    
+                                    <th> Total Amount</th>
+
                                     <th>Payment Check Number</th>
                                     <th>Payment Note</th>
                                     <th>Actions</th>
@@ -113,7 +114,8 @@
                                 <tr ng-repeat="payment in Payments">
                                     <td><a class="btn btn-danger btn-sm">{{payment.PaymentToClient}}</a></td>
                                     <td><a class="btn btn-add btn-sm"   ng-click="GetPayment(payment.PaymentKey,true)">{{payment.PaymentTypeName}}</a></td>
-                                    <td>{{payment.PaymentCheckNumber}}</td>
+                                    <td ng-repeat="payment in Payments.PaymentAccountsModel"> </td>
+                                     <td>{{payment.PaymentCheckNumber}}</td>
                                     <td>{{payment.PaymentNote}}</td>
                                     <td>
                                         <button type="button" class="btn btn-add btn-sm" ng-click="AddEditPayment(payment.PaymentKey)" data-target="#customer1"><i class="fa fa-pencil"></i></button>

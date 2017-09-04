@@ -59,15 +59,19 @@ namespace WebApplication1.Controllers
                 BudgetAccountKey = x.BudgetAccountKey,
                 BudgetAmount = x.BudgetAmount,
                 BudgetNote = x.BudgetNote,
+                BudgetAccountName = x.Account.AccountName,
+                BudgetProgramName = x.Program.ProgramName,
+                BudgetTermName = x.Term.TermName,
+             
                 //Account = x.Account,
-                Account = from a in x.Account
-                          select new AccountModel()
-                          {
-                              AccountKey = a.AccountKey,
-                              AccountName = a.AccountName
-                          },
-                Program = x.Program,
-                Term = x.Term
+                //Account = from a in x.Account
+                //          select new AccountModel()
+                //          {
+                //              AccountKey = a.AccountKey,
+                //              AccountName = a.AccountName
+                //          },
+                //Program = x.Program,
+                //Term = x.Term
             }).ToList();
 
             return Json(new { Budgets = budgetsModel, BudgetCount = budgetCount }, JsonRequestBehavior.AllowGet);

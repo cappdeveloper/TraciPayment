@@ -48,7 +48,7 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
             $scope.Persons = data.Persons;
             $scope.Programs = data.Programs;
             $scope.Accounts = data.Accounts;
-
+         
             //begin paging
             $scope.PaymentCount = data.PaymentCount;
             $scope.PageCount = Math.ceil(data.PaymentCount / $scope.PageSize);
@@ -312,7 +312,7 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         $scope.Payments = [];
         $scope.AccountTotalAmount = 0;
         $scope.ProgramTotalAmount = 0;
-        //Paging
+        ////Paging
         $scope.PaymentCount = 0;
         $scope.PageSize = 10;
         $scope.CurrentPage = 1;
