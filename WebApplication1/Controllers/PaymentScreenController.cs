@@ -48,6 +48,8 @@ namespace WebApplication1.Controllers
                     PaymentProgramAmount = y.PaymentProgramAmount,
                     ProgramName = y.Program.ProgramName
                 }).ToList() : null,
+
+                PaymentTotalAmount = x.PaymentAccounts.Sum(z => z.PaymentAccountAmount) + x.PaymentPrograms.Sum(z => z.PaymentProgramAmount)
             }).ToList();
 
             var paymentTypes = obj.PaymentTypes.ToList(); // for payment type dll

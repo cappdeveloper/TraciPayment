@@ -1,20 +1,13 @@
 ﻿
-
-
 <section class="content-header">
     <div class="header-icon">
         <i class="fa fa-users"></i>
     </div>
     <div class="header-title">
         <h1>Payments</h1>
-        <small>Payment List</small>
-      
-        
+        <small>Payment List</small>     
     </div>
-    
 </section>
-
-
 
 <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
 @*<table id="payment-table1" ng-show="Payments.length > 0" class="table table-bordered table-striped table-hover">
@@ -40,16 +33,6 @@
         </tbody>
     </table>*@
 
-
-
-
-
-
-
-
-
-
-
 <section class="content">
     <div class="row">
         <div class="col-sm-12">
@@ -73,10 +56,6 @@
                     </div>
                     <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
                   
-                     
-
-
-
                             <div class="table-header-options" ng-show="Payments.length>0">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div ng-hide="PaymentCount==0" class="display-inline-block pull-left" style="margin:8px 0">
@@ -103,7 +82,7 @@
                                 <tr class="info">
                                     <th>Client Name</th>
                                     <th>Payment Type</th>
-                                    <th> Total Amount</th>
+                                    <th>Total Amount</th>
 
                                     <th>Payment Check Number</th>
                                     <th>Payment Note</th>
@@ -113,9 +92,10 @@
                             <tbody>
                                 <tr ng-repeat="payment in Payments">
                                     <td><a class="btn btn-danger btn-sm">{{payment.PaymentToClient}}</a></td>
-                                    <td><a class="btn btn-add btn-sm"   ng-click="GetPayment(payment.PaymentKey,true)">{{payment.PaymentTypeName}}</a></td>
+                                    <td><a class="btn btn-add btn-sm" ng-click="GetPayment(payment.PaymentKey,true)">{{payment.PaymentTypeName}}</a></td>
+                                    <td>{{payment.PaymentTotalAmount}}</td>
                                     <td ng-repeat="payment in Payments.PaymentAccountsModel"> </td>
-                                     <td>{{payment.PaymentCheckNumber}}</td>
+                                    <td>{{payment.PaymentCheckNumber}}</td>
                                     <td>{{payment.PaymentNote}}</td>
                                     <td>
                                         <button type="button" class="btn btn-add btn-sm" ng-click="AddEditPayment(payment.PaymentKey)" data-target="#customer1"><i class="fa fa-pencil"></i></button>
