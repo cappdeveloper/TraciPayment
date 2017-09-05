@@ -77,6 +77,23 @@ namespace WebApplication1.Controllers
             return Json(new { Budgets = budgetsModel, BudgetCount = budgetCount }, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetBudget(int budgetKey)
+        {
+            var budget = obj.Budgets.SingleOrDefault(x => x.BudgetKey == budgetKey);
+            BudgetModel budgetModel = new BudgetModel();
+
+            if (budget != null)
+            {
+                budgetModel.BudgetKey = budget.BudgetKey;
+                budgetModel.BudgetProgramKey = budget.BudgetProgramKey;
+                budgetModel.BudgetTermKey = budget.BudgetTermKey;
+                budgetModel.BudgetAccountKey = budget.BudgetAccountKey;
+                budgetModel.BudgetAmount = budget.BudgetAmount;
+                budgetModel.BudgetNote = budget.BudgetNote;
+            }
+
+            return Json(budgetModel, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult SaveUpdateBudget(Budget budget)
         {
             if (budget.BudgetKey == 0)

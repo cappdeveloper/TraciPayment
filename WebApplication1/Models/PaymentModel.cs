@@ -18,6 +18,7 @@ namespace WebApplication1.Models
         public Nullable<byte> PaymentReconciled { get; set; }
         public string PaymentVendorInvoiceNumber { get; set; }
         public string PaymentTypeName { get; set; }
+        public Nullable<decimal> PaymentTotalAmount { get; set; }
         public List<PaymentAccountModel> PaymentAccountsModel { get; set; }
         public List<PaymentProgramModel> PaymentProgramsModel { get; set; }
     }

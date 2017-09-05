@@ -37,6 +37,8 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
             $scope.Accounts = data.Accounts;
             $scope.Terms = data.Terms;
             $scope.Programs = data.Programs;
+
+            container.show();
         }).error(function () {
             alert("Some error occured while getting data.")
         });
@@ -49,14 +51,8 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
         $scope.CurrentPage = page; //paging
 
         $scope.Budgets = [];
-        $scope.Accounts = [];
-        $scope.Terms = [];
-        $scope.Programs = [];
         budgetService.getBudgets(page, pageSize).success(function (data) {
             $scope.Budgets = data.Budgets;
-            $scope.Accounts = data.Accounts;
-            $scope.Terms = data.Terms;
-            $scope.Programs = data.Programs;
 
             //begin paging
             $scope.BudgetCount = data.BudgetCount;
@@ -66,8 +62,7 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
                 $scope.LastRecord = ($scope.Budgets.length == $scope.PageSize ? $scope.PageSize * $scope.CurrentPage : $scope.BudgetCount);
             }
             //end paging
-
-            container.show();
+            
             $scope.PageMode = $scope.Mode.ListMode;
         }).error(function () {
             alert("Some error occured while getting Budgets.")
@@ -84,9 +79,9 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
         }
     }
 
-    // method will get soecific budget with budgetkey
+    // method will get specific budget with budgetkey
     $scope.GetBudget = function (budgetKey) {
-        paymentService.getBudget(budgetKey).success(function (data) {
+        budgetService.getBudget(budgetKey).success(function (data) {          
             $scope.Budget = data;
         }).error(function () {
             alert("Some error occured while getting Budget.")
@@ -103,7 +98,7 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
 
     /// method will take you back to listing
     $scope.CancelBudget = function () {
-        $scope.PageMode = $scope.Mode.ListMode;
+        $scope.GetBudgets($scope.CurrentPage, $scope.PageSize);
     }
 
     /// method will add/update Budget
@@ -113,7 +108,7 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
             return;
 
         clearValidations();
-        budgetService.saveUpdateBudget($scope.Budget).success(function (data) {
+        budgetService.saveUpdateBudget($scope.Budget).success(function (data) {       
             if (data.BudgetKey != undefined) {
                 if ($scope.Budget.BudgetKey == undefined) {                    
                     $scope.Budget = data;
@@ -127,11 +122,21 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
                         budgetObj[0].BudgetAccountKey = data.BudgetAccountKey;
                         budgetObj[0].BudgetAmount = data.BudgetAmount;
                         budgetObj[0].BudgetNote = data.BudgetNote;
+
+                        var acctObj = $filter('filter')($scope.Accounts, { AccountKey: $scope.Budget.BudgetAccountKey });
+                        var progObj = $filter('filter')($scope.Programs, { ProgramKey: $scope.Budget.BudgetProgramKey });
+                        var termObj = $filter('filter')($scope.Terms, { TermKey: $scope.Budget.BudgetTermKey });
+
+                        budgetObj[0].BudgetAccountName = acctObj[0].AccountName;
+                        budgetObj[0].BudgetProgramName = progObj[0].ProgramName;
+                        budgetObj[0].BudgetTermName = termObj[0].TermName;
+
+                        $scope.PageMode = $scope.Mode.ListMode;
                     }
                     alert("Budget updated successfully.");
                 }
             }
-            $scope.PageMode = $scope.Mode.ListMode;
+           
         }).error(function () {
             alert("Some error occured while saving Budget.")
         });
