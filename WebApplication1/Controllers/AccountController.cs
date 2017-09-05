@@ -79,10 +79,10 @@ namespace WebApplication1.Controllers
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        if (UserManager.IsInRole(user.Id, "User"))
-                            return RedirectToAction("JobDashboard", "Job");
+                        if (UserManager.IsInRole(user.Id, "Admin"))
+                            return RedirectToAction("PaymentScreen", "Index");
                         else
-                            return RedirectToAction("Index", "Contractor");
+                            return RedirectToAction("Account", "Login");
                     case SignInStatus.LockedOut:
                         return View("Lockout");
                     case SignInStatus.Failure:

@@ -32,7 +32,13 @@ namespace WebApplication1.Models
         public string Status { get; set; }
 
       
-       // public virtual tblRole tblRole { get; set; }
+     public virtual AspNetRole tblRole { get; set; }
+
+    }
+    public class Role
+    {
+        public int RoleID { get; set; }
+        public string RoleName { get; set; }
 
     }
 
@@ -40,29 +46,29 @@ namespace WebApplication1.Models
     public class UserDB
     {
         NYFSEntities2 oDB = new NYFSEntities2();
-     
-
-       // public tblUser GetUser(string Username, string Password)
-       // {
-       //    var objuser = oDB.tblUsers.Where(m => m.UserName == Username && m.Password == Password && m.IsActive == true).FirstOrDefault();
-       //    return objuser;
-       //}
 
 
-        // public List<ContractorModel> LoadContractor()
-        //{
-               
-          
-        //List<ContractorModel> oUser = new List<ContractorModel>();
-        //    oUser = (from p in oDB.tblContractors where p.Isactive == true select new ContractorModel { Id = p.Id,FirstName = p.FirstName+p.LastName }).ToList();
-        //    return oUser;
-            
-
+        // public tblUser GetUser(string Username, string Password)
+        // {
+        //    var objuser = oDB.tblUsers.Where(m => m.UserName == Username && m.Password == Password && m.IsActive == true).FirstOrDefault();
+        //    return objuser;
         //}
+
+
+        public List<AspNetRole> LoadRoles()
+        {
+
+
+            List<AspNetRole> oUser = new List<AspNetRole>();
+            oUser = (from p in oDB.AspNetRoles  select p).ToList();
+            return oUser;
+
+
+        }
         public List<Users> GetUsers()
         {
             var _list = (from p in oDB.AspNetUsers
-                         where p.isActive==true && p.ContractorId != null
+                         where p.isActive==true 
                          select new Users
                          {
                              Ids = p.Id,

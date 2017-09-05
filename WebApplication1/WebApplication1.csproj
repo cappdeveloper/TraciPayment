@@ -415,11 +415,13 @@
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Shared\login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\" />
     <Folder Include="Design\" />
+    <Folder Include="Scripts\Challenger\" />
     <Folder Include="Views\ManageAccount\" />
     <Folder Include="Views\ManageProgram\" />
   </ItemGroup>

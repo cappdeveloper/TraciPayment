@@ -13,7 +13,7 @@ using WebApplication1;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private EmailService.ApplicationSignInManager _signInManager;
@@ -78,7 +78,7 @@ namespace WebApplication1.Controllers
             }
 
 
-       //     ViewBag.Contractor = (new UserDB()).LoadContractor();
+          ViewBag.LoadRoles = (new UserDB()).LoadRoles();
 
             return View(model);
         }
@@ -120,7 +120,7 @@ namespace WebApplication1.Controllers
                 if (model.Ids != null)
                 {
 
-                   // ViewBag.Contractor = (new UserDB()).LoadContractor();
+                   ViewBag.LoadRoles = (new UserDB()).LoadRoles();
                     var user = oDB.AspNetUsers.Where(m => m.Id == model.Ids).FirstOrDefault();
 
                     user.Name = model.Name;
@@ -134,7 +134,7 @@ namespace WebApplication1.Controllers
                     user.PhoneNumber = model.Contact;
                     user.Notes = model.Notes;
                     user.isActive = true;
-
+                  
                     oDB.Entry(user).State = System.Data.Entity.EntityState.Modified;
                     oDB.SaveChanges();
 
@@ -174,7 +174,7 @@ namespace WebApplication1.Controllers
                         City = model.City,
                         CreatedDate = model.CreatedDate.Value,
                         Zip = model.Zip,
-                    //    ContractorId = model.ContractorId.Value,
+                     
                     //    PhoneNumber = model.Contact,
                         Notes = model.Notes,
                         isActive = true,
@@ -190,7 +190,7 @@ namespace WebApplication1.Controllers
                     {
                         var currentUser = UserManager.FindByName(user.UserName);
 
-                        var roleresult = UserManager.AddToRole(currentUser.Id, "User");
+                        var roleresult = UserManager.AddToRole(currentUser.Id,model.RoleName);
                         //  returnId = currentUser.Id;
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
 

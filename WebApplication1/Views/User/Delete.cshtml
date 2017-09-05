@@ -1,4 +1,4 @@
-﻿@model PMS.Models.ClientModel
+﻿@model WebApplication1.Models.AspNetUser
 @{
     ViewBag.Title = ":: PMS - Delete Client ::";
     Layout = "~/Views/Shared/Layout_final.cshtml";
@@ -11,7 +11,7 @@
         <div class="alert alert-info fade in nomargin">
 
             <h4>Alert!</h4>
-            <p>Are you sure you want  to delete <strong>@Model.ClientName </strong>Client?</p>
+            <p>Are you sure you want  to delete <strong>@Model.Name</strong>Client?</p>
             <p>
                 <button class="btn btn-sm btn-default" type="submit">Submit</button>
                 <a class="btn btn-sm btn-default" href="/Client/Index">Cancel</a>

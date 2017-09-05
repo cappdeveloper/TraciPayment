@@ -1,8 +1,9 @@
-﻿@model List<Construction_intranet.Models.Users>
+﻿@model List<WebApplication1.Models.Users>
 
 @{
     ViewBag.Title = "User";
-
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
 }
 
 <div class="panel">
@@ -53,13 +54,13 @@
         <!-- table-responsive -->
     </div>
 </div>
-@section styles{
+@*@section styles{
     <link href="~/Content/css/jquery.datatables.css" rel="stylesheet" />
 }
 
 @section breadcrumbs{
     <li class="active"><span>User</span></li>
-}
+}*@
 
 @section scripts{
     <script src="~/Scripts/jquery.datatables.min.js"></script>
