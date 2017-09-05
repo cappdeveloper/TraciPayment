@@ -1,0 +1,30 @@
+﻿@model PMS.Models.ClientModel
+@{
+    ViewBag.Title = ":: PMS - Delete Client ::";
+    Layout = "~/Views/Shared/Layout_final.cshtml";
+}
+<link rel="stylesheet" href="~/css/bootstrap-timepicker.min.css" />
+
+ 
+    <form   method="post" action="/Client/DeleteConfirm">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <div class="alert alert-info fade in nomargin">
+
+            <h4>Alert!</h4>
+            <p>Are you sure you want  to delete <strong>@Model.ClientName </strong>Client?</p>
+            <p>
+                <button class="btn btn-sm btn-default" type="submit">Submit</button>
+                <a class="btn btn-sm btn-default" href="/Client/Index">Cancel</a>
+            </p>
+        </div>
+
+    </form>
+ <script type="text/javascript">    // <![CDATA[
+
+     $(document).ready(function () {
+
+
+         $('#liClients').addClass('active');
+
+     });
+                </script>

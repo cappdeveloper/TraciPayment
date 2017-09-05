@@ -1,0 +1,241 @@
+﻿@model PMS.Models.ClientModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layout_final.cshtml";
+}
+<style>
+    .HeadingColor
+    {
+        color: #1caf9a;
+        margin-bottom: 10px;
+    }
+</style>
+<div class="row">
+<div class="pageheader">
+    <div class="page-bar">
+
+        <div class="breadcrumb-line right">
+				<ul class="breadcrumb right">
+					<li><a href="/admin/Dashboard/">Dashboard</a></li>
+					<li class="active">Client</li>
+				</ul>
+          
+			
+            <a href="/Client/Index" class="btn btn-icon btn-danger btn-icon btn-xs tip" title="" data-original-title="Add New Client"><i class="icon-bubble-replu"></i></a>   
+		
+				
+				
+
+				
+			</div>
+
+    </div>
+    </div></div>
+
+<div class="row">
+           
+                 <div class="panel panel-default">
+	                <div class="panel-heading"><h6 class="panel-title"><span class="label label-primary"> <i class="icon-user"></i> @Model.ClientName Detail Section</span></h6></div>
+	                <div class="panel-body">
+
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-6">
+									<label>Client:</label>
+	                           <strong>@Model.ClientName</strong>	</div>
+                                	<div class="col-md-6">
+									<label>Contact Person:</label>
+	                            <strong>@Model.CompanyDomain</strong>
+								</div>
+							
+							</div>
+						</div>
+
+                        	
+                        	<div class="form-group">
+							<div class="row">	<div class="col-md-6">
+									<label>Address:</label>
+	                                   <strong> @Model.Address</strong>
+              
+                                    
+                                    	</div>
+								<div class="col-md-6">
+									<label>Contact Number:</label>
+	                          <strong>@Model.Phone</strong>  
+								</div>
+
+							
+							</div>
+						</div>
+                        	<div class="form-group">
+							<div class="row">
+							
+
+								<div class="col-md-6">
+									<label>Suburb:</label>
+	                             <strong> @Model.City</strong>
+                  
+								</div>
+                                	<div class="col-md-6">
+									<label>Mobile Number:</label>
+	                                 
+                 <strong>@Model.MobileNumber</strong> 
+                  
+								</div>
+                                	
+							</div>
+						</div>
+
+                        	<div class="form-group">
+							<div class="row"><div class="col-md-6">
+									<label>Postal Code:</label>
+	                               
+                   <strong>@Model.PostalCode</strong>
+                                
+                                </div>
+                                <div class="col-md-6">
+									<label>Contact Email:</label>
+	                           <strong> @Model.ClientEmail</strong>    
+								</div>
+								
+                                </div>
+                                </div>
+                        	<div class="form-group">
+							<div class="row">
+                                <div class="col-md-6">
+									<label>State or Territory:</label>
+	                            <strong>@Model.State</strong>  
+                   
+                                
+                                </div>
+                                 <input type="hidden" value="Model.IsPOstalSameAddres" id="hfIsPOstalSameAddres" />
+
+                
+							<div class="col-md-6">
+									<label>Is the Client Address same as Site Address? </label>
+                   
+                               <strong> @Model.IsPOstalSameAddress</strong> 
+                                        
+								</div>
+              
+                               
+                                
+							</div>
+						</div>
+
+
+
+                        <div class="form-group">
+							<div class="row">
+								<div class="col-md-6">
+									<label>Staff Member:</label>
+	                                <strong> @Model.StaffMember</strong> 
+                                
+                                </div>
+
+							<div class="col-md-6">
+									<label>How did you hear about us?</label>
+                  <strong>@Model.HereAboutusName</strong> 
+                                   
+  
+                      
+                    
+                                        
+								</div>
+							</div>
+						</div>
+
+
+						
+
+						
+
+						<div class="form-group">
+							<label>Additional information:</label>
+                                
+                        <strong>@Model.Notes</strong>  
+						</div>
+
+
+                </div>
+
+</div>
+
+
+		       
+
+    <div class="panel panel-default">
+						<div class="panel-heading">
+						 <div class="panel-heading"><h6 class="panel-title"><span class="label label-primary"><i class="icon-file-excel"></i> Documents</span></h6></div>
+						</div>
+						<ul class="list-group">
+                             @foreach (var item in Model.userPFiles)
+                        {
+							<li class="list-group-item has-button"><i class="icon-file-pdf"></i> <a href="@Request.ApplicationPath.TrimEnd('/')/Client/DownloadProjectFile/@item.Id">@Html.Encode(item.FileName)</a> <a href="@Request.ApplicationPath.TrimEnd('/')/Client/DownloadProjectFile/@item.Id" class="btn btn-link btn-icon"><i class="icon-download"></i></a><a href="@Request.ApplicationPath.TrimEnd('/')/Client/DeleteDocument/@item.Id"><span class="btn btn-danger btn-circle glyphicon glyphicon-trash delete-link"></span></a></li>
+                             }
+						</ul>
+					</div>
+
+
+
+<div class="panel panel-default">
+
+    	<div class="panel-heading">
+						 <div class="panel-heading"><h6 class="panel-title"><span class="label label-primary"><i class="icon-stats-up"></i> Jobs</span></h6>
+						</div>
+            </div>
+    <div class="table-responsive">
+                      @if (Model.ProjectModel != null)
+            {
+           
+				    <table class="table table-bordered dataTable no-footer">
+				        <thead>
+				            <tr>
+				                <th>Job Number</th>
+                        <th>Job Address</th>
+                        <th>Contact no</th>
+                        <th>Created Date</th>
+                        <th>Status</th>
+                        
+				            </tr>
+				        </thead>
+				        <tbody>
+				            @foreach (PMS.Models.ProjectModel item in Model.ProjectModel)
+                    {
+                        <tr class="">
+                            <td>@item.ProjectCode </td>
+                            <td>@item.ProjectName</td>
+                             <td>@item.ContactNo</td>
+                            <td>@item.CreatedDate.ToString("MM/dd/yyyy HH:mm")</td>
+                           <td>@item.StatusName</td>
+
+                        </tr>
+                    }
+				            
+				            
+				            
+				        </tbody>
+				    </table>
+                      }
+				</div></div>
+
+
+				
+			</div>
+
+
+   
+
+
+															
+      
+      
+ <script type="text/javascript">    // <![CDATA[
+
+     $(document).ready(function () {
+
+
+         $('#liClients').addClass('active');
+
+     });
+                </script>

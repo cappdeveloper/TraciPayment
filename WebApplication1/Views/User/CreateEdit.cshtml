@@ -1,0 +1,291 @@
+﻿@model Construction_intranet.Models.Users
+
+@{
+    ViewBag.Title = "Create::Edit";
+   
+    
+}
+
+
+ 
+
+    <div class="panel">
+
+        <div class="panel-heading">
+            <div class="panel-btns">
+               
+            </div>
+            <h3 class="panel-title">User Form</h3>
+            <p></p>
+        </div>
+
+        <div id="alert-container" class="col-sm-12" style="margin-top: 5px;">
+        </div>
+        <div class="panel-body">
+
+
+    @using (Html.BeginForm("CreateEdit", "User", FormMethod.Post, new { Id = "GeneralUserDetailsForm", @class = "form-horizontal" }))
+            {
+
+
+        <p>
+            @Html.AntiForgeryToken()
+        </p>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="Name" placeholder="Enter  Name" value="@Model.Name" class="form-control" required />
+                            <input type="hidden" name="Ids" value="@Model.Ids"/>
+ 
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Username</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="UserName" placeholder="Same as Email" value="@Model.UserName" class="form-control" required />
+
+                        </div>
+                    </div>
+                    @if(Model.Password==null)
+                    { 
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" name="Password" placeholder="Enter Password" value="@Model.Password" class="form-control" required />
+
+                        </div>
+                    </div>
+                    }
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="CompanyEmail" placeholder="Enter Email" value="@Model.CompanyEmail" class="form-control" required />
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Contractor</label>
+                        <div class="col-sm-9">
+                            @Html.DropDownList("ContractorId", new SelectList(ViewBag.Contractor, "Id", "FirstName"), new { @class = "form-control chosen-select" })
+
+                 
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Contact</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="Contact" placeholder="Enter State" value="@Model.Contact" class="form-control" required />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Address</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="Address" placeholder="Enter Address" value="@Model.Address" class="form-control" required />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">City</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="City" placeholder="Enter City" value="@Model.City" class="form-control" required />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Zip</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="Zip" placeholder="Enter State" value="@Model.Zip" class="form-control" required />
+
+                        </div>
+                    </div>
+                 
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Notes</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="Notes" placeholder="Any Note" value="@Model.Notes" class="form-control" required />
+
+
+                        </div>
+                    </div>
+                </div>
+              
+
+
+
+
+    }
+             
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-2" style="margin-top: 10px; padding-right: 30px;">
+                <button id="save-user-details-button" class="btn btn-primary pull-right">Save Changes</button>
+
+            </div>
+        </div>
+  
+</div>
+
+
+</div>
+
+
+
+@section breadcrumbs{
+    <li><a href="/User/Index">User</a></li>
+    <li class="active"><span>@ViewBag.Action</span></li>
+}
+
+@section styles{
+    <link href="~/Content/css/jquery.datatables.css" rel="stylesheet" />
+    <link href="~/Content/css/dropzone.css" rel="stylesheet" />
+
+}
+
+@section Scripts {
+   @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.datatables.min.js"></script>
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<script src="~/Scripts/dropzone.min.js"></script>
+<script src="~/Scripts/dropzone.min.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+          
+            $(".chosen-select").chosen();
+          
+            //$('#contact-datatable').dataTable(
+            //{
+            //    "sPaginationType": "full_numbers",
+            //    "aoColumnDefs": [
+            //        { 'bSortable': false, 'aTargets': [-1, -2, -3, -4] }
+            //    ]
+            //});
+
+            //$('#document-datatable').dataTable(
+            //{
+            //    "sPaginationType": "full_numbers",
+            //    "aoColumnDefs": [
+            //        { 'bSortable': false, 'aTargets': [-1, -2] }
+            //    ]
+            //});
+            $('#liU').addClass('active');
+
+            $("#GeneralUserDetailsForm").validate({
+                rules: {
+                    Name: {
+                        required: true
+                    },
+                    UserName: {
+                        required: true
+                    },
+                    CompanyEmail: {
+                        required: true
+                    },
+                    Contact: {
+                        required: true
+
+                    },
+                    Address: {
+                        required: true
+
+                    },
+
+                    City: {
+                        required: true
+                    },
+                   
+                    Zip: {
+                        required: true
+                    },
+                  
+                    Notes: {
+                        required: true,
+                    }
+
+                },
+
+                messages: {
+                   Name: {
+                        required: "Please enter  Name"
+                    },
+                    UserName: {
+                        required: "Please enter Username"
+                    },
+                    CompanyEmail: {
+                        required: "Please enter Address"
+                    },
+                    Contact: {
+                        required: "Please enter Phone Number"
+                    },
+                    City: {
+                        required: "Please enter City"
+                    },
+                    Address: {
+                        required: "Please enter Address"
+                    },
+
+                    Zip: {
+                        required: "Please enter Zip Code"
+                    },
+                  
+                    Notes: {
+                        required: "Please enter Notes"
+                    }
+                }
+
+
+
+            });
+
+            // Chosen Select
+            jQuery("select").chosen({
+                'min-width': '100px',
+                'white-space': 'nowrap',
+                disable_search_threshold: 10
+            });
+            jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+
+         
+            // Show aciton upon row hover
+            jQuery('.table-hidaction tbody tr').hover(function () {
+                jQuery(this).find('.table-action-hide a').animate({ opacity: 1 });
+            }, function () {
+                jQuery(this).find('.table-action-hide a').animate({ opacity: 0 });
+            });
+
+            $('#save-user-details-button').click(function () {
+                if ($("#GeneralUserDetailsForm").valid() == true) {
+                    var form = $('#GeneralUserDetailsForm');
+                    challengerApp.CreateEdit(form, saveCallback);
+                    $("#GeneralUserDetailsForm").trigger("reset");
+                }
+            });
+
+            var saveCallback = function (data) {
+                switch (data.NotifyType) {
+
+                    case 0: $("#alert-container").html(data.Html);
+                        setTimeout(function () {
+                            $("#alert-container").html('');
+                        }, 8000)
+                        break;
+                }
+            }
+
+       
+
+
+            
+         
+        });
+    </script>
+
+}
