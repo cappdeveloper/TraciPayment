@@ -62,7 +62,7 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
                 $scope.LastRecord = ($scope.Budgets.length == $scope.PageSize ? $scope.PageSize * $scope.CurrentPage : $scope.BudgetCount);
             }
             //end paging
-            
+
             $scope.PageMode = $scope.Mode.ListMode;
         }).error(function () {
             alert("Some error occured while getting Budgets.")
@@ -81,24 +81,19 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
 
     // method will get specific budget with budgetkey
     $scope.GetBudget = function (budgetKey) {
-        budgetService.getBudget(budgetKey).success(function (data) {          
+        budgetService.getBudget(budgetKey).success(function (data) {
             $scope.Budget = data;
         }).error(function () {
             alert("Some error occured while getting Budget.")
         });
     }
 
-    // convert date to javascript date
-    var ToJavaScriptDate = function (value) {
-        if (value == null || value == undefined) {
-            return "";
-        }
-        return moment(value).format("DD/MM/YYYY");
-    }
-
     /// method will take you back to listing
     $scope.CancelBudget = function () {
-        $scope.GetBudgets($scope.CurrentPage, $scope.PageSize);
+        if ($scope.Budget.BudgetKey == undefined)
+            $scope.PageMode = $scope.Mode.ListMode;
+        else
+            $scope.GetBudgets($scope.CurrentPage, $scope.PageSize);
     }
 
     /// method will add/update Budget
@@ -108,35 +103,37 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
             return;
 
         clearValidations();
-        budgetService.saveUpdateBudget($scope.Budget).success(function (data) {       
+        budgetService.saveUpdateBudget($scope.Budget).success(function (data) {
             if (data.BudgetKey != undefined) {
-                if ($scope.Budget.BudgetKey == undefined) {                    
+                if ($scope.Budget.BudgetKey == undefined) {
                     $scope.Budget = data;
+                    $scope.Budgets.push($scope.Budget);
                     alert("Budget added successfully.");
                 }
                 else {
-                    var budgetObj = $filter('filter')($scope.Budgets, { BudgetKey: $scope.Budget.BudgetKey });
-                    if (budgetObj != null) {
-                        budgetObj[0].BudgetProgramKey = data.BudgetProgramKey;
-                        budgetObj[0].BudgetTermKey = data.BudgetTermKey;
-                        budgetObj[0].BudgetAccountKey = data.BudgetAccountKey;
-                        budgetObj[0].BudgetAmount = data.BudgetAmount;
-                        budgetObj[0].BudgetNote = data.BudgetNote;
+                    //var budgetObj = $filter('filter')($scope.Budgets, { BudgetKey: $scope.Budget.BudgetKey });
+                    //if (budgetObj != null) {
+                    //    budgetObj[0].BudgetProgramKey = data.BudgetProgramKey;
+                    //    budgetObj[0].BudgetTermKey = data.BudgetTermKey;
+                    //    budgetObj[0].BudgetAccountKey = data.BudgetAccountKey;
+                    //    budgetObj[0].BudgetAmount = data.BudgetAmount;
+                    //    budgetObj[0].BudgetNote = data.BudgetNote;
 
-                        var acctObj = $filter('filter')($scope.Accounts, { AccountKey: $scope.Budget.BudgetAccountKey });
-                        var progObj = $filter('filter')($scope.Programs, { ProgramKey: $scope.Budget.BudgetProgramKey });
-                        var termObj = $filter('filter')($scope.Terms, { TermKey: $scope.Budget.BudgetTermKey });
+                    //    var acctObj = $filter('filter')($scope.Accounts, { AccountKey: $scope.Budget.BudgetAccountKey });
+                    //    var progObj = $filter('filter')($scope.Programs, { ProgramKey: $scope.Budget.BudgetProgramKey });
+                    //    var termObj = $filter('filter')($scope.Terms, { TermKey: $scope.Budget.BudgetTermKey });
 
-                        budgetObj[0].BudgetAccountName = acctObj[0].AccountName;
-                        budgetObj[0].BudgetProgramName = progObj[0].ProgramName;
-                        budgetObj[0].BudgetTermName = termObj[0].TermName;
+                    //    budgetObj[0].BudgetAccountName = acctObj[0].AccountName;
+                    //    budgetObj[0].BudgetProgramName = progObj[0].ProgramName;
+                    //    budgetObj[0].BudgetTermName = termObj[0].TermName;
 
-                        $scope.PageMode = $scope.Mode.ListMode;
-                    }
+                    //    $scope.PageMode = $scope.Mode.ListMode;
+                    //}
+                    $scope.GetBudgets($scope.CurrentPage, $scope.PageSize);
                     alert("Budget updated successfully.");
                 }
             }
-           
+
         }).error(function () {
             alert("Some error occured while saving Budget.")
         });

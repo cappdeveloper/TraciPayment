@@ -188,6 +188,7 @@
     <Compile Include="Models\AccountType.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountTypeModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
@@ -313,14 +314,18 @@
     </Content>
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\App\app.js" />
+    <Content Include="Scripts\App\Controllers\accountController.js" />
     <Content Include="Scripts\App\Controllers\budgetController.js" />
     <Content Include="Scripts\App\Controllers\paymentController.js" />
     <Content Include="Scripts\App\Controllers\personController.js" />
+    <Content Include="Scripts\App\Controllers\programController.js" />
     <Content Include="Scripts\App\Directives\datePicker.js" />
     <Content Include="Scripts\App\Filters\appFilters.js" />
+    <Content Include="Scripts\App\Services\accountService.js" />
     <Content Include="Scripts\App\Services\budgetService.js" />
     <Content Include="Scripts\App\Services\paymentService.js" />
     <Content Include="Scripts\App\Services\personService.js" />
+    <Content Include="Scripts\App\Services\programService.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\DatePicker\bootstrap-datepicker.js" />
@@ -416,14 +421,18 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\login.cshtml" />
+    <Content Include="Views\ManageAccount\Index.cshtml" />
+    <Content Include="Views\ManageAccount\_AddEditAccount.cshtml" />
+    <Content Include="Views\ManageAccount\_ListAccount.cshtml" />
+    <Content Include="Views\ManageProgram\Index.cshtml" />
+    <Content Include="Views\ManageProgram\_AddEditProgram.cshtml" />
+    <Content Include="Views\ManageProgram\_ListProgram.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\" />
     <Folder Include="Design\" />
     <Folder Include="Scripts\Challenger\" />
-    <Folder Include="Views\ManageAccount\" />
-    <Folder Include="Views\ManageProgram\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

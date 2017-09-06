@@ -1,0 +1,64 @@
+﻿<!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+<nav class="navbar navbar-default row" role="navigation" id="horizontal-navbar" style="margin: auto 0">
+    <div id="horizontal-navbar">
+        <div id="programId" class="validateform">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new
+                            {
+                                id = "ProgramForm",
+                                @class = "editorForm",
+                                onsubmit = "return false;",
+                                name = "ProgramForm"
+                            }))
+            {
+                <div id="editorForm" class="editorForm">
+
+                    <div class="col-sm-12 col-md-12">
+                        <div class="panel panel-bd">
+                            <div class="panel-heading ui-sortable-handle">
+                                <div class="panel-title">
+                                    <h4>Program Detail</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="panel panel-gray">
+                                            <div class="panel-body">
+                                                <div class="form-horizontal">
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Program Name:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="ProgramName" name="ProgramName" ng-model="Program.ProgramName" class="form-control" data-val="true" data-val-required="" />
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="ProgramName">Program name is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Program Note:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <textarea id="ProgramNote" name="ProgramNote" ng-model="Program.ProgramNote" class="form-control" rows="4"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row text-center">
+                                                        <button ng-click="SaveUpdateProgram()" class="btn btn-add btn-sm" style="margin-right:10px"> <span ng-bind="Program.ProgramKey == undefined ? 'Save' : 'Update'"></span> </button>
+                                                        <button ng-click="CancelProgram()" class="btn btn-danger btn-sm" style="margin-right:10px"><span ng-bind="Program.ProgramKey == undefined ? 'Cancel' : 'Back To List'"></span> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+        <div class="clear"></div>
+    </div>
+</nav>

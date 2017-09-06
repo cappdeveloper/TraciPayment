@@ -12,5 +12,7 @@ namespace WebApplication1.Models
         public string GLAccountCode { get; set; }
         public Nullable<int> AccountTypeKey { get; set; }
         public string AccountNote { get; set; }
+        public Nullable<int> AccountParentKey { get; set; }
+        public string AccountTypeName { get; set; }
     }
 }
