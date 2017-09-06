@@ -171,6 +171,7 @@
     <Compile Include="Concrete_Classes\SessionManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BudgetController.cs" />
+    <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageAccountController.cs" />
     <Compile Include="Controllers\ManageProgramController.cs" />
@@ -433,6 +434,7 @@
     <Folder Include="assets\" />
     <Folder Include="Design\" />
     <Folder Include="Scripts\Challenger\" />
+    <Folder Include="Views\DashBoard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
