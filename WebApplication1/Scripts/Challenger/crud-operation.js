@@ -16,7 +16,7 @@
                             id: $this.attr("id")
                         },
                         beforeSend: function () {
-                            $.blockUI({ message: '<img src="/Images/loader2.gif" />' });
+                        //    $.blockUI({ message: '<img src="/Images/loader2.gif" />' });
                         },
                         success: function (data) {
                             if (data.success == true) {
@@ -107,7 +107,7 @@
         CreateEdit: function (form, successCallback) {
             var $this = form;
 
-            if (jQuery($this).validationEngine('validate')) {
+            
                 $.ajax({
                     type: "POST",
                     async: true,
@@ -115,7 +115,7 @@
                     datatype: "json",
                     data: $($this).serialize(),
                     beforeSend: function () {
-                        $.blockUI({ message: '<img src="/Images/loader2.gif" />' });
+                      $.blockUI({ message: '<img src="/Images/loader2.gif" />' });
                     },
                     success: function (data) {
 
@@ -123,15 +123,15 @@
                     },
                     complete: function () {
 
-                        $.unblockUI();
+                 $.unblockUI();
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        $.unblockUI();
+                       $.unblockUI();
                         alert(xhr, textStatus, errorThrown);
                         console.log(errorThrown);
                     }
                 });
-            }
+            
         },
         GetList: function (url, id, successCallback) {
             $.ajax({
@@ -188,7 +188,7 @@
 
 }
 
-$('.table .delete-link').live('click',function (e) {
+$('.table .delete-link').click(function (e) {
     e.preventDefault();
     challengerApp.DeleteData(e);
     return false;

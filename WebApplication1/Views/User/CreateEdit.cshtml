@@ -5,7 +5,16 @@
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
 }
     
-}
+
+<section class="content-header">
+    <div class="header-icon">
+        <i class="fa fa-users"></i>
+    </div>
+    <div class="header-title">
+        <h1>User</h1>
+        <small></small>
+    </div>
+</section>
 
 
  
@@ -62,7 +71,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Email</label>
                         <div class="col-sm-9">
-                            <input type="text" name="CompanyEmail" placeholder="Enter Email" value="@Model.CompanyEmail" class="form-control" required />
+                            <input type="text" name="Email" placeholder="Enter Email" value="@Model.Email" class="form-control" required />
 
 
                         </div>
@@ -70,7 +79,7 @@
                   <div class="form-group">
     <label class="col-sm-3 control-label">Assign Role</label>
     <div class="col-sm-9">
-     @Html.DropDownList("RoleID", new SelectList(ViewBag.LoadRoles, "Id", "Name"), new { @class = "form-control chosen-select" })
+     @Html.DropDownList("RoleName", new SelectList(ViewBag.LoadRoles, "Name", "Name"),new { @class = "form-control" })
 
 
                         </div>
@@ -126,7 +135,7 @@
              
         <div class="row">
             <div class="col-sm-9 col-sm-offset-2" style="margin-top: 10px; padding-right: 30px;">
-                <button id="save-user-details-button" class="btn btn-primary pull-right">Save Changes</button>
+                <button id="save-user-details-button" class="btn btn-xs btn-primary pull-right">Save Changes</button>
 
             </div>
         </div>
@@ -150,17 +159,16 @@
 }*@
 
 @section Scripts {
-   @Scripts.Render("~/bundles/jqueryval")
+ @Scripts.Render("~/bundles/jqueryval")
 <script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.datatables.min.js"></script>
 <script src="~/Scripts/chosen.jquery.min.js"></script>
-<script src="~/Scripts/dropzone.min.js"></script>
-<script src="~/Scripts/dropzone.min.js"></script>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
     <script>
         jQuery(document).ready(function () {
           
-            $(".chosen-select").chosen();
           
             //$('#contact-datatable').dataTable(
             //{
@@ -247,13 +255,6 @@
             });
 
             // Chosen Select
-            jQuery("select").chosen({
-                'min-width': '100px',
-                'white-space': 'nowrap',
-                disable_search_threshold: 10
-            });
-            jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-
          
             // Show aciton upon row hover
             jQuery('.table-hidaction tbody tr').hover(function () {

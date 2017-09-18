@@ -14,6 +14,8 @@ namespace WebApplication1.Models
         public string Ids { get; set; }
         public string Name { get; set; }
         public string UserName { get; set; }
+        public string Email { get; set; }
+
         public string Password { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
@@ -27,7 +29,6 @@ namespace WebApplication1.Models
         public string Country { get; set; }
         public string Notes { get; set; }
     
-      //  public string ContractorName { get; set; }
         public string Zip { get; set; }
         public string Status { get; set; }
 
@@ -48,13 +49,6 @@ namespace WebApplication1.Models
         NYFSEntities2 oDB = new NYFSEntities2();
 
 
-        // public tblUser GetUser(string Username, string Password)
-        // {
-        //    var objuser = oDB.tblUsers.Where(m => m.UserName == Username && m.Password == Password && m.IsActive == true).FirstOrDefault();
-        //    return objuser;
-        //}
-
-
         public List<AspNetRole> LoadRoles()
         {
 
@@ -73,13 +67,12 @@ namespace WebApplication1.Models
                          {
                              Ids = p.Id,
                              Name = p.Name,
-                           //  UserName = p.UserName,
-                        //    ContractorName = p.tblContractor.FirstName,
                              Address = p.Address,
                              CompanyEmail = p.CompanyEmail,
                          CreatedDate = p.CreatedDate,
-                             Contact = p.PhoneNumber
-
+                             Contact = p.PhoneNumber,
+                            Email=p.Email,
+                          
 
 
 
@@ -100,7 +93,7 @@ namespace WebApplication1.Models
 
                              Ids = p.Id,
                           Name = p.Name,
-                            // UserName = p.UserName,
+                            UserName = p.UserName,
                              Address = p.Address,
                              City = p.City,
                              CompanyEmail = p.CompanyEmail,
@@ -108,9 +101,8 @@ namespace WebApplication1.Models
                              Country = p.Country,
                              Notes = p.Notes,
                              Password=p.PasswordHash,
-                             //ContractorId = p.ContractorId,
-                             //Zip=p.Zip,
-                            
+                          
+                             
                             
 
 

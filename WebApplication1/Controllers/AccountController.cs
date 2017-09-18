@@ -80,7 +80,7 @@ namespace WebApplication1.Controllers
                 {
                     case SignInStatus.Success:
                         if (UserManager.IsInRole(user.Id, "Admin"))
-                            return RedirectToAction("PaymentScreen", "Index");
+                            return RedirectToAction("Index", "PaymentScreen");
                         else
                             return RedirectToAction("Account", "Login");
                     case SignInStatus.LockedOut:
@@ -108,37 +108,7 @@ namespace WebApplication1.Controllers
 
 
 
-            //var objUser = (new UserDB()).GetUser(Username, Password);
-            //if (objUser != null)
-            //{
-            //    SessionManager.UserId =(int) objUser.Id;
-            //    SessionManager.UserName = objUser.UserName;
-            //    SessionManager.RoleId = (int)objUser.RoleID;
-            //    if(SessionManager.RoleId==2)
-            //    { 
-            //    SessionManager.ContractorId = (int)objUser.ContractorId;
-            //    }
-            //    HttpCookie myCookie = new HttpCookie("myCookie");
-
-            //    //Add key-values in the cookie
-            //    myCookie.Values.Add("userid", objUser.RoleID.ToString());
-
-            //    //set cookie expiry date-time. Made it to last for next 12 hours.
-            //    myCookie.Expires = DateTime.Now.AddYears(1);
-
-            //    //Most important, write the cookie to client.
-            //    Response.Cookies.Add(myCookie);
-            //    if (SessionManager.RoleId == 2)
-            //    return RedirectToAction("JobDashboard", "Job");
-            //    else
-            //    return RedirectToAction("Index", "Contractor");
-
-            //}
-            //else
-            //{
-            //    return View("Login");
-            //}
-
+          
         }
         public ActionResult LogOff()
         {

@@ -124,13 +124,14 @@ namespace WebApplication1.Controllers
                     var user = oDB.AspNetUsers.Where(m => m.Id == model.Ids).FirstOrDefault();
 
                     user.Name = model.Name;
+                  
                     user.UserName = model.UserName;
                     user.CompanyEmail = model.CompanyEmail;
                     user.Address = model.Address;
                     user.City = model.City;
-                    //  user.ModifiedDate = model.ModifiedDate;
+               
                     user.Zip = model.Zip;
-                  //  user.ContractorId = model.ContractorId.Value;
+            
                     user.PhoneNumber = model.Contact;
                     user.Notes = model.Notes;
                     user.isActive = true;
@@ -144,38 +145,23 @@ namespace WebApplication1.Controllers
                 }
                 else
                 {
-                  //  ViewBag.Contractor = (new UserDB()).LoadContractor();
-
-
-                    //tblUser user = new tblUser();
-                    //user.Name = model.Name;
-                    //user.UserName = model.UserName;
-                    //user.CompanyEmail = model.CompanyEmail;
-                    //user.Address = model.Address;
-                    //user.City = model.City;
-                    //user.ModifiedDate = model.ModifiedDate;
-                    //user.CreatedDate = model.CreatedDate;
-                    //user.Zip = model.Zip;
-                    //user.ContractorId = model.ContractorId;
-                    //user.Contact = model.Contact;
-                    //user.Notes = model.Notes;
-                    //user.Password = model.Password;
-                    //user.RoleID = 2;
-                    //user.IsActive = true;
-
+                    ViewBag.LoadRoles = (new UserDB()).LoadRoles();
+                  
                     var user = new ApplicationUser
                     {
 
-                        UserName = model.CompanyEmail,
-                      //  Email = model.CompanyEmail,
+
+                        UserName = model.UserName,
+
+                        Email = model.Email,
                         Name = model.Name,
-                        CompanyEmail = model.CompanyEmail,
+                        CompanyEmail = model.Email,
                         Address = model.Address,
                         City = model.City,
                         CreatedDate = model.CreatedDate.Value,
                         Zip = model.Zip,
-                     
-                    //    PhoneNumber = model.Contact,
+                       
+                          PhoneNumber = model.Contact,
                         Notes = model.Notes,
                         isActive = true,
 
@@ -185,13 +171,13 @@ namespace WebApplication1.Controllers
 
 
                     };
-                    var result = await UserManager.CreateAsync(user, model.Password);
+                    var result = UserManager.Create(user, model.Password);
                     if (result.Succeeded)
                     {
                         var currentUser = UserManager.FindByName(user.UserName);
 
                         var roleresult = UserManager.AddToRole(currentUser.Id,model.RoleName);
-                        //  returnId = currentUser.Id;
+                     //  returnId = currentUser.Id;
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
 
                     }

@@ -73,7 +73,7 @@
     <Property Name="City" Type="nvarchar(max)" />
     <Property Name="Country" Type="nvarchar(max)" />
     <Property Name="Notes" Type="nvarchar(max)" />
-    <Property Name="ContractorId" Type="int" Nullable="false" />
+    <Property Name="ContractorId" Type="int" />
     <Property Name="Zip" Type="nvarchar(max)" />
     <Property Name="Email" Type="nvarchar" MaxLength="256" />
     <Property Name="EmailConfirmed" Type="bit" Nullable="false" />

@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CRM Admin Panel</title>
+    <title>NYFS</title>
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="../../assets/dist/img/ico/favicon.png" type="image/x-icon">
     <!-- Start Global Mandatory Style
@@ -17,8 +17,10 @@
     <link href="../../assets/plugins/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css" />
     <!-- Bootstrap -->
     <link href="../../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- Bootstrap rtl -->
-    <!--<link href="../../assets/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet" type="text/css"/>-->
+  
+    <link href="~/Content/jquery.datatables.css" rel="stylesheet" />
+      <!-- Bootstrap rtl -->
+    @*<link href="../../assets/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet" type="text/css"/>*@
     <!-- Lobipanel css -->
     <link href="../../assets/plugins/lobipanel/lobipanel.min.css" rel="stylesheet" type="text/css" />
     <!-- Pace css -->
@@ -34,9 +36,9 @@
     <!-- Start page Label Plugins
        =====================================================================-->
     <!-- Emojionearea -->
-    <link href="../../assets/plugins/emojionearea/emojionearea.min.css" rel="stylesheet" type="text/css" />
+    @*<link href="../../assets/plugins/emojionearea/emojionearea.min.css" rel="stylesheet" type="text/css" />*@
     <!-- Monthly css -->
-    <link href="../../assets/plugins/monthly/monthly.css" rel="stylesheet" type="text/css" />
+    @*<link href="../../assets/plugins/monthly/monthly.css" rel="stylesheet" type="text/css" />*@
     <!-- End page Label Plugins
        =====================================================================-->
     <!-- Start Theme Layout Style
@@ -48,7 +50,7 @@
     <!-- End Theme Layout Style
        =====================================================================-->
 </head>
-<body  ng-app="app" class="hold-transition sidebar-mini">
+<body  ng-app="app" class="">
     <!--preloader-->
    
     <!-- Site wrapper -->
@@ -74,30 +76,33 @@
     </div>
     <!-- /.wrapper -->
     <!-- Start Core Plugins
-       =====================================================================-->
-
+    
    
     <!-- jQuery -->
+   
     <script src="../../assets/plugins/jQuery/jquery-1.12.4.min.js" type="text/javascript"></script>
-    <!-- jquery-ui -->
+   
     <script src="../../assets/plugins/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+ <!-- jquery-ui -->
     <!-- Bootstrap -->
     <script src="../../assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
-  
+    <script src="~/Scripts/Challenger/call_back_functions.js"></script>
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/Challenger/crud-operation.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
 
-
-
+    
     <!-- lobipanel -->
     <script src="../../assets/plugins/lobipanel/lobipanel.min.js" type="text/javascript"></script>
     <!-- Pace js -->
-    <script src="../../assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    @*<script src="../../assets/plugins/pace/pace.min.js" type="text/javascript"></script>*@
     <!-- SlimScroll -->
     <script src="../../assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript">    </script>
     <!-- FastClick -->
     <script src="../../assets/plugins/fastclick/fastclick.min.js" type="text/javascript"></script>
     <!-- CRMadmin frame -->
-    <script src="../../assets/dist/js/custom.js" type="text/javascript"></script>
+   <script src="../../assets/dist/js/custom.js" type="text/javascript"></script>
     <!-- End Core Plugins
        =====================================================================-->
     <!-- Start Page Lavel Plugins
@@ -105,7 +110,7 @@
     <!-- ChartJs JavaScript -->
     <script src="../../assets/plugins/chartJs/Chart.min.js" type="text/javascript"></script>
     <!-- Counter js -->
-    <script src="../../assets/plugins/counterup/waypoints.js" type="text/javascript"></script>
+   <script src="../../assets/plugins/counterup/waypoints.js" type="text/javascript"></script>
     <script src="../../assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
     <!-- Monthly js -->
     <script src="../../assets/plugins/monthly/monthly.js" type="text/javascript"></script>

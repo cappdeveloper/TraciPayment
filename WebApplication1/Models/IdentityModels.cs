@@ -20,7 +20,8 @@ namespace WebApplication1.Models
         public string City { get; set; }
         public string Country { get; set; }
         public string Notes { get; set; }
-    
+       
+
         public string Zip { get; set; }
        public string Name { get; set; }
      public Nullable<System.DateTime> CreatedDate { get; set; }
