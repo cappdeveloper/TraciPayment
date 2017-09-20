@@ -194,6 +194,7 @@
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountTypeModel.cs" />
+    <Compile Include="Models\AccountUserRolesModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
