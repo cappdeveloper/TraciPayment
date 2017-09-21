@@ -48,7 +48,7 @@
                                 <td>@Html.DisplayFor(model => item.Email)</td>
                                 <td>@Html.DisplayFor(model => item.Contact)</td>
                                  <td>@Html.DisplayFor(model => item.CreatedDate)</td>
-                                <td><span class="label label-success">@Html.DisplayFor(model => item.tblRole.Name)</span></td>
+                                <td><span class="label label-success">@Html.DisplayFor(model => item.RoleName)</span></td>
                                 <td class="text-left  fit-content">
                                     <a title="Edit" class="btn btn-primary btn-xs  btn-circle glyphicon glyphicon-edit" href="@Url.Action("CreateEdit", "User", new { Id = item.Ids })"></a>
                                     <a title="Delete" id="@item.Ids" class="btn btn-danger btn-xs  btn-circle glyphicon glyphicon-trash delete-link" href="@Url.Action("Delete", "User")"></a>

@@ -61,7 +61,8 @@ namespace WebApplication1.Models
         }
         public List<Users> GetUsers()
         {
-            
+            var data = oDB.AspNetUserRoles.ToList();
+            var allRoles = oDB.AspNetRoles.ToList();
             var _list = (from p in oDB.AspNetUsers
                          where p.isActive==true 
                          select new Users
@@ -73,13 +74,18 @@ namespace WebApplication1.Models
                             CreatedDate = p.CreatedDate,
                              Contact = p.PhoneNumber,
                             Email=p.Email,
-                          
-
-
-
-
-
                          }).ToList();
+            foreach(var items in _list)
+            {
+                var roleId = data.Where(cond => cond.UserId == items.Ids).FirstOrDefault();
+                if(roleId != null)
+                { 
+                    items.RoleName = allRoles.Where(cond => cond.Id == roleId.RoleId.ToString()).FirstOrDefault().Name;
+                }
+            }
+
+
+
               return _list;
 
 
