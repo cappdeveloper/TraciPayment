@@ -61,6 +61,7 @@ namespace WebApplication1.Models
         }
         public List<Users> GetUsers()
         {
+            
             var _list = (from p in oDB.AspNetUsers
                          where p.isActive==true 
                          select new Users
@@ -69,7 +70,7 @@ namespace WebApplication1.Models
                              Name = p.Name,
                              Address = p.Address,
                              CompanyEmail = p.CompanyEmail,
-                         CreatedDate = p.CreatedDate,
+                            CreatedDate = p.CreatedDate,
                              Contact = p.PhoneNumber,
                             Email=p.Email,
                           
