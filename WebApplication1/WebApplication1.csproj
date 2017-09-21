@@ -208,6 +208,9 @@
     <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetUserRole.cs">
+      <DependentUpon>NYFS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Budget.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
@@ -270,12 +273,6 @@
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProgramModel.cs" />
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>NYFS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>NYFS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>NYFS.tt</DependentUpon>
     </Compile>
@@ -442,13 +439,14 @@
     <Content Include="Views\ManageProgram\Index.cshtml" />
     <Content Include="Views\ManageProgram\_AddEditProgram.cshtml" />
     <Content Include="Views\ManageProgram\_ListProgram.cshtml" />
+    <Content Include="Views\ManageRole\CreateEdit.cshtml" />
+    <Content Include="Views\ManageRole\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\" />
     <Folder Include="Design\" />
     <Folder Include="Views\DashBoard\" />
-    <Folder Include="Views\ManageRole\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
