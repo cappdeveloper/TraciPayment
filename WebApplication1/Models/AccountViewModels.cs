@@ -98,28 +98,16 @@ namespace WebApplication1.Models
                          select new Users
                          {
 
-                             Ids = p.Id,
-                          Name = p.Name,
+                            Ids = p.Id,
+                            Name = p.Name,
                             UserName = p.UserName,
-                             Address = p.Address,
-                             City = p.City,
-                             CompanyEmail = p.CompanyEmail,
-                             Contact = p.PhoneNumber,
-                             Country = p.Country,
-                             Notes = p.Notes,
-                             Password=p.PasswordHash,
-                          
-                             
-                            
-
-
-
-
-
-
-
-
-
+                            Address = p.Address,
+                            City = p.City,
+                            CompanyEmail = p.CompanyEmail,
+                            Contact = p.PhoneNumber,
+                            Country = p.Country,
+                            Notes = p.Notes,
+                            Password=p.PasswordHash,
                          }).SingleOrDefault();
             return _list;
 

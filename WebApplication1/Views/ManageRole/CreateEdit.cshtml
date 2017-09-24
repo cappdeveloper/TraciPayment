@@ -80,18 +80,16 @@
 
 }*@
 
-@section Scripts {
- @Scripts.Render("~/bundles/jqueryval")
+
+
+<script src="~/Scripts/jquery-2.1.0.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/chosen.jquery.min.js"></script>
 
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
     <script>
-        jQuery(document).ready(function () {
-          
-          
+        $(document).ready(function () {
             //$('#contact-datatable').dataTable(
             //{
             //    "sPaginationType": "full_numbers",
@@ -130,11 +128,11 @@
             // Chosen Select
          
             // Show aciton upon row hover
-            jQuery('.table-hidaction tbody tr').hover(function () {
-                jQuery(this).find('.table-action-hide a').animate({ opacity: 1 });
-            }, function () {
-                jQuery(this).find('.table-action-hide a').animate({ opacity: 0 });
-            });
+            //jQuery('.table-hidaction tbody tr').hover(function () {
+            //    jQuery(this).find('.table-action-hide a').animate({ opacity: 1 });
+            //}, function () {
+            //    jQuery(this).find('.table-action-hide a').animate({ opacity: 0 });
+            //});
 
             $('#save-role-details-button').click(function () {
                 if ($("#GeneralRoleDetailsForm").valid() == true) {
@@ -154,13 +152,6 @@
                         break;
                 }
             }
-
-       
-
-
-            
-         
         });
     </script>
 
-}
