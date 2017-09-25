@@ -1,0 +1,104 @@
+﻿@model List<WebApplication1.Models.Roles>
+           
+        @{
+               ViewBag.Title = "User";
+               Layout = "~/Views/Shared/_MasterLayout.cshtml";
+               }
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="fa fa-users"></i>
+        </div>
+        <div class="header-title">
+            <h1>Roles</h1>
+            <small>Roles List</small>
+        </div>
+    </section>
+
+
+    <div class="panel">
+        <header class="panel-heading">
+            <a href="@Url.Action("CreateEdit", "ManageRole")" class="btn btn-primary pull-left">[+] Create New</a>
+        </header>
+
+        <div class="panel-body">
+
+            <br />
+            <div class="table-responsive">
+                <table class="table table-bordered table-condensed m-b-none text-sm" id="role-datatable">
+                    <thead>
+                        <tr>
+                            <th>Role Name</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                        foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@Html.DisplayFor(model => item.Name)</td>
+                            <td class="text-left  fit-content">
+                                <a title="Edit" class="btn btn-primary btn-xs  btn-circle glyphicon glyphicon-edit" href="@Url.Action("CreateEdit", "Managerole" , new { Id=item.Id })"></a>
+                                <a title="Delete" id="@item.Id" class="btn btn-danger btn-xs  btn-circle glyphicon glyphicon-trash delete-link" href="@Url.Action("Delete", "Managerole" )"></a>
+                            </td>
+                        </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- table-responsive -->
+        </div>
+    </div>
+
+
+
+    @section scripts{
+    <script src="~/Scripts/jquery.datatables.min.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+
+
+            $('#role-datatable').dataTable(
+            {
+                "sPaginationType": "full_numbers",
+              
+            });
+            $('#liU').addClass('active');
+
+
+
+            // Chosen Select
+            jQuery("select").chosen({
+                'min-width': '100px',
+                'white-space': 'nowrap',
+                disable_search_threshold: 10
+            });
+
+            // Delete row in a table
+            jQuery('.delete-row').click(function () {
+                var c = confirm("Continue delete?");
+                if (c)
+                    jQuery(this).closest('tr').fadeOut(function () {
+                        jQuery(this).remove();
+                    });
+
+                return false;
+            });
+
+            // Show aciton upon row hover
+            jQuery('.table-hidaction tbody tr').hover(function () {
+                jQuery(this).find('.table-action-hide a').animate({ opacity: 1 });
+            }, function () {
+                jQuery(this).find('.table-action-hide a').animate({ opacity: 0 });
+            });
+
+
+        });
+    </script>
+    }
+
+

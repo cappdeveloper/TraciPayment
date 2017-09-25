@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Account";
+}
+
+<div ng-controller="accountController" class="displaynone">
+    <div ng-show="PageMode != Mode.ListMode">
+        @Html.Partial("_AddEditAccount")
+    </div>
+    <div ng-show="PageMode == Mode.ListMode">
+        @Html.Partial("_ListAccount")
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/App/app.js"></script>
+    <script src="~/Scripts/App/Services/accountService.js"></script>
+    <script src="~/Scripts/App/Controllers/accountController.js"></script>
+    <script src="~/Scripts/App/Filters/appFilters.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
