@@ -14,6 +14,7 @@ using WebApplication1;
 namespace WebApplication1.Controllers
 {
     //[Authorize(Roles = "Admin")]
+    [Authorize]
     public class UserController : Controller
     {
         private EmailService.ApplicationSignInManager _signInManager;

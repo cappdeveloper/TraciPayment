@@ -7,6 +7,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class PersonController : Controller
     {
         NYFSEntities2 obj = new NYFSEntities2();

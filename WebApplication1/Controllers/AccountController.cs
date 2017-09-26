@@ -59,8 +59,10 @@ namespace WebApplication1.Controllers
 
         //
         // GET: /Account/Login
-        public ActionResult Login()
+        public ActionResult Login(string msg)
         {
+
+            ViewBag.errorMsg = msg;
             return View();
         }
 
@@ -82,21 +84,20 @@ namespace WebApplication1.Controllers
                         if (UserManager.IsInRole(user.Id, "Admin"))
                             return RedirectToAction("Index", "PaymentScreen");
                         else
-                            return RedirectToAction("Account", "Login");
+                            return RedirectToAction("Login", "Account", new { msg = "Username and Password is Not correct !" });
                     case SignInStatus.LockedOut:
                         return View("Lockout");
                     case SignInStatus.Failure:
                     default:
                         ModelState.AddModelError("", "Invalid login attempt.");
-                        return View("Login");
+                        return RedirectToAction("Login", "Account", new { msg = "Username and Password is Not correct !" });
                 }
             }
             else
-                return View("Login");
+                return RedirectToAction("Login", "Account", new { msg = "Username and Password is Not correct !" });
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-           
 
 
 
@@ -108,7 +109,8 @@ namespace WebApplication1.Controllers
 
 
 
-          
+
+
         }
         public ActionResult LogOff()
         {
