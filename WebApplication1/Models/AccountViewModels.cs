@@ -106,7 +106,9 @@ namespace WebApplication1.Models
                             CompanyEmail = p.CompanyEmail,
                             Contact = p.PhoneNumber,
                             Country = p.Country,
+                            Email    = p.Email,
                             Notes = p.Notes,
+                            Zip = p.Zip,
                             Password=p.PasswordHash,
                          }).SingleOrDefault();
             return _list;

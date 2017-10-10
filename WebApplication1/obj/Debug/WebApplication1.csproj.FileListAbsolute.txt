@@ -383,3 +383,4 @@ C:\Users\Sanuria\source\repos\TraciPayment\WebApplication1\bin\Microsoft.Owin.Se
 C:\Users\Sanuria\source\repos\TraciPayment\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
 C:\Users\Sanuria\source\repos\TraciPayment\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\Sanuria\source\repos\TraciPayment\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\Sanuria\source\repos\TraciPayment\WebApplication1\obj\Debug\WebApplication1.csproj.CoreCompileInputs.cache

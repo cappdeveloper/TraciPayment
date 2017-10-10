@@ -18,7 +18,7 @@ namespace WebApplication1.Controllers
 
 {
 
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private EmailService.ApplicationSignInManager _signInManager;
         private EmailService.ApplicationUserManager _userManager;
@@ -66,9 +66,12 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> Login(string Username, string Password)
         {
+            var context =new NYFSEntities2();
             if (!ModelState.IsValid)
             {
                 return View("Login");
@@ -81,8 +84,11 @@ namespace WebApplication1.Controllers
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        if (UserManager.IsInRole(user.Id, "Admin"))
-                            return RedirectToAction("Index", "PaymentScreen");
+                        if (UserManager.IsInRole(user.Id, "Admin")) {
+                            var allroles = context.AspNetRoles.ToList();
+                            this.IdentitySignIn(user.Id, user.Name, false, allroles);
+                        return RedirectToAction("Index", "PaymentScreen");
+                        }
                         else
                             return RedirectToAction("Login", "Account", new { msg = "Username and Password is Not correct !" });
                     case SignInStatus.LockedOut:
@@ -95,33 +101,21 @@ namespace WebApplication1.Controllers
             }
             else
                 return RedirectToAction("Login", "Account", new { msg = "Username and Password is Not correct !" });
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
-        public ActionResult LogOff()
+       
+        [Authorize()]
+        public ActionResult Logoff()
         {
-
-            FormsAuthentication.SignOut();
-            Session.Clear();
-            Session.Abandon();
-
-            return RedirectToAction("../Account/login");
+            this.IdentitySignout();
+            return RedirectToAction("login", "Account");
         }
 
+        [Authorize]
+        public ActionResult ManageAccount()
+        {
+            string Id = currentUserId.ToString();
+            return View();
+        }
 
     }
 }

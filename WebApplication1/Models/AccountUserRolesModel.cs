@@ -43,10 +43,8 @@ namespace WebApplication1.Models
                           Name = p.Name
                          }).SingleOrDefault();
             return _list;
-
-
         }
-
+       
 
     }
 }
