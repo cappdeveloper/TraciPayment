@@ -1,0 +1,85 @@
+﻿
+<!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+<nav class="navbar navbar-default row" role="navigation" id="horizontal-navbar" style="margin: auto 0">
+    <div id="horizontal-navbar">
+        <div id="accountId" class="validateform">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new
+                            {
+                                id = "AccountForm",
+                                @class = "editorForm",
+                                onsubmit = "return false;",
+                                name = "AccountForm"
+                            }))
+            {
+                <div id="editorForm" class="editorForm">
+
+                    <div class="col-sm-12 col-md-12">
+                        <div class="panel panel-bd">
+                            <div class="panel-heading ui-sortable-handle">
+                                <div class="panel-title">
+                                    <h4>Account Detail</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="panel panel-gray">
+                                            <div class="panel-body">
+                                                <div class="form-horizontal">
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Account Name:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="AccountName" name="AccountName" ng-model="Account.AccountName" class="form-control" data-val="true" data-val-required="" />
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="AccountName">Account name is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">GL Account Code:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="GLAccountCode" name="GLAccountCode" ng-model="Account.GLAccountCode" class="form-control" data-val="true" data-val-required="" />
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="GLAccountCode">Code is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Account Type:</label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-7">
+                                                                <select class="form-control" data-val="true" data-val-required="" data-ng-model="Account.AccountTypeKey" data-ng-options="type.AccountTypeKey as type.AccountTypeName for type in AccounTypes" id="AccountTypeKey" name="AccountTypeKey">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="AccountTypeKey">Account type is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Account Note:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <textarea id="AccountNote" name="AccountNote" ng-model="Account.AccountNote" class="form-control" rows="4"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row text-center">
+                                                        <button ng-click="SaveUpdateAccount()" class="btn btn-add btn-sm" style="margin-right:10px"> <span ng-bind="Account.AccountKey == undefined ? 'Save' : 'Update'"></span> </button>
+                                                        <button ng-click="CancelAccount()" class="btn btn-danger btn-sm" style="margin-right:10px"><span ng-bind="Account.AccountKey == undefined ? 'Cancel' : 'Back To List'"></span> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+        <div class="clear"></div>
+    </div>
+</nav>

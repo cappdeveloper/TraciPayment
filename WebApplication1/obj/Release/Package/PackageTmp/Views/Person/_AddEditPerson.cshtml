@@ -1,0 +1,118 @@
+﻿<!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+<nav class="navbar navbar-default row" role="navigation" id="horizontal-navbar" style="margin: auto 0">
+    <div id="horizontal-navbar">
+        <div id="paymentId" class="validateform">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new
+                            {
+                                id = "PersonForm",
+                                @class = "editorForm",
+                                onsubmit = "return false;",
+                                name = "PersonForm"
+                            }))
+            {
+                <div id="editorForm" class="editorForm">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="panel panel-bd">
+                            <div class="panel-heading ui-sortable-handle">
+                                <div class="panel-title">
+                                    <h4>Person Detail</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="panel panel-gray">
+                                            <div class="panel-body">
+                                                <div class="form-horizontal">
+                                                    <div class="row">
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Person Name:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="PersonName" name="PersonName" ng-model="Person.PersonName" class="form-control" data-val="true" data-val-required="" />
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="PersonName">Person Name is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Person Address:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <textarea id="PersonAddress" name="PersonAddress" ng-model="Person.PersonAddress" class="form-control" rows="4" data-val="true" data-val-required=""></textarea>
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="PersonAddress">Person Address is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Person City:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="PersonCity" name="PersonCity" ng-model="Person.PersonCity" class="form-control" data-val="true" data-val-required="" />
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="PersonCity">Person City is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Person State Key:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="PersonStateKey" name="PersonStateKey" ng-model="Person.PersonStateKey" class="form-control" data-val="true" data-val-required="" />
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="PersonStateKey">Person State Key is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Person ZipCode:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="PersonZipCode" name="PersonZipCode" ng-model="Person.PersonZipCode" class="form-control" data-val="true" data-val-required="" />
+                                                                <span class="msg-validation">
+                                                                    <span data-valmsg-for="PersonZipCode">Person ZipCode is required.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label"> Person Note:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <textarea id="PersonNote" name="PersonNote" ng-model="Person.PersonNote" class="form-control" rows="4"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Vendor Federal EIN:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="VendorFederalEIN" name="VendorFederalEIN" ng-model="Person.VendorFederalEIN" class="form-control" />                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3  col-md-3 col-xs-5 control-label">Vendor Default Terms:</label>
+                                                            <div class="col-md-4 col-sm-4 col-xs-4 pl-none">
+                                                                <input id="VendorDefaultTerms" name="VendorDefaultTerms" ng-model="Person.VendorDefaultTerms" class="form-control" />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row text-center">
+                                                        <button ng-click="SaveUpdatePerson()" class="btn btn-add btn-sm" style="margin-right:10px"> Update Person </button>
+                                                        <button ng-click="CancelPerson()" class="btn btn-danger btn-sm" style="margin-right:10px">Cancel </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</nav>
+<!-- ./Plugin content:powerpoint,txt,pdf,png,word,xl -->
