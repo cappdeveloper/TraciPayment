@@ -94,6 +94,10 @@ namespace WebApplication1.Controllers
             var account = obj.Accounts.SingleOrDefault(x => x.AccountKey == accountKey);
             if (account != null)
             {
+                if (account.Budgets.Count() > 0 || account.PaymentAccounts.Count() > 0)
+                {
+                    return Json(new { Success = true, Message = "This account cannot be deleted, As this is being used by other modules." }, JsonRequestBehavior.AllowGet);
+                }
                 obj.Accounts.Remove(account);
                 obj.SaveChanges();
             }

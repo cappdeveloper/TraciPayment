@@ -33,7 +33,7 @@
                             </div>
                             <div class="display-inline-block pull-right">
                                 <label class="control-label display-inline-block">Page Size:</label>
-                                <div class="" display-inline-block">
+                                <div class="display-inline-block">
                                     <select class="form-control ng-pristine ng-valid" ng-change="GetPersons(1,PageSize)" ng-model="PageSize">
                                         <option value="10" ng-selected="true" selected="selected">10</option>
                                         <option value="50">50</option>
@@ -61,8 +61,8 @@
                                 <td>{{person.PersonAddress}}</td>
                                 <td>{{person.PersonZipCode}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-add btn-sm" ng-click="EditPerson(person)"><i class="fa fa-pencil"></i></button>
-                                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeletePerson(person.PersonKey,$index)"><i class="fa fa-trash-o"></i> </button>
+                                    <button type="button" class="btn btn-add btn-sm" ng-click="EditPerson(person)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeletePerson(person.PersonKey,$index)" title="Delete"><i class="fa fa-trash-o"></i> </button>
                                 </td>
                             </tr>
                         </tbody>

@@ -25,7 +25,7 @@
 
                     <div class="btn-group">
                         <div class="buttonexport" id="buttonlist">
-                            <a ng-click="AddEditAccount()" class="btn btn-danger btn-sm">
+                            <a ng-click="AddEditAccount()" class="btn btn-add btn-sm">
                                 <i class="fa fa-plus"></i> Add New Account
                             </a>
                         </div>
@@ -55,22 +55,22 @@
                     <table id="account-table" ng-show="Accounts.length > 0" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr class="info">
-                                <th>Account Name</th>
-                                <th>GL Account Code</th>
-                                <th>AccountType</th>
+                                <th>Account Name &nbsp; <span ng-click="SortAccounts(true,false,false,'AccountNote')"><i class="fa fa-arrow-up" aria-hidden="true" ng-hide="SortByAcctName"></i> <i class="fa fa-arrow-down" aria-hidden="true" ng-show="SortByAcctName"></i></span></th>
+                                <th>GL Account Code &nbsp; <span ng-click="SortAccounts(false,true,false,'GLAccountCode')"> <i class="fa fa-arrow-up" aria-hidden="true" ng-hide="SortByAcctCode"></i> <i class="fa fa-arrow-down" aria-hidden="true" ng-show="SortByAcctCode"></i></span></th>
+                                <th>AccountType &nbsp; <span ng-click="SortAccounts(false,false,true,'AccountTypeName')"><i class="fa fa-arrow-up" aria-hidden="true" ng-hide="SortByAcctTypeName"></i> <i class="fa fa-arrow-down" aria-hidden="true" ng-show="SortByAcctTypeName"></i></span></th>
                                 <th>Account Note</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="acct in Accounts">
+                            <tr ng-repeat="acct in Accounts | orderBy : AccountSort">
                                 <td>{{acct.AccountName}}</td>
                                 <td>{{acct.GLAccountCode}}</td>
                                 <td>{{acct.AccountTypeName}}</td>
                                 <td>{{acct.AccountNote}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-add btn-sm" ng-click="AddEditAccount(acct.AccountKey)"><i class="fa fa-pencil"></i></button>
-                                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeleteAccount(acct.AccountKey,$index)"><i class="fa fa-trash-o"></i> </button>
+                                    <button type="button" class="btn btn-add btn-sm" ng-click="AddEditAccount(acct.AccountKey)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeleteAccount(acct.AccountKey,$index)" title="Delete"><i class="fa fa-trash-o"></i> </button>
                                 </td>
                             </tr>
                         </tbody>

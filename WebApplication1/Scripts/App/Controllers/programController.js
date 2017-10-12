@@ -89,39 +89,54 @@ app.controller('programController', ['$scope', '$filter', 'programService', func
         clearValidations();
         programService.saveUpdateProgram($scope.Program).success(function (data) {
             if (data.ProgramKey != undefined) {
-                if ($scope.Program.ProgramKey == undefined) {
-                    $scope.Program = data;
-                    $scope.Programs.push($scope.Program);
-                    alert("Program added successfully.");
-                }
-                else {
-                    //var programObj = $filter('filter')($scope.Programs, { ProgramKey: $scope.Program.ProgramKey });
-                    //if (programObj != null) {
-                    //    programObj[0].ProgramName = data.ProgramName;
-                    //    programObj[0].ProgramNote = data.ProgramNote;
-
-                    //    $scope.PageMode = $scope.Mode.ListMode;
-                    //}
+                //if ($scope.Program.ProgramKey == undefined) {
+                //    $scope.Program = data;
+                //    $scope.Programs.push($scope.Program);
+                //    alert("Program added successfully.");
+                //}
+                //else {
                     $scope.GetPrograms($scope.CurrentPage, $scope.PageSize);
-                    alert("Program updated successfully.");
-                }
+                //    alert("Program updated successfully.");
+                //}
             }
 
         }).error(function () {
-            alert("Some error occured while saving Program.")
+            bootbox.alert("Some error occured while saving Program.")
         });
     }
 
     ///method will delete specific Program with ProgramKey
     $scope.DeleteProgram = function (programKey, index) {
-        programService.deleteProgram(programKey).then(function (response) {
-            if (response.data.Success) {
-                $scope.GetPrograms($scope.CurrentPage, $scope.PageSize);
-            }
-            alert(response.data.Message);
-        },
+
+        bootbox.dialog({
+            message: "Are you sure you want to delete this Program ?",
+            title: "Delete Program",
+            className: "bootbox-alert",
+            buttons: {
+                yes: {
+                    label: "Yes",
+                    className: "btn-danger",
+                    callback: function () {
+                        programService.deleteProgram(programKey).then(function (response) {
+                            if (response.data.Success) {
+                                $scope.GetPrograms($scope.CurrentPage, $scope.PageSize);
+                            }
+                            bootbox.alert(response.data.Message);
+                        },
         function (response) {
-            alert('Some error occured while deleting the Program.');
+            bootbox.alert('Some error occured while deleting the Program.');
+        });
+                    }
+                },
+                no: {
+                    label: "No",
+                    className: "btn-default",
+                    callback: function () {
+                        bootbox.hideAll();
+                        return false;
+                    }
+                },
+            }
         });
     }
 

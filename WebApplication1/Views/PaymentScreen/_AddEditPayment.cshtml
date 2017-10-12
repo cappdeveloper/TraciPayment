@@ -68,7 +68,7 @@
                                                                     <span data-valmsg-for="person">Payment To is required.</span>
                                                                 </span>
                                                             </div>
-                                                            <a class="pull-left btn btn-danger btn-sm" data-toggle="modal" style="cursor:pointer;" ng-click="AddNewPerson()">Add a new person</a>
+                                                            <a class="pull-left btn btn-add btn-sm" data-toggle="modal" style="cursor:pointer;" ng-click="AddNewPerson()">Add a new person</a>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-sm-3  col-md-3 col-xs-5 control-label">Invoice Number:</label>
@@ -88,7 +88,7 @@
                                                     </div>
                                                     <div class="row text-center">
                                                         <button ng-click="SavePayment()" class="btn btn-add btn-sm" style="margin-right:10px"> <span ng-bind="Payment.PaymentKey == undefined ? 'Save Detail' : 'Update Detail'"></span> </button>
-                                                        <button ng-click="CancelPayment()" class="btn btn-danger btn-sm" style="margin-right:10px"><span ng-bind="Payment.PaymentKey == undefined ? 'Cancel' : 'Back To List'"></span> </button>
+                                                        <button ng-click="CancelPayment()" class="btn btn-danger btn-sm" style="margin-right:10px"> Cancel </button>
                                                     </div>
                                                 </div>
                                             </div>

@@ -105,51 +105,57 @@ app.controller('budgetController', ['$scope', '$filter', 'budgetService', functi
         clearValidations();
         budgetService.saveUpdateBudget($scope.Budget).success(function (data) {
             if (data.BudgetKey != undefined) {
-                if ($scope.Budget.BudgetKey == undefined) {
-                    $scope.Budget = data;
-                    $scope.Budgets.push($scope.Budget);
-                    alert("Budget added successfully.");
-                }
-                else {
-                    //var budgetObj = $filter('filter')($scope.Budgets, { BudgetKey: $scope.Budget.BudgetKey });
-                    //if (budgetObj != null) {
-                    //    budgetObj[0].BudgetProgramKey = data.BudgetProgramKey;
-                    //    budgetObj[0].BudgetTermKey = data.BudgetTermKey;
-                    //    budgetObj[0].BudgetAccountKey = data.BudgetAccountKey;
-                    //    budgetObj[0].BudgetAmount = data.BudgetAmount;
-                    //    budgetObj[0].BudgetNote = data.BudgetNote;
-
-                    //    var acctObj = $filter('filter')($scope.Accounts, { AccountKey: $scope.Budget.BudgetAccountKey });
-                    //    var progObj = $filter('filter')($scope.Programs, { ProgramKey: $scope.Budget.BudgetProgramKey });
-                    //    var termObj = $filter('filter')($scope.Terms, { TermKey: $scope.Budget.BudgetTermKey });
-
-                    //    budgetObj[0].BudgetAccountName = acctObj[0].AccountName;
-                    //    budgetObj[0].BudgetProgramName = progObj[0].ProgramName;
-                    //    budgetObj[0].BudgetTermName = termObj[0].TermName;
-
-                    //    $scope.PageMode = $scope.Mode.ListMode;
-                    //}
-                    $scope.GetBudgets($scope.CurrentPage, $scope.PageSize);
-                    alert("Budget updated successfully.");
-                }
+                //if ($scope.Budget.BudgetKey == undefined) {
+                //    $scope.Budget = data;
+                //    $scope.Budgets.push($scope.Budget);
+                //    alert("Budget added successfully.");
+                //}
+                //else {
+                $scope.GetBudgets($scope.CurrentPage, $scope.PageSize);
+                //    alert("Budget updated successfully.");
+                //}
             }
 
         }).error(function () {
-            alert("Some error occured while saving Budget.")
+            bootbox.alert("Some error occured while saving Budget.")
         });
     }
 
     ///method will delete specific Budget with budgetKey
     $scope.DeleteBudget = function (budgetKey, index) {
-        budgetService.deleteBudget(budgetKey).then(function (response) {
-            if (response.data.Success) {
-                $scope.GetBudgets($scope.CurrentPage, $scope.PageSize);
+
+        bootbox.dialog({
+            message: "Are you sure you want to delete this Budget ?",
+            title: "Delete Budget",
+            className: "bootbox-alert",
+            buttons: {
+                yes: {
+                    label: "Yes",
+                    className: "btn-danger",
+                    callback: function () {
+                        budgetService.deleteBudget(budgetKey).then(function (response) {
+                            if (response.data.Success) {
+                                $scope.GetBudgets($scope.CurrentPage, $scope.PageSize);
+                            }
+                            bootbox.alert(response.data.Message);
+                        },
+         function (response) {
+             bootbox.alert('Some error occured while deleting the Budget.');
+         });
+                    }
+                },
+                no: {
+                    label: "No",
+                    className: "btn-default",
+                    callback: function () {
+                        bootbox.hideAll();
+                        return false;
+                    }
+                },
             }
-            alert(response.data.Message);
-        },
-        function (response) {
-            alert('Some error occured while deleting the Budget.');
         });
+
+
     }
 
     var initial = function () {

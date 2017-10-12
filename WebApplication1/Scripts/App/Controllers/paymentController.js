@@ -119,41 +119,63 @@ app.controller('paymentController', ['$scope', '$filter', 'paymentService', func
         clearValidations();
         paymentService.savePayment($scope.Payment).success(function (data) {
             if (data.PaymentKey != undefined) {
-                if ($scope.Payment.PaymentKey == undefined) {
-                    alert("Payment added successfully.");
-                    $scope.Payment.PaymentKey = data.PaymentKey;
-                }
-                else {
-                    alert("Payment updated successfully.");
-                    var paymentObj = $filter('filter')($scope.Payments, { PaymentKey: $scope.Payment.PaymentKey });
-                    if (paymentObj != null) {
-                        paymentObj[0].PaymentDate = data.PaymentDate;
-                        paymentObj[0].PaymentCheckNumber = data.PaymentCheckNumber;
-                        paymentObj[0].PaymentTypeKey = data.PaymentTypeKey;
-                        paymentObj[0].PaymentTo = data.PaymentTo;
-                        paymentObj[0].PaymentVendorInvoiceNumber = data.PaymentVendorInvoiceNumber;
-                        paymentObj[0].PaymentNote = data.PaymentNote;
-                    }
-                }
+                //if ($scope.Payment.PaymentKey == undefined) {
+                //    alert("Payment added successfully.");
+                //    $scope.Payment.PaymentKey = data.PaymentKey;
+                //}
+                //else {
+                //    alert("Payment updated successfully.");
+                //    var paymentObj = $filter('filter')($scope.Payments, { PaymentKey: $scope.Payment.PaymentKey });
+                //    if (paymentObj != null) {
+                //        paymentObj[0].PaymentDate = data.PaymentDate;
+                //        paymentObj[0].PaymentCheckNumber = data.PaymentCheckNumber;
+                //        paymentObj[0].PaymentTypeKey = data.PaymentTypeKey;
+                //        paymentObj[0].PaymentTo = data.PaymentTo;
+                //        paymentObj[0].PaymentVendorInvoiceNumber = data.PaymentVendorInvoiceNumber;
+                //        paymentObj[0].PaymentNote = data.PaymentNote;
+                //    }
+                //}
+
+                $scope.GetPayments($scope.CurrentPage, $scope.PageSize);
             }
         }).error(function () {
-            alert("Some error occured while saving the payment.")
+            bootbox.alert("Some error occured while saving the Payment.")
         });
     }
 
     ///method will delete specific payment
     $scope.DeletePayment = function (paymentId, index) {
-        paymentService.deletePayment(paymentId).then(function (response) {
-            if (response.data) {
-                //$scope.Payments.splice(index, 1);
-                $scope.GetPayments($scope.CurrentPage, $scope.PageSize);
-                alert('Payment deleted successfully');
-            }
-        },
-        function (response) {
-            alert('Some error occured while deleting the payment.');
-        });
 
+        bootbox.dialog({
+            message: "Are you sure you want to delete this Payment ?",
+            title: "Delete Payment",
+            className: "bootbox-alert",
+            buttons: {
+                yes: {
+                    label: "Yes",
+                    className: "btn-danger",
+                    callback: function () {
+                        paymentService.deletePayment(paymentId).then(function (response) {
+                            if (response.data) {
+                                $scope.GetPayments($scope.CurrentPage, $scope.PageSize);
+                                bootbox.alert('Payment deleted successfully.');
+                            }
+                        },
+                        function (response) {
+                            bootbox.alert('Some error occured while deleting the payment.');
+                        });
+                    }
+                },
+                no: {
+                    label: "No",
+                    className: "btn-default",
+                    callback: function () {
+                        bootbox.hideAll();
+                        return false;
+                    }
+                },
+            }
+        });
     }
 
     // method will display the person popup allowing you to add a new person

@@ -24,7 +24,7 @@
 
                     <div class="btn-group">
                         <div class="buttonexport" id="buttonlist">
-                            <a ng-click="AddEditBudget()" class="btn btn-danger btn-sm">
+                            <a ng-click="AddEditBudget()" class="btn btn-add btn-sm">
                                 <i class="fa fa-plus"></i> Add New Budget
                             </a>
                         </div>
@@ -70,8 +70,8 @@
                                 <td>{{budget.BudgetAmount}}</td>
                                 <td>{{budget.BudgetNote}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-add btn-sm" ng-click="AddEditBudget(budget.BudgetKey)"><i class="fa fa-pencil"></i></button>
-                                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeleteBudget(budget.BudgetKey,$index)"><i class="fa fa-trash-o"></i> </button>
+                                    <button type="button" class="btn btn-add btn-sm" ng-click="AddEditBudget(budget.BudgetKey)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeleteBudget(budget.BudgetKey,$index)" title="Delete"><i class="fa fa-trash-o"></i> </button>
                                 </td>
                             </tr>
                         </tbody>

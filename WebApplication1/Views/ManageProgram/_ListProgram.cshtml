@@ -24,7 +24,7 @@
 
                     <div class="btn-group">
                         <div class="buttonexport" id="buttonlist">
-                            <a ng-click="AddEditProgram()" class="btn btn-danger btn-sm">
+                            <a ng-click="AddEditProgram()" class="btn btn-add btn-sm">
                                 <i class="fa fa-plus"></i> Add New Program
                             </a>
                         </div>
@@ -64,8 +64,8 @@
                                 <td>{{prog.ProgramName}}</td>
                                 <td>{{prog.ProgramNote}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-add btn-sm" ng-click="AddEditProgram(prog.ProgramKey)"><i class="fa fa-pencil"></i></button>
-                                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeleteProgram(prog.ProgramKey,$index)"><i class="fa fa-trash-o"></i> </button>
+                                    <button type="button" class="btn btn-add btn-sm" ng-click="AddEditProgram(prog.ProgramKey)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeleteProgram(prog.ProgramKey,$index)" title="Delete"><i class="fa fa-trash-o"></i> </button>
                                 </td>
                             </tr>
                         </tbody>

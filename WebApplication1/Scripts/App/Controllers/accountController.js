@@ -101,29 +101,13 @@ app.controller('accountController', ['$scope', '$filter', 'accountService', func
         clearValidations();
         accountService.saveUpdateAccount($scope.Account).success(function (data) {
             if (data.AccountKey != undefined) {
-                if ($scope.Account.AccountKey == undefined) {
-                    $scope.Account = data;
-                    $scope.Accounts.push($scope.Account);
-                    alert("Account added successfully.");
-                }
-                else {
-                    //var budgetObj = $filter('filter')($scope.Accounts, { AccountKey: $scope.Account.AccountKey });
-                    //if (budgetObj != null) {
-                    //    budgetObj[0].AccountName = data.AccountName;
-                    //    budgetObj[0].GLAccountCode = data.GLAccountCode;
-                    //    budgetObj[0].AccountTypeKey = data.AccountTypeKey;
-                    //    budgetObj[0].AccountParentKey = data.AccountParentKey;
-                    //    budgetObj[0].AccountNote = data.AccountNote;
-
-                    //    var acctTypeObj = $filter('filter')($scope.AccounTypes, { AccountTypeKey: $scope.Account.AccountTypeKey });
-
-                    //    budgetObj[0].AccountTypeName = acctTypeObj[0].AccountTypeName;
-
-                    //    $scope.PageMode = $scope.Mode.ListMode;
-                    //}
+                //if ($scope.Account.AccountKey == undefined) {
+                //    $scope.Account = data;
+                //    $scope.Accounts.push($scope.Account);
+                //}
+                //else {                    
                     $scope.GetAccounts($scope.CurrentPage, $scope.PageSize);
-                    alert("Account updated successfully.");
-                }
+               // }
             }
         }).error(function () {
             alert("Some error occured while saving Account.")
@@ -132,15 +116,44 @@ app.controller('accountController', ['$scope', '$filter', 'accountService', func
 
     ///method will delete specific Account with accountKey
     $scope.DeleteAccount = function (accountKey, index) {
-        accountService.deleteAccount(accountKey).then(function (response) {
-            if (response.data.Success) {
-                $scope.GetAccounts($scope.CurrentPage, $scope.PageSize);
+        bootbox.dialog({
+            message: "Are you sure you want to delete this Account ?",
+            title: "Delete Account",
+            className: "bootbox-alert",
+            buttons: {
+                yes: {
+                    label: "Yes",
+                    className: "btn-danger",
+                    callback: function () {
+                        accountService.deleteAccount(accountKey).then(function (response) {
+                            if (response.data.Success) {
+                                $scope.GetAccounts($scope.CurrentPage, $scope.PageSize);
+                            }
+                            bootbox.alert(response.data.Message);
+                        },
+                               function (response) {
+                                   bootbox.alert('Some error occured while deleting the Account.');
+                               });
+                    }
+                },
+                no: {
+                    label: "No",
+                    className: "btn-default",
+                    callback: function () {
+                        bootbox.hideAll();
+                        return false;
+                    }
+                },
             }
-            alert(response.data.Message);
-        },
-        function (response) {
-            alert('Some error occured while deleting the Account.');
         });
+    }
+
+    // this method will sort the records by AccountName, Accountcode and AccountTypeName
+    $scope.SortAccounts = function (sortByAcctName, sortByAcctCode, sortByAcctTypeName, accountSort) {
+        $scope.SortByAcctName = sortByAcctName;
+        $scope.SortByAcctCode = sortByAcctCode;
+        $scope.SortByAcctTypeName = sortByAcctTypeName;
+        $scope.AccountSort = accountSort;
     }
 
     var initial = function () {
@@ -157,6 +170,12 @@ app.controller('accountController', ['$scope', '$filter', 'accountService', func
         //paging
 
         $scope.GetAccountViewData();
+
+        /// sorting scope variables 
+        $scope.AccountSort = 'AccountName';
+        $scope.SortByAcctName = true;
+        $scope.SortByAcctCode = false;
+        $scope.SortByAcctTypeName = false; ///
 
         $scope.GetAccounts($scope.CurrentPage, $scope.PageSize);
     }

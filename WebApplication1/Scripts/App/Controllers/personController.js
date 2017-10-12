@@ -94,23 +94,44 @@ app.controller('personController', ['$scope', '$filter', 'personService', functi
                 personObj[0].VendorFederalEIN = data.VendorFederalEIN;
                 personObj[0].VendorDefaultTerms = data.VendorDefaultTerms;
             }
-            alert("Person updated successfully.");
+            //alert("Person updated successfully.");
             $scope.PageMode = $scope.Mode.ListMode;
         }).error(function () {
-            alert("Some error occured while saving the payment.")
+            bootbox.alert("Some error occured while saving the Person.")
         });
     }
 
     ///method will delete specific person with id
     $scope.DeletePerson = function (personKey, index) {
-        personService.deletePerson(personKey).then(function (response) {
-            if (response.data.Success) {
-                $scope.GetPersons($scope.CurrentPage, $scope.PageSize);
+        bootbox.dialog({
+            message: "Are you sure you want to delete this Person ?",
+            title: "Delete Person",
+            className: "bootbox-alert",
+            buttons: {
+                yes: {
+                    label: "Yes",
+                    className: "btn-danger",
+                    callback: function () {
+                        personService.deletePerson(personKey).then(function (response) {
+                            if (response.data.Success) {
+                                $scope.GetPersons($scope.CurrentPage, $scope.PageSize);
+                            }
+                            bootbox.alert(response.data.Message);
+                        },
+       function (response) {
+           bootbox.alert('Some error occured while deleting the Person.');
+       });
+                    }
+                },
+                no: {
+                    label: "No",
+                    className: "btn-default",
+                    callback: function () {
+                        bootbox.hideAll();
+                        return false;
+                    }
+                },
             }
-            alert(response.data.Message);
-        },
-        function (response) {
-            alert('Some error occured while deleting the Person.');
         });
     }
 
